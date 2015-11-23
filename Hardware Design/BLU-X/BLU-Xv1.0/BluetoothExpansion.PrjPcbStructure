@@ -1,0 +1,3 @@
+Record=SheetSymbol|SourceDocument=BT_Top.SchDoc|Designator=BT_MCU_BLE|SchDesignator=BT_MCU_BLE|FileName=BT_MCU_BLE.SchDoc|SymbolType=Normal|RawFileName=BT_MCU_BLE.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=BT_Top.SchDoc|Designator=BT_PowerIn|SchDesignator=BT_PowerIn|FileName=BT_PowerIn.SchDoc|SymbolType=Normal|RawFileName=BT_PowerIn.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=TopLevelDocument|FileName=BT_Top.SchDoc

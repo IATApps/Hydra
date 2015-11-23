@@ -1,0 +1,497 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7F1BBEF4159177A0000741FA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1BBEF3159177A0000741FA /* UIKit.framework */; };
+		7F1BBEF6159177A0000741FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1BBEF5159177A0000741FA /* Foundation.framework */; };
+		7F1BBEF8159177A0000741FA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1BBEF7159177A0000741FA /* CoreGraphics.framework */; };
+		7F1BBF00159177A0000741FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F1BBEFF159177A0000741FA /* main.m */; };
+		7F1BBF151591785F000741FA /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1BBF141591785F000741FA /* CoreBluetooth.framework */; };
+		C57B79D71BF79B77004DAB9B /* HydraPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C57B79D61BF79B77004DAB9B /* HydraPacket.m */; };
+		C58137A21BF5437C001238F8 /* CBPeripheral+iGateHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C581379E1BF500B5001238F8 /* CBPeripheral+iGateHelpers.m */; };
+		CE7F530F177B96C300678246 /* LCDyellow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F530E177B96C300678246 /* LCDyellow.png */; };
+		CE897588172205C100870825 /* hydra_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE897587172205C100870825 /* hydra_logo.png */; };
+		CE89758A172206E000870825 /* hydra_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE897589172206E000870825 /* hydra_logo.png */; };
+		CE898A6C171752AC005A62FA /* DataLoggingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE898A6B171752AC005A62FA /* DataLoggingViewController.m */; };
+		CE8D3651171E07FE00BD64DD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8D3650171E07FE00BD64DD /* Default-568h@2x.png */; };
+		CE8D3654171E144800BD64DD /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8D3653171E144700BD64DD /* Utilities.m */; };
+		CE8D3657171E314500BD64DD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8D3655171E310700BD64DD /* MessageUI.framework */; };
+		CE8FA137173AA9D000189C70 /* diagnostics.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8FA136173AA9D000189C70 /* diagnostics.png */; };
+		CE8FA139173AA9F900189C70 /* commands_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8FA138173AA9F900189C70 /* commands_icon.png */; };
+		CE8FA13D173AAF2400189C70 /* graph.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8FA13C173AAF2400189C70 /* graph.png */; };
+		CE8FA13F173AB48E00189C70 /* batteryicon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8FA13E173AB48E00189C70 /* batteryicon.png */; };
+		CE8FA142173ABB2E00189C70 /* BattChargingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8FA141173ABB2D00189C70 /* BattChargingViewController.m */; };
+		CE8FA144173AC4C100189C70 /* seperator_line.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8FA143173AC4C100189C70 /* seperator_line.png */; };
+		CE95746717988A5D00C374A1 /* hydraTODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CE95746617988A5C00C374A1 /* hydraTODO.rtf */; };
+		CEA2C9E716FB9E7700AA2663 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEA2C9E616FB9E7700AA2663 /* InfoPlist.strings */; };
+		CEA2C9E916FB9EBB00AA2663 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA2C9E816FB9EBB00AA2663 /* MainStoryboard.storyboard */; };
+		CEB9DBE3171641A7006DBD4B /* controlKnobFrameII.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBCC171641A6006DBD4B /* controlKnobFrameII.png */; };
+		CEB9DBE5171641A7006DBD4B /* LCDblue.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBCE171641A6006DBD4B /* LCDblue.png */; };
+		CEB9DBE6171641A7006DBD4B /* redLedOff.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBCF171641A6006DBD4B /* redLedOff.png */; };
+		CEB9DBE7171641A7006DBD4B /* redLedOn.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBD0171641A6006DBD4B /* redLedOn.png */; };
+		CEB9DBE8171641A7006DBD4B /* controlKnobII.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBD1171641A6006DBD4B /* controlKnobII.png */; };
+		CEB9DBE9171641A7006DBD4B /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBD2171641A6006DBD4B /* home.png */; };
+		CEB9DBEB171641A7006DBD4B /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBD4171641A6006DBD4B /* settings.png */; };
+		CEB9DBEC171641A7006DBD4B /* SimpleDarkGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBD5171641A6006DBD4B /* SimpleDarkGradient.png */; };
+		CEB9DBED171641A7006DBD4B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9DBD7171641A6006DBD4B /* AppDelegate.m */; };
+		CEB9DBF4171641A7006DBD4B /* steel_gradient.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBDE171641A7006DBD4B /* steel_gradient.jpg */; };
+		CEB9DBFE1716453A006DBD4B /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9DBF91716453A006DBD4B /* SettingsViewController.m */; };
+		CEB9DBFF1716453A006DBD4B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9DBFB1716453A006DBD4B /* ViewController.m */; };
+		CEB9DC001716453A006DBD4B /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9DBFD1716453A006DBD4B /* Channel.m */; };
+		CEB9DC0217170F51006DBD4B /* blackBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DC0117170F50006DBD4B /* blackBtn.png */; };
+		CEB9DC0A17171834006DBD4B /* blackBtnSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DC0917171834006DBD4B /* blackBtnSmall.png */; };
+		CEB9DC0C1717221E006DBD4B /* controlCanvas.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DC0B1717221E006DBD4B /* controlCanvas.png */; };
+		CEB9DC0E171734EF006DBD4B /* lightBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DC0D171734EF006DBD4B /* lightBtn.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7F1BBEEF159177A0000741FA /* Hydra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hydra.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F1BBEF3159177A0000741FA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7F1BBEF5159177A0000741FA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7F1BBEF7159177A0000741FA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7F1BBEFB159177A0000741FA /* iGateTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iGateTest-Info.plist"; sourceTree = "<group>"; };
+		7F1BBEFF159177A0000741FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7F1BBF01159177A0000741FA /* iGateTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iGateTest-Prefix.pch"; sourceTree = "<group>"; };
+		7F1BBF141591785F000741FA /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		C57B79D51BF79B77004DAB9B /* HydraPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HydraPacket.h; sourceTree = "<group>"; };
+		C57B79D61BF79B77004DAB9B /* HydraPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HydraPacket.m; sourceTree = "<group>"; };
+		C581379D1BF500B5001238F8 /* CBPeripheral+iGateHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBPeripheral+iGateHelpers.h"; sourceTree = "<group>"; };
+		C581379E1BF500B5001238F8 /* CBPeripheral+iGateHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+iGateHelpers.m"; sourceTree = "<group>"; };
+		C58137A11BF515F0001238F8 /* CiGateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CiGateDelegate.h; sourceTree = "<group>"; };
+		C5936A231BF7DE6B005345C3 /* BitUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitUtilities.h; sourceTree = "<group>"; };
+		CE052E06175EA09C003F80AE /* libiGate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libiGate.a; sourceTree = "<group>"; };
+		CE052E08175EA402003F80AE /* iGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGate.h; sourceTree = "<group>"; };
+		CE7F530E177B96C300678246 /* LCDyellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LCDyellow.png; sourceTree = "<group>"; };
+		CE897587172205C100870825 /* hydra_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hydra_logo.png; sourceTree = "<group>"; };
+		CE897589172206E000870825 /* hydra_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hydra_logo.png; sourceTree = "<group>"; };
+		CE898A6A171752AC005A62FA /* DataLoggingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLoggingViewController.h; sourceTree = "<group>"; };
+		CE898A6B171752AC005A62FA /* DataLoggingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLoggingViewController.m; sourceTree = "<group>"; };
+		CE8D3650171E07FE00BD64DD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "iGateTest/Default-568h@2x.png"; sourceTree = "<group>"; };
+		CE8D3652171E144400BD64DD /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		CE8D3653171E144700BD64DD /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		CE8D3655171E310700BD64DD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		CE8FA136173AA9D000189C70 /* diagnostics.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diagnostics.png; sourceTree = "<group>"; };
+		CE8FA138173AA9F900189C70 /* commands_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commands_icon.png; sourceTree = "<group>"; };
+		CE8FA13C173AAF2400189C70 /* graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graph.png; sourceTree = "<group>"; };
+		CE8FA13E173AB48E00189C70 /* batteryicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryicon.png; sourceTree = "<group>"; };
+		CE8FA140173ABB2C00189C70 /* BattChargingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattChargingViewController.h; sourceTree = "<group>"; };
+		CE8FA141173ABB2D00189C70 /* BattChargingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattChargingViewController.m; sourceTree = "<group>"; };
+		CE8FA143173AC4C100189C70 /* seperator_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seperator_line.png; sourceTree = "<group>"; };
+		CE95746617988A5C00C374A1 /* hydraTODO.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = hydraTODO.rtf; sourceTree = "<group>"; };
+		CEA2C9E616FB9E7700AA2663 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		CEA2C9E816FB9EBB00AA2663 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		CEB9DBCC171641A6006DBD4B /* controlKnobFrameII.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controlKnobFrameII.png; sourceTree = "<group>"; };
+		CEB9DBCE171641A6006DBD4B /* LCDblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LCDblue.png; sourceTree = "<group>"; };
+		CEB9DBCF171641A6006DBD4B /* redLedOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redLedOff.png; sourceTree = "<group>"; };
+		CEB9DBD0171641A6006DBD4B /* redLedOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redLedOn.png; sourceTree = "<group>"; };
+		CEB9DBD1171641A6006DBD4B /* controlKnobII.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controlKnobII.png; sourceTree = "<group>"; };
+		CEB9DBD2171641A6006DBD4B /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		CEB9DBD4171641A6006DBD4B /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		CEB9DBD5171641A6006DBD4B /* SimpleDarkGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SimpleDarkGradient.png; sourceTree = "<group>"; };
+		CEB9DBD6171641A6006DBD4B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CEB9DBD7171641A6006DBD4B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CEB9DBDE171641A7006DBD4B /* steel_gradient.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = steel_gradient.jpg; sourceTree = "<group>"; };
+		CEB9DBF81716453A006DBD4B /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		CEB9DBF91716453A006DBD4B /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		CEB9DBFA1716453A006DBD4B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CEB9DBFB1716453A006DBD4B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CEB9DBFC1716453A006DBD4B /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
+		CEB9DBFD1716453A006DBD4B /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
+		CEB9DC0117170F50006DBD4B /* blackBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackBtn.png; sourceTree = "<group>"; };
+		CEB9DC0917171834006DBD4B /* blackBtnSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackBtnSmall.png; sourceTree = "<group>"; };
+		CEB9DC0B1717221E006DBD4B /* controlCanvas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controlCanvas.png; sourceTree = "<group>"; };
+		CEB9DC0D171734EF006DBD4B /* lightBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightBtn.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7F1BBEEC159177A0000741FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F1BBF151591785F000741FA /* CoreBluetooth.framework in Frameworks */,
+				7F1BBEF4159177A0000741FA /* UIKit.framework in Frameworks */,
+				7F1BBEF6159177A0000741FA /* Foundation.framework in Frameworks */,
+				CE8D3657171E314500BD64DD /* MessageUI.framework in Frameworks */,
+				7F1BBEF8159177A0000741FA /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7F1BBEE4159177A0000741FA = {
+			isa = PBXGroup;
+			children = (
+				CE897589172206E000870825 /* hydra_logo.png */,
+				CE052E06175EA09C003F80AE /* libiGate.a */,
+				CE8D3650171E07FE00BD64DD /* Default-568h@2x.png */,
+				CE95746617988A5C00C374A1 /* hydraTODO.rtf */,
+				7F1BBEF9159177A0000741FA /* iGateTest */,
+				7F1BBEF2159177A0000741FA /* Frameworks */,
+				7F1BBEF0159177A0000741FA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7F1BBEF0159177A0000741FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7F1BBEEF159177A0000741FA /* Hydra.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7F1BBEF2159177A0000741FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE8D3655171E310700BD64DD /* MessageUI.framework */,
+				7F1BBF141591785F000741FA /* CoreBluetooth.framework */,
+				7F1BBEF3159177A0000741FA /* UIKit.framework */,
+				7F1BBEF5159177A0000741FA /* Foundation.framework */,
+				7F1BBEF7159177A0000741FA /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7F1BBEF9159177A0000741FA /* iGateTest */ = {
+			isa = PBXGroup;
+			children = (
+				CEB9DBF7171641DA006DBD4B /* images */,
+				CE052E08175EA402003F80AE /* iGate.h */,
+				C58137A11BF515F0001238F8 /* CiGateDelegate.h */,
+				CEB9DBD6171641A6006DBD4B /* AppDelegate.h */,
+				CEB9DBD7171641A6006DBD4B /* AppDelegate.m */,
+				CEA2C9E816FB9EBB00AA2663 /* MainStoryboard.storyboard */,
+				CE8FA140173ABB2C00189C70 /* BattChargingViewController.h */,
+				CE8FA141173ABB2D00189C70 /* BattChargingViewController.m */,
+				CE898A6A171752AC005A62FA /* DataLoggingViewController.h */,
+				CE898A6B171752AC005A62FA /* DataLoggingViewController.m */,
+				CEB9DBF81716453A006DBD4B /* SettingsViewController.h */,
+				CEB9DBF91716453A006DBD4B /* SettingsViewController.m */,
+				CEB9DBFA1716453A006DBD4B /* ViewController.h */,
+				CEB9DBFB1716453A006DBD4B /* ViewController.m */,
+				CEB9DBFC1716453A006DBD4B /* Channel.h */,
+				CEB9DBFD1716453A006DBD4B /* Channel.m */,
+				CE8D3652171E144400BD64DD /* Utilities.h */,
+				CE8D3653171E144700BD64DD /* Utilities.m */,
+				C57B79D51BF79B77004DAB9B /* HydraPacket.h */,
+				C57B79D61BF79B77004DAB9B /* HydraPacket.m */,
+				C581379D1BF500B5001238F8 /* CBPeripheral+iGateHelpers.h */,
+				C581379E1BF500B5001238F8 /* CBPeripheral+iGateHelpers.m */,
+				C5936A231BF7DE6B005345C3 /* BitUtilities.h */,
+				7F1BBEFA159177A0000741FA /* Supporting Files */,
+			);
+			path = iGateTest;
+			sourceTree = "<group>";
+		};
+		7F1BBEFA159177A0000741FA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7F1BBEFB159177A0000741FA /* iGateTest-Info.plist */,
+				CEA2C9E616FB9E7700AA2663 /* InfoPlist.strings */,
+				7F1BBEFF159177A0000741FA /* main.m */,
+				7F1BBF01159177A0000741FA /* iGateTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEB9DBF7171641DA006DBD4B /* images */ = {
+			isa = PBXGroup;
+			children = (
+				CE8FA136173AA9D000189C70 /* diagnostics.png */,
+				CEB9DC0117170F50006DBD4B /* blackBtn.png */,
+				CE8FA143173AC4C100189C70 /* seperator_line.png */,
+				CE7F530E177B96C300678246 /* LCDyellow.png */,
+				CE8FA138173AA9F900189C70 /* commands_icon.png */,
+				CEB9DBCE171641A6006DBD4B /* LCDblue.png */,
+				CEB9DC0917171834006DBD4B /* blackBtnSmall.png */,
+				CE8FA13C173AAF2400189C70 /* graph.png */,
+				CEB9DBCF171641A6006DBD4B /* redLedOff.png */,
+				CEB9DBD0171641A6006DBD4B /* redLedOn.png */,
+				CEB9DBD1171641A6006DBD4B /* controlKnobII.png */,
+				CE8FA13E173AB48E00189C70 /* batteryicon.png */,
+				CEB9DBD2171641A6006DBD4B /* home.png */,
+				CEB9DBD4171641A6006DBD4B /* settings.png */,
+				CEB9DC0B1717221E006DBD4B /* controlCanvas.png */,
+				CEB9DBD5171641A6006DBD4B /* SimpleDarkGradient.png */,
+				CEB9DC0D171734EF006DBD4B /* lightBtn.png */,
+				CEB9DBDE171641A7006DBD4B /* steel_gradient.jpg */,
+				CE897587172205C100870825 /* hydra_logo.png */,
+				CEB9DBCC171641A6006DBD4B /* controlKnobFrameII.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7F1BBEEE159177A0000741FA /* Hydra */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F1BBF0D159177A0000741FA /* Build configuration list for PBXNativeTarget "Hydra" */;
+			buildPhases = (
+				7F1BBEEB159177A0000741FA /* Sources */,
+				7F1BBEEC159177A0000741FA /* Frameworks */,
+				7F1BBEED159177A0000741FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Hydra;
+			productName = iGateTest;
+			productReference = 7F1BBEEF159177A0000741FA /* Hydra.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7F1BBEE6159177A0000741FA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = iGate;
+				LastUpgradeCheck = 0710;
+				TargetAttributes = {
+					7F1BBEEE159177A0000741FA = {
+						DevelopmentTeam = H8E2LSZV55;
+					};
+				};
+			};
+			buildConfigurationList = 7F1BBEE9159177A0000741FA /* Build configuration list for PBXProject "hydra" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7F1BBEE4159177A0000741FA;
+			productRefGroup = 7F1BBEF0159177A0000741FA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7F1BBEEE159177A0000741FA /* Hydra */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7F1BBEED159177A0000741FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEA2C9E716FB9E7700AA2663 /* InfoPlist.strings in Resources */,
+				CEA2C9E916FB9EBB00AA2663 /* MainStoryboard.storyboard in Resources */,
+				CEB9DBE3171641A7006DBD4B /* controlKnobFrameII.png in Resources */,
+				CEB9DBE5171641A7006DBD4B /* LCDblue.png in Resources */,
+				CEB9DBE6171641A7006DBD4B /* redLedOff.png in Resources */,
+				CEB9DBE7171641A7006DBD4B /* redLedOn.png in Resources */,
+				CEB9DBE8171641A7006DBD4B /* controlKnobII.png in Resources */,
+				CEB9DBE9171641A7006DBD4B /* home.png in Resources */,
+				CEB9DBEB171641A7006DBD4B /* settings.png in Resources */,
+				CEB9DBEC171641A7006DBD4B /* SimpleDarkGradient.png in Resources */,
+				CEB9DBF4171641A7006DBD4B /* steel_gradient.jpg in Resources */,
+				CEB9DC0217170F51006DBD4B /* blackBtn.png in Resources */,
+				CEB9DC0A17171834006DBD4B /* blackBtnSmall.png in Resources */,
+				CEB9DC0C1717221E006DBD4B /* controlCanvas.png in Resources */,
+				CEB9DC0E171734EF006DBD4B /* lightBtn.png in Resources */,
+				CE8D3651171E07FE00BD64DD /* Default-568h@2x.png in Resources */,
+				CE897588172205C100870825 /* hydra_logo.png in Resources */,
+				CE89758A172206E000870825 /* hydra_logo.png in Resources */,
+				CE8FA137173AA9D000189C70 /* diagnostics.png in Resources */,
+				CE8FA139173AA9F900189C70 /* commands_icon.png in Resources */,
+				CE8FA13D173AAF2400189C70 /* graph.png in Resources */,
+				CE8FA13F173AB48E00189C70 /* batteryicon.png in Resources */,
+				CE8FA144173AC4C100189C70 /* seperator_line.png in Resources */,
+				CE7F530F177B96C300678246 /* LCDyellow.png in Resources */,
+				CE95746717988A5D00C374A1 /* hydraTODO.rtf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7F1BBEEB159177A0000741FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C57B79D71BF79B77004DAB9B /* HydraPacket.m in Sources */,
+				7F1BBF00159177A0000741FA /* main.m in Sources */,
+				CEB9DBED171641A7006DBD4B /* AppDelegate.m in Sources */,
+				C58137A21BF5437C001238F8 /* CBPeripheral+iGateHelpers.m in Sources */,
+				CEB9DBFE1716453A006DBD4B /* SettingsViewController.m in Sources */,
+				CEB9DBFF1716453A006DBD4B /* ViewController.m in Sources */,
+				CEB9DC001716453A006DBD4B /* Channel.m in Sources */,
+				CE898A6C171752AC005A62FA /* DataLoggingViewController.m in Sources */,
+				CE8D3654171E144800BD64DD /* Utilities.m in Sources */,
+				CE8FA142173ABB2E00189C70 /* BattChargingViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7F1BBF0B159177A0000741FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Chase Roberts (E6A7XV2XK7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chase Roberts (E6A7XV2XK7)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = NO;
+				PROVISIONING_PROFILE = "31226076-499B-428E-82AD-44F4C045ABE0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "31226076-499B-428E-82AD-44F4C045ABE0";
+				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7s armv7";
+			};
+			name = Debug;
+		};
+		7F1BBF0C159177A0000741FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Chase Roberts (E6A7XV2XK7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chase Roberts (E6A7XV2XK7)";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "31226076-499B-428E-82AD-44F4C045ABE0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "31226076-499B-428E-82AD-44F4C045ABE0";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7s armv7";
+			};
+			name = Release;
+		};
+		7F1BBF0E159177A0000741FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEAD_CODE_STRIPPING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iGateTest/iGateTest-Prefix.pch";
+				GENERATE_MASTER_OBJECT_FILE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/iGateTest/iGateTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/iGateTest\"",
+					"\"$(SRCROOT)\"",
+				);
+				OTHER_LDFLAGS = (
+					"-whyload",
+					"-ObjC",
+					"-force_load",
+					libiGate.a,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iatapps.llc.Hydra;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "454aaf13-04ca-45fb-bae3-aeed8ab5335a";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7F1BBF0F159177A0000741FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEAD_CODE_STRIPPING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iGateTest/iGateTest-Prefix.pch";
+				GENERATE_MASTER_OBJECT_FILE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/iGateTest/iGateTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/iGateTest\"",
+					"\"$(SRCROOT)\"",
+				);
+				OTHER_LDFLAGS = (
+					"-whyload",
+					"-ObjC",
+					"-force_load",
+					libiGate.a,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iatapps.llc.Hydra;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "454aaf13-04ca-45fb-bae3-aeed8ab5335a";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7F1BBEE9159177A0000741FA /* Build configuration list for PBXProject "hydra" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F1BBF0B159177A0000741FA /* Debug */,
+				7F1BBF0C159177A0000741FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F1BBF0D159177A0000741FA /* Build configuration list for PBXNativeTarget "Hydra" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F1BBF0E159177A0000741FA /* Debug */,
+				7F1BBF0F159177A0000741FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7F1BBEE6159177A0000741FA /* Project object */;
+}

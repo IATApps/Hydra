@@ -1,0 +1,24 @@
+* C:\_CHRobotics\Hardware\smartPower\LTC3112_5Vout.asc
+XU1 0 N008 N007 0 Vin MP_01 N005 Vi Vout MP_02 MP_03 N002 MP_04 N004 N001 MP_05 N003 N005 N005 LTC3112
+L1 N001 N002 10µ Ipk=7 Rser=.0173
+C1 N001 N003 0.1µ
+C2 N002 N004 0.1µ
+C3 Vin 0 10µ
+C4 N005 0 1µ
+V1 Vin 0 15V Rser=0
+C5 Vout 0 200µ
+R1 0 Vi 42.2k
+C6 0 Vi 100p
+R2 Vout N007 1.4MEG
+R3 N007 0 500k
+R4 N006 N007 10k
+R5 N007 N009 33k
+C7 Vout N006 47p
+C8 N007 N008 22p
+C9 N009 N008 150p
+R6 Vout 0 100
+;tf Vout Vin
+.tran 0 .01 0 steady
+.lib LTC3112.sub
+.backanno
+.end
