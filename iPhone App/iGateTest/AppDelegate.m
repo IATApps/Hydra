@@ -300,20 +300,25 @@
         }
         
         data = &packet[5];
-        uint16_t ch1TargetVoltage = (data[2] << 8)|data[3];
         uint16_t ch1MaxCurrent = ((data[0] & 0x0F) << 8)|data[1];
         uint8_t ch1OE = (data[0]>>7)&0x01;
         uint8_t ch1LC = (data[0]>>6)&0x01;
+        uint16_t ch1TargetVoltage = (data[2] << 8)|data[3];
         
-        uint16_t ch2TargetVoltage = (data[6] << 8)|data[7];
         uint16_t ch2MaxCurrent = ((data[4] & 0x0F) << 8)|data[5];
         uint8_t ch2OE = (data[4]>>7)&0x01;
         uint8_t ch2LC = (data[4]>>6)&0x01;
+        uint16_t ch2TargetVoltage = (data[6] << 8)|data[7];
         
-        uint16_t ch3TargetVoltage = (data[10] << 8)|data[11];
-        uint16_t ch3MaxCurrent = ((data[0] & 0x0F) << 8)|data[9];
+        uint16_t ch3MaxCurrent = ((data[8] & 0x0F) << 8)|data[9];
         uint8_t ch3OE = (data[8]>>7)&0x01;
         uint8_t ch3LC = (data[8]>>6)&0x01;
+        uint16_t ch3TargetVoltage = (data[10] << 8)|data[11];
+        
+        HydraChannel *ch1 = [hydra batchEntryAtIndex:0];
+        HydraChannel *ch2 = [hydra batchEntryAtIndex:1];
+        HydraChannel *ch3 = [hydra batchEntryAtIndex:2];
+        HydraChannel *ch4 = [hydra batchEntryAtIndex:3];
         
         self.ch1TargetVoltage = [NSNumber numberWithUnsignedInt:ch1TargetVoltage].intValue;
         self.ch2TargetVoltage = [NSNumber numberWithUnsignedInt:ch2TargetVoltage].intValue;
