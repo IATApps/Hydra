@@ -12,6 +12,5 @@
 @property bool enabled;
 //@property float voltage;
 //@property float current;
-@property bool voltage_controlled;
 
 @end

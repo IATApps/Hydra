@@ -114,8 +114,12 @@
     uint16_t calculated = [self checksumCalculated];
 
     uint16_t internal = [self checksumValue];
+    
+    if (internal == 0x0000) {
+        internal = calculated;
+    }
 
-    NSLog(@"packet checksum %04x %@ %04x internal checksum  - packet length %04x", calculated, (internal == calculated) ? @"==" : @"!=", internal, self.packet.length);
+    NSLog(@"calculated checksum %04x %@ %04x internal checksum  - packet length %04x", calculated, (internal == calculated) ? @"==" : @"!=", internal, self.packet.length);
     
     // Compare to the checksum provided in the packet and return if they don't match
     return (internal == calculated);

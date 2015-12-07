@@ -13,6 +13,7 @@
 		7F1BBF00159177A0000741FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F1BBEFF159177A0000741FA /* main.m */; };
 		7F1BBF151591785F000741FA /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1BBF141591785F000741FA /* CoreBluetooth.framework */; };
 		C50166CF1C0DE4FC00749378 /* libiGate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE052E06175EA09C003F80AE /* libiGate.a */; };
+		C54D03511C153989000DE766 /* CHRHChannelView.m in Sources */ = {isa = PBXBuildFile; fileRef = C54D03501C153989000DE766 /* CHRHChannelView.m */; };
 		C57B79D71BF79B77004DAB9B /* HydraPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C57B79D61BF79B77004DAB9B /* HydraPacket.m */; };
 		C58137A21BF5437C001238F8 /* CBPeripheral+iGateHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C581379E1BF500B5001238F8 /* CBPeripheral+iGateHelpers.m */; };
 		CE7F530F177B96C300678246 /* LCDyellow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F530E177B96C300678246 /* LCDyellow.png */; };
@@ -59,6 +60,8 @@
 		7F1BBEFF159177A0000741FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7F1BBF01159177A0000741FA /* Hydra-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hydra-Prefix.pch"; sourceTree = "<group>"; };
 		7F1BBF141591785F000741FA /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		C54D034F1C153989000DE766 /* CHRHChannelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHRHChannelView.h; sourceTree = "<group>"; };
+		C54D03501C153989000DE766 /* CHRHChannelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHRHChannelView.m; sourceTree = "<group>"; };
 		C57B79D51BF79B77004DAB9B /* HydraPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HydraPacket.h; sourceTree = "<group>"; };
 		C57B79D61BF79B77004DAB9B /* HydraPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HydraPacket.m; sourceTree = "<group>"; };
 		C581379D1BF500B5001238F8 /* CBPeripheral+iGateHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBPeripheral+iGateHelpers.h"; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				C58137A11BF515F0001238F8 /* CiGateDelegate.h */,
 				CEB9DBD6171641A6006DBD4B /* AppDelegate.h */,
 				CEB9DBD7171641A6006DBD4B /* AppDelegate.m */,
+				C54D034F1C153989000DE766 /* CHRHChannelView.h */,
+				C54D03501C153989000DE766 /* CHRHChannelView.m */,
 				CEA2C9E816FB9EBB00AA2663 /* MainStoryboard.storyboard */,
 				CE8FA140173ABB2C00189C70 /* BattChargingViewController.h */,
 				CE8FA141173ABB2D00189C70 /* BattChargingViewController.m */,
@@ -254,7 +259,7 @@
 		7F1BBEE6159177A0000741FA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = iGate;
+				CLASSPREFIX = CHRH;
 				LastUpgradeCheck = 0710;
 				TargetAttributes = {
 					7F1BBEEE159177A0000741FA = {
@@ -329,6 +334,7 @@
 				CE898A6C171752AC005A62FA /* DataLoggingViewController.m in Sources */,
 				CE8D3654171E144800BD64DD /* Utilities.m in Sources */,
 				CE8FA142173ABB2E00189C70 /* BattChargingViewController.m in Sources */,
+				C54D03511C153989000DE766 /* CHRHChannelView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

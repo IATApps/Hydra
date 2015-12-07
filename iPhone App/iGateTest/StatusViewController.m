@@ -7,64 +7,50 @@
 //
 
 #import "StatusViewController.h"
-#import "Channel.h"
+#import "CHRHChannelView.h"
 #import "AppDelegate.h"
 #import "Utilities.h"
 #import "HydraPacket.h"
 
-@interface StatusViewController ()
+@interface StatusViewController () <CHRHChannelViewDelegate>
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
 /* These are wrappers around all the information on the channel. */
-@property (strong, nonatomic) IBOutlet Channel *ch1view;
-@property (strong, nonatomic) IBOutlet Channel *ch2view;
-@property (strong, nonatomic) IBOutlet Channel *ch3view;
+@property (weak, nonatomic) IBOutlet CHRHChannelView *ch1view;
+@property (weak, nonatomic) IBOutlet CHRHChannelView *ch2view;
+@property (weak, nonatomic) IBOutlet CHRHChannelView *ch3view;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ch1Top;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ch2Top;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ch3Top;
 
 /* These display the actual voltage/current values that we get back from the hydra */
-@property (strong, nonatomic) IBOutlet UILabel *ch1voltageLabel;
-@property (strong, nonatomic) IBOutlet UILabel *ch1currentLabel;
-@property (strong, nonatomic) IBOutlet UILabel *ch2voltageLabel;
-@property (strong, nonatomic) IBOutlet UILabel *ch2currentLabel;
-@property (strong, nonatomic) IBOutlet UILabel *ch3voltageLabel;
-@property (strong, nonatomic) IBOutlet UILabel *ch3currentLabel;
 
 /* These are the albels that display the max current as given by the hydra */
-@property (strong, nonatomic) IBOutlet UILabel *ch1MaxCurrent;
-@property (strong, nonatomic) IBOutlet UILabel *ch2MaxCurrent;
-@property (strong, nonatomic) IBOutlet UILabel *ch3MaxCurrent;
 
 /* These are the LEDs associated with each channels CC and CV labels*/
-@property (strong, nonatomic) IBOutlet UIImageView *ch1_CV_led;
-@property (strong, nonatomic) IBOutlet UIImageView *ch1_CC_led;
-@property (strong, nonatomic) IBOutlet UIImageView *ch2_CV_led;
-@property (strong, nonatomic) IBOutlet UIImageView *ch2_CC_led;
-@property (strong, nonatomic) IBOutlet UIImageView *ch3_CV_led;
-@property (strong, nonatomic) IBOutlet UIImageView *ch3_CC_led;
 
 /* The control view is the entire view that gets hidden when we are not editing values */
-@property (strong, nonatomic) IBOutlet UIView *controlView;
-@property (strong, nonatomic) IBOutlet UIImageView *knob;
-@property (strong, nonatomic) IBOutlet UIButton *enableBtn;
+@property (weak, nonatomic) IBOutlet UIView *controlView;
+@property (weak, nonatomic) IBOutlet UIImageView *knob;
+@property (weak, nonatomic) IBOutlet UIButton *enableBtn;
 
-@property (strong, nonatomic) IBOutlet UILabel *inputVoltageLabel;
-@property (strong, nonatomic) IBOutlet UILabel *controlLabel;
+@property (weak, nonatomic) IBOutlet UILabel *inputVoltageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *controlLabel;
 
 /* notice selectedParam is not an IBOutlet. It is just a pointer to whichever voltage/current label we are currently editing.*/
-@property (strong, nonatomic) UILabel *selectedParam;
+@property (weak, nonatomic) UILabel *selectedParam;
+@property (weak, nonatomic) IBOutlet CHRHChannelView *selectedChannel;
 
 @property (nonatomic, strong) HydraPacket *packet;
 
 @end
 
-@implementation ViewController{
+@implementation StatusViewController {
     UIView *overlay; //the dark overlay that shows up before the bluetooth is bonded
     UILabel *status; //displays the current bluetooth status
     float prevADC; //this is for doing the math to calculate the turns on the control dial
     float param_value; //the current value of the current/voltage we are editing
     bool voltage_selected; //are we currently editing a voltage or a current
-    bool ch1Enable; //whether the channel has been enabled
-    bool ch2Enable;
-    bool ch3Enable;
     bool editing; //tells whether we are currently trying to set voltage/currents
     NSTimer *resendTimer; // don't get a success packet? use this to resend the packet
     int retryCount; //a counter to keep track of how many times we have sent a given packet
@@ -89,6 +75,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(recievedSuccess:)
                                                  name:@"success"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(recievedReject:)
+                                                 name:@"rejected"
                                                object:nil];
     //basic initialization stuff
     self.ch1view.enabled = YES; //start the channels enabled.
@@ -129,81 +119,100 @@
 
 /* when one of the voltage/current buttons is pressed it calls this method. Which grabs the current voltage/current value and brings up the control panel so you can edit the values.
  */
-- (IBAction)paramPressed:(UIButton *)sender {
-    //get the current value from the bluetooth delegate and set the voltage/current labels
-    self.ch1voltageLabel.text = [NSString stringWithFormat:@"%.02f", (float)self.appDelegate.ch1TargetVoltage/MILLI_SCALER];
-    self.ch2voltageLabel.text = [NSString stringWithFormat:@"%.02f", (float)self.appDelegate.ch2TargetVoltage/MILLI_SCALER];
-    self.ch3voltageLabel.text = [NSString stringWithFormat:@"%.02f", (float)self.appDelegate.ch3TargetVoltage/MILLI_SCALER];
-    
-    switch (sender.tag) {
-        case 1: self.controlLabel.text = @"Channel 1 Voltage Control"; break;
-        case 2: self.controlLabel.text = @"Channel 1 Current Control"; break;
-        case 3: self.controlLabel.text = @"Channel 2 Voltage Control"; break;
-        case 4: self.controlLabel.text = @"Channel 2 Current Control"; break;
-        case 5: self.controlLabel.text = @"Channel 3 Voltage Control"; break;
-        case 6: self.controlLabel.text = @"Channel 3 Current Control"; break;
-        default: break;
-    }
-    // all of the voltage and current buttons have tags. 1-6 left to right, top to bottom. if it is divisible by two then it is a current button.
-     
-    if (sender.tag % 2 == 0) voltage_selected = false;
-    else voltage_selected = true;
-    
-    //this shuffles the buttons around so that the field you are editing is shown in the middle of the screen
-    switch (sender.tag) {
-        case 1: //channel 1 voltage
-            param_value = (float)self.appDelegate.ch1TargetVoltage/MILLI_SCALER;
-            self.ch1view.center = CENTER_STAGE;
-            self.ch2view.alpha = 0;
-            self.ch3view.alpha = 0;
-            self.selectedParam = self.ch1voltageLabel;
+- (void)setupForChannelNumber:(NSUInteger)channelNumber control:(NSString*)controlType channelView:(CHRHChannelView *)chView control:(id)sender {
+    int chTargetVoltage = 0;
+    switch (channelNumber) {
+        case 1:
+            chTargetVoltage = self.appDelegate.ch1TargetVoltage;
             break;
-        case 2: //channel 1 current
-            param_value = (float)self.appDelegate.ch1MaxCurrent/MILLI_SCALER;
-            self.ch1view.center = CENTER_STAGE;
-            self.ch2view.alpha = 0;
-            self.ch3view.alpha = 0;
-            self.selectedParam = self.ch1MaxCurrent;
+        case 2:
+            chTargetVoltage = self.appDelegate.ch2TargetVoltage;
             break;
-        case 3://channel 2 voltage
-            param_value = (float)self.appDelegate.ch2TargetVoltage/MILLI_SCALER;
-            self.ch2view.center = CENTER_STAGE;
-            self.ch1view.alpha = 0;
-            self.ch3view.alpha = 0;
-            self.selectedParam = self.ch2voltageLabel;
+        case 3:
+            chTargetVoltage = self.appDelegate.ch3TargetVoltage;
             break;
-        case 4: //channel 2 current
-            param_value = (float)self.appDelegate.ch2MaxCurrent/MILLI_SCALER;
-            self.ch2view.center = CENTER_STAGE;
-            self.ch1view.alpha = 0;
-            self.ch3view.alpha = 0;
-            self.selectedParam = self.ch2MaxCurrent;
-            break;
-        case 5: //channel 3 voltage
-            param_value = (float)self.appDelegate.ch3TargetVoltage/MILLI_SCALER;
-            self.ch3view.center = CENTER_STAGE;
-            self.ch2view.alpha = 0;
-            self.ch1view.alpha = 0;
-            self.selectedParam = self.ch3voltageLabel;
-            break;
-        case 6: //channel 3 current
-            param_value = (float)self.appDelegate.ch3MaxCurrent/MILLI_SCALER;
-            self.ch3view.center = CENTER_STAGE;
-            self.ch2view.alpha = 0;
-            self.ch1view.alpha = 0;
-            self.selectedParam = self.ch3MaxCurrent;
-            break;
+            
         default:
             break;
     }
-    //set the opacity for the channels according to whether they are enabled/disabled
-    if (self.selectedParam.superview.alpha == .5){
+    int chTargetCurrent = 0;
+    switch (channelNumber) {
+        case 1:
+            chTargetCurrent = self.appDelegate.ch1MaxCurrent;
+            break;
+        case 2:
+            chTargetCurrent = self.appDelegate.ch2MaxCurrent;
+            break;
+        case 3:
+            chTargetCurrent = self.appDelegate.ch3MaxCurrent;
+            break;
+            
+        default:
+            break;
+    }
+    
+    if ([controlType isEqualToString:@"Voltage"]) {
+        param_value = (float)chTargetVoltage/MILLI_SCALER;
+    } else  {
+        param_value = (float)chTargetCurrent/MILLI_SCALER;
+    }
+    
+    [chView setVoltageDisplay: chTargetVoltage];
+    [chView setCurrentDisplay: chTargetCurrent];
+    
+    NSString *controlLabel = [NSString stringWithFormat:@"Channel %d %@ Control", channelNumber, controlType];
+    [self.controlLabel setText: controlLabel];
+
+    self.selectedChannel = chView;
+    self.selectedParam = sender;
+    
+    NSLayoutConstraint *top = nil;
+    switch (channelNumber) {
+        case 1:
+            top = self.ch1Top;
+            break;
+        case 2:
+            top = self.ch2Top;
+            break;
+        case 3:
+            top = self.ch3Top;
+            break;
+            
+        default:
+            break;
+    }
+
+    if (!chView.enabled){
         [self.enableBtn setTitle:@"Enable" forState:UIControlStateNormal];
     }else{
         [self.enableBtn setTitle:@"Disable" forState:UIControlStateNormal];
     }
-    self.controlView.alpha = 1;
+
+    [UIView animateWithDuration:0.33 animations:^{
+        top.constant = CENTER_STAGE.y;
+        NSArray *channels = @[self.ch1view, self.ch2view, self.ch3view];
+        for (UIView *channel in channels) {
+            if (channel != chView) {
+                channel.alpha = 0;
+            }
+        }
+        [chView layoutIfNeeded];
+        self.controlView.alpha = 1;
+    }];
+
     editing = YES;
+}
+
+- (IBAction)userWantsToEditVoltage:(CHRHChannelView *)chView control:sender {
+    NSUInteger channelNum = chView.channelNumber;
+    [self setupForChannelNumber:channelNum control:@"Voltage" channelView:chView control:sender];
+    voltage_selected = true;
+}
+
+- (IBAction)userWantsToEditMaxCurrent:(CHRHChannelView *)chView control:sender {
+    NSUInteger channelNum = chView.channelNumber;
+    [self setupForChannelNumber:channelNum control:@"Current" channelView:chView control:sender];
+    voltage_selected = false;
 }
 
 /* all the logic to turn the control knob and update the labels with new values. */
@@ -260,39 +269,41 @@
 
 /* ok we like our new voltage and current so we tell the app delegate to send the new values to the hydra */
 - (IBAction)acceptPressed:(UIButton *)sender {
-    UIView *channelView = self.selectedParam.superview;
-    float current;
-    switch (channelView.tag) {
-        case 1:            
-            self.appDelegate.ch1TargetVoltage = [self.ch1voltageLabel.text floatValue] *MILLI_SCALER;
-            current = [self.ch1MaxCurrent.text stringByReplacingOccurrencesOfString:@"MAX " withString:@""].floatValue;
-            self.appDelegate.ch1MaxCurrent = current*MILLI_SCALER;
+    NSUInteger channel = self.selectedChannel.channelNumber;
+    BOOL enabled = self.selectedChannel.enabled;
+    float current = 0.0;
+    float voltage = 0.0;
+    voltage = enabled ? [self.selectedChannel.voltage.text floatValue] : 0.0;
+    current = enabled ? [self.selectedChannel.maxCurrent.text stringByReplacingOccurrencesOfString:@"MAX " withString:@""].floatValue : 0.0;
+
+    switch (channel) {
+        case 1:
+            self.appDelegate.ch1TargetVoltage = voltage * MILLI_SCALER;
+            self.appDelegate.ch1MaxCurrent = current * MILLI_SCALER;
             break;
         case 2:
-            self.appDelegate.ch2TargetVoltage = [self.ch2voltageLabel.text floatValue] *MILLI_SCALER;
-            current = [self.ch2MaxCurrent.text stringByReplacingOccurrencesOfString:@"MAX " withString:@""].floatValue;
-            self.appDelegate.ch2MaxCurrent = current*MILLI_SCALER;
+            self.appDelegate.ch2TargetVoltage = voltage * MILLI_SCALER;
+            self.appDelegate.ch2MaxCurrent = current * MILLI_SCALER;
             break;
         case 3:
-            self.appDelegate.ch3TargetVoltage = [self.ch3voltageLabel.text floatValue] *MILLI_SCALER;
-            current = [self.ch2MaxCurrent.text stringByReplacingOccurrencesOfString:@"MAX " withString:@""].floatValue;
-            self.appDelegate.ch3MaxCurrent = current*MILLI_SCALER;
+            self.appDelegate.ch3TargetVoltage = voltage * MILLI_SCALER;
+            self.appDelegate.ch3MaxCurrent = current * MILLI_SCALER;
             break;
         default:
             break;
     }
     
     //set the buttons to be that yellow color until we get a success packet back.
-    UIButton *button = (UIButton*)[[channelView subviews] objectAtIndex:0];
-    [button setImage:[UIImage imageNamed:@"LCDyellow.png"] forState:UIControlStateNormal];
-    button = (UIButton*)[[channelView subviews] objectAtIndex:1];
-    [button setImage:[UIImage imageNamed:@"LCDyellow.png"] forState:UIControlStateNormal];
+    [self.selectedChannel valueBeingSentMode:YES];
     
-    [self updateHydra]; //this method is the one that creates the bluetooth packet string and then sends it to the bluetooth delegate to be sent
+    //this method is the one that creates the bluetooth packet string and then sends it to the bluetooth delegate to be sent
+    [self updateHydra];
     
+    //restore the channel view positions and alpha
     [self restoreChannels];
     self.controlView.alpha = 0;
     self.selectedParam = nil;
+    
     editing = NO;
 }
 
@@ -301,14 +312,20 @@
     [self restoreChannels];
     self.controlView.alpha = 0;
     self.selectedParam = nil;
+    self.selectedChannel = nil;
     editing = NO;
 }
 
 /* a little bit of clean up after we are done editing values. make sure all the channels are displayed again and whatnot. */
 -(void)restoreChannels{
-    self.ch1view.frame = CH1_VIEW_FRAME;
-    self.ch2view.frame = CH2_VIEW_FRAME;
-    self.ch3view.frame = CH3_VIEW_FRAME;
+    [UIView animateWithDuration:0.33 animations:^{
+        self.ch1Top.constant = 0.0;
+        self.ch2Top.constant = self.ch1view.bounds.size.height + 5;
+        self.ch3Top.constant = self.ch1view.bounds.size.height + self.ch2view.bounds.size.height + 10;
+        [self.ch1view layoutIfNeeded];
+        [self.ch2view layoutIfNeeded];
+        [self.ch3view layoutIfNeeded];
+    }];
     self.ch1view.alpha = .5;
     self.ch2view.alpha = .5;
     self.ch3view.alpha = .5;
@@ -325,7 +342,7 @@
 
 /*enabling and disabling channels.*/
 - (IBAction)enablePressed:(UIButton *)enableBtn {
-    Channel *channel = ((Channel*)self.selectedParam.superview);
+    CHRHChannelView *channel = ((CHRHChannelView*)self.selectedChannel);
     if (channel.enabled){
         channel.enabled = NO;
         channel.alpha = .5;
@@ -333,10 +350,10 @@
         [enableBtn setTitle:@"Enable" forState:UIControlStateSelected];
     }
     else{
-        [enableBtn setTitle:@"Disable" forState:UIControlStateNormal];
-        [enableBtn setTitle:@"Disable" forState:UIControlStateSelected];
         channel.enabled = YES;
         channel.alpha = 1;
+        [enableBtn setTitle:@"Disable" forState:UIControlStateNormal];
+        [enableBtn setTitle:@"Disable" forState:UIControlStateSelected];
     }
 }
 
@@ -354,7 +371,7 @@
     self.packet = [[HydraPacket alloc] init];
     
     [self.packet addAddress:0x00];
-    [self.packet addBatchForCurrent:ch1current voltage:ch1voltage enabled:YES lcMode:self.appDelegate.ch1LC];
+    [self.packet addBatchForCurrent:ch1current voltage:ch1voltage enabled:self.ch1view.enabled lcMode:self.appDelegate.ch1LC];
     [self.packet addBatchForCurrent:ch2current voltage:ch2voltage enabled:self.ch2view.enabled lcMode:self.appDelegate.ch2LC];
     [self.packet addBatchForCurrent:ch3current voltage:ch3voltage enabled:self.ch3view.enabled lcMode:self.appDelegate.ch3LC];
     [self.packet addChecksum];
@@ -365,7 +382,7 @@
     
     [self.appDelegate sendCommand:self.packet.packet];
     retryCount = 0;
-    resendTimer = [NSTimer scheduledTimerWithTimeInterval:.5
+    resendTimer = [NSTimer scheduledTimerWithTimeInterval:2
                                      target:self
                                    selector:@selector(resendData:)
                                    userInfo:nil
@@ -400,72 +417,28 @@
     if (editing) return;
     
     NSDictionary *userInfo = notification.userInfo;
-    self.ch1voltageLabel.text = [NSString stringWithFormat:@"%.02f",[userInfo[CH_1_VOLT] floatValue]/MILLI_SCALER];
-   
-    self.ch1currentLabel.text = [NSString stringWithFormat:@"%.02f",[userInfo[CH_1_CURR] floatValue]/MILLI_SCALER];
-    
-    self.ch2voltageLabel.text = [NSString stringWithFormat:@"%.02f",[userInfo[CH_2_VOLT] floatValue]/MILLI_SCALER];
-    
-    self.ch2currentLabel.text = [NSString stringWithFormat:@"%.02f",[userInfo[CH_2_CURR] floatValue]/MILLI_SCALER];
-    
-    self.ch3voltageLabel.text = [NSString stringWithFormat:@"%.02f",[userInfo[CH_3_VOLT] floatValue]/MILLI_SCALER];
-    
-    self.ch3currentLabel.text = [NSString stringWithFormat:@"%.02f",[userInfo[CH_3_CURR] floatValue]/MILLI_SCALER];
-    
+    [self.ch1view setVoltageDisplay:[userInfo[CH_1_VOLT] intValue]];
+    [self.ch1view setCurrentDisplay:[userInfo[CH_1_CURR] intValue]];
+
+    [self.ch2view setVoltageDisplay:[userInfo[CH_2_VOLT] intValue]];
+    [self.ch2view setCurrentDisplay:[userInfo[CH_2_CURR] intValue]];
+
+    [self.ch3view setVoltageDisplay:[userInfo[CH_3_VOLT] intValue]];
+    [self.ch3view setCurrentDisplay:[userInfo[CH_3_CURR] intValue]];
+
     self.inputVoltageLabel.text = [NSString stringWithFormat:@"%.2f",[userInfo[IN_VOLT] floatValue]/MILLI_SCALER];
     
     //Set the CV or CC led's based on what data we just got back
-    switch ([userInfo[CH_1_MODE] intValue]) {
-        case 1:
-            self.ch1_CV_led.image = [UIImage imageNamed:@"redLedOff"];
-            self.ch1_CC_led.image = [UIImage imageNamed:@"redLedOn"];
-            break;
-        case 2:
-            self.ch1_CV_led.image = [UIImage imageNamed:@"redLedOn"];
-            self.ch1_CC_led.image = [UIImage imageNamed:@"redLedOff"];
-            break;
-        default:
-            self.ch1_CV_led.image = [UIImage imageNamed:@"redLedOff"];
-            self.ch1_CC_led.image = [UIImage imageNamed:@"redLedOff"];
-            break;
-    }
-    
-    switch ([userInfo[CH_2_MODE] intValue]) {
-        case 1:
-            self.ch2_CV_led.image = [UIImage imageNamed:@"redLedOff"];
-            self.ch2_CC_led.image = [UIImage imageNamed:@"redLedOn"];
-            break;
-        case 2:
-            self.ch2_CV_led.image = [UIImage imageNamed:@"redLedOn"];
-            self.ch2_CC_led.image = [UIImage imageNamed:@"redLedOff"];
-            break;
-        default:
-            self.ch2_CV_led.image = [UIImage imageNamed:@"redLedOff"];
-            self.ch2_CC_led.image = [UIImage imageNamed:@"redLedOff"];
-            break;
-    }
-    
-    switch ([userInfo[CH_3_MODE] intValue]) {
-        case 1:
-            self.ch3_CV_led.image = [UIImage imageNamed:@"redLedOff"];
-            self.ch3_CC_led.image = [UIImage imageNamed:@"redLedOn"];
-            break;
-        case 2:
-            self.ch3_CV_led.image = [UIImage imageNamed:@"redLedOn"];
-            self.ch3_CC_led.image = [UIImage imageNamed:@"redLedOff"];
-            break;
-        default:
-            self.ch3_CV_led.image = [UIImage imageNamed:@"redLedOff"];
-            self.ch3_CC_led.image = [UIImage imageNamed:@"redLedOff"];
-            break;
-    }
+    [self.ch1view setLedMode: [userInfo[CH_1_MODE] intValue]];
+    [self.ch2view setLedMode: [userInfo[CH_2_MODE] intValue]];
+    [self.ch3view setLedMode: [userInfo[CH_3_MODE] intValue]];
 }
 
 -(void)recievedConfig:(NSNotification *) notification{
     if (editing) return;
-    self.ch1MaxCurrent.text = [NSString stringWithFormat:@"MAX %.02f",((float)self.appDelegate.ch1MaxCurrent)/MILLI_SCALER];
-    self.ch2MaxCurrent.text = [NSString stringWithFormat:@"MAX %.02f",((float)self.appDelegate.ch2MaxCurrent)/MILLI_SCALER];
-    self.ch3MaxCurrent.text = [NSString stringWithFormat:@"MAX %.02f",((float)self.appDelegate.ch3MaxCurrent)/MILLI_SCALER];
+    [self.ch1view setMaxCurrentDisplay:self.appDelegate.ch1MaxCurrent];
+    [self.ch2view setMaxCurrentDisplay:self.appDelegate.ch2MaxCurrent];
+    [self.ch3view setMaxCurrentDisplay:self.appDelegate.ch3MaxCurrent];
     self.ch1view.enabled = self.appDelegate.ch1OE;
     self.ch2view.enabled = self.appDelegate.ch2OE;
     self.ch3view.enabled = self.appDelegate.ch3OE;
@@ -473,21 +446,18 @@
 }
 
 /* we got a success packet. Turn all the channels blue and invalidate the resend timer */
--(void)recievedSuccess:(NSNotification *) notification{
+-(void)recievedSuccess:(NSNotification *) notification {
+    [self.selectedChannel valueBeingSentMode: NO];
+    self.selectedChannel = nil;
     [resendTimer invalidate];
     resendTimer = nil;
-    UIButton *button = (UIButton*)[self.ch1view.subviews objectAtIndex:0];
-    [button setImage:[UIImage imageNamed:@"LCDblue.png"] forState:UIControlStateNormal];
-    button = (UIButton*)[self.ch1view.subviews objectAtIndex:1];
-    [button setImage:[UIImage imageNamed:@"LCDblue.png"] forState:UIControlStateNormal];
-    button = (UIButton*)[self.ch2view.subviews objectAtIndex:0];
-    [button setImage:[UIImage imageNamed:@"LCDblue.png"] forState:UIControlStateNormal];
-    button = (UIButton*)[self.ch2view.subviews objectAtIndex:1];
-    [button setImage:[UIImage imageNamed:@"LCDblue.png"] forState:UIControlStateNormal];
-    button = (UIButton*)[self.ch3view.subviews objectAtIndex:0];
-    [button setImage:[UIImage imageNamed:@"LCDblue.png"] forState:UIControlStateNormal];
-    button = (UIButton*)[self.ch3view.subviews objectAtIndex:1];
-    [button setImage:[UIImage imageNamed:@"LCDblue.png"] forState:UIControlStateNormal];
+}
+
+-(void)recievedReject:(NSNotification *) notification {
+    [self.selectedChannel valueBeingSentMode: YES];
+    self.selectedChannel = nil;
+    [resendTimer invalidate];
+    resendTimer = nil;    
 }
 
 /* We got a bluetooth state update. If we are bonded dismiss the overlay. If not, then just update the status label...*/
@@ -521,17 +491,6 @@
 - (void)viewDidUnload {
     [self setControlLabel:nil];
     [self setInputVoltageLabel:nil];
-    [self setCh1_CV_led:nil];
-    [self setCh2_CV_led:nil];
-    [self setCh2_CV_led:nil];
-    [self setCh1MaxCurrent:nil];
-    [self setCh2MaxCurrent:nil];
-    [self setCh3MaxCurrent:nil];
-    [self setCh1currentLabel:nil];
-    [self setCh2voltageLabel:nil];
-    [self setCh2currentLabel:nil];
-    [self setCh1voltageLabel:nil];
-    [self setCh3currentLabel:nil];
     [super viewDidUnload];
 }
 @end

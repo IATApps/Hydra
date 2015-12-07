@@ -263,8 +263,17 @@
                               nil];
         
         self.ch1Voltage = ch1.voltage;
+        if (self.ch1TargetVoltage == 0) {
+            self.ch1TargetVoltage = self.ch1Voltage;
+        }
         self.ch2Voltage = ch2.voltage;
+        if (self.ch2TargetVoltage == 0) {
+            self.ch2TargetVoltage = self.ch2Voltage;
+        }
         self.ch3Voltage = ch3.voltage;
+        if (self.ch3TargetVoltage == 0) {
+            self.ch3TargetVoltage = self.ch3Voltage;
+        }
         
         self.ch1Current = ch1.current;
         self.ch2Current = ch2.current;
@@ -278,7 +287,6 @@
         
         // Clear the persistent data storage
         [BTLE_data setLength:0];
-        
     }
     // Configuration data packet
     else if ((hydra.ptByte == 0xCC) && (hydra.addressByte == 0x00))
@@ -327,6 +335,7 @@
         
         // Set flag indicating that we've received configuration data for the Hydra
         haveConfigData = 1;
+        [BTLE_data setLength: 0];
     }
     // Success packet.  Indicates that a register write happened successfully
     else if ((hydra.ptByte == 0x00) && (hydra.addressByte == 0x00))
@@ -335,11 +344,13 @@
 //        if (![hydra isChecksumValid])
 //        {
 //            NSLog(@"iGateDidReceivedData 0x00 Checksum rejected");
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"rejected" object:nil userInfo:nil];
 //            [BTLE_data setLength: 0];
 //            return;
 //        }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"success" object:nil userInfo:nil];
+        [BTLE_data setLength: 0];
     }
     // Firmware Response Packet
     else if ((hydra.ptByte == 0x80) && (hydra.addressByte == 0xAA)) {
@@ -358,6 +369,7 @@
         
         NSDictionary *userInfo = @{ @"version" : version };
         [[NSNotificationCenter defaultCenter] postNotificationName:@"firmwareVersionReport" object:nil userInfo:userInfo];
+        [BTLE_data setLength: 0];
     }
 }
 
