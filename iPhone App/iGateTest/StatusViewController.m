@@ -271,6 +271,8 @@
 - (IBAction)acceptPressed:(UIButton *)sender {
     NSUInteger channel = self.selectedChannel.channelNumber;
     BOOL enabled = self.selectedChannel.enabled;
+    
+    
     float current = 0.0;
     float voltage = 0.0;
     voltage = enabled ? [self.selectedChannel.voltage.text floatValue] : 0.0;
@@ -278,14 +280,35 @@
 
     switch (channel) {
         case 1:
+            if (voltage_selected) {
+                [self.selectedChannel setLedMode:2];
+                self.appDelegate.ch1LC = false;
+            } else {
+                [self.selectedChannel setLedMode:1];
+                self.appDelegate.ch1LC = true;
+            }
             self.appDelegate.ch1TargetVoltage = voltage * MILLI_SCALER;
             self.appDelegate.ch1MaxCurrent = current * MILLI_SCALER;
             break;
         case 2:
+            if (voltage_selected) {
+                [self.selectedChannel setLedMode:2];
+                self.appDelegate.ch2LC = false;
+            } else {
+                [self.selectedChannel setLedMode:1];
+                self.appDelegate.ch2LC = true;
+            }
             self.appDelegate.ch2TargetVoltage = voltage * MILLI_SCALER;
             self.appDelegate.ch2MaxCurrent = current * MILLI_SCALER;
             break;
         case 3:
+            if (voltage_selected) {
+                [self.selectedChannel setLedMode:2];
+                self.appDelegate.ch3LC = false;
+            } else {
+                [self.selectedChannel setLedMode:1];
+                self.appDelegate.ch3LC = true;
+            }
             self.appDelegate.ch3TargetVoltage = voltage * MILLI_SCALER;
             self.appDelegate.ch3MaxCurrent = current * MILLI_SCALER;
             break;
