@@ -56,16 +56,25 @@
     [self.channelLabel setNeedsLayout];
 }
 
-- (void)setVoltage_controlled:(BOOL)voltage_controlled {
-    if (_voltage_controlled == voltage_controlled) {
-        return;
-    }
+- (void)setEnabled:(BOOL)enabled {
+    _enabled = enabled;
     
+    if (_enabled) {
+        self.alpha = 1.0;
+    } else {
+        self.alpha = 0.5;
+    }
+}
+
+- (void)setVoltage_controlled:(BOOL)voltage_controlled {
     _voltage_controlled = voltage_controlled;
     
     if (voltage_controlled) {
         [self.ccLed setImage: [UIImage imageNamed: @"redLedOff"]];
         [self.vcLed setImage: [UIImage imageNamed: @"redLedOn"]];
+    } else {
+        [self.ccLed setImage: [UIImage imageNamed: @"redLedOn"]];
+        [self.vcLed setImage: [UIImage imageNamed: @"redLedOff"]];
     }
 }
 
@@ -77,12 +86,15 @@
 - (void)setLedMode:(int)ledMode {
     switch (ledMode) {
         case 1:
+            [self setEnabled: YES];
             [self setVoltage_controlled: NO];
             break;
         case 2:
+            [self setEnabled: YES];
             [self setVoltage_controlled: YES];
             break;
         default:
+            [self setEnabled: NO];
             [self setUnknownMode];
             break;
     }
