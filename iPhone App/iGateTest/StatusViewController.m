@@ -317,7 +317,7 @@
 }
 
 /* a little bit of clean up after we are done editing values. make sure all the channels are displayed again and whatnot. */
--(void)restoreChannels{
+-(void)restoreChannels {
     [UIView animateWithDuration:0.33 animations:^{
         self.ch1Top.constant = 0.0;
         self.ch2Top.constant = self.ch1view.bounds.size.height + 5;
@@ -326,18 +326,9 @@
         [self.ch2view layoutIfNeeded];
         [self.ch3view layoutIfNeeded];
     }];
-    self.ch1view.alpha = .5;
-    self.ch2view.alpha = .5;
-    self.ch3view.alpha = .5;
-    if (self.ch1view.enabled){
-        self.ch1view.alpha = 1;
-    }
-    if (self.ch2view.enabled){
-        self.ch2view.alpha = 1;
-    }
-    if (self.ch3view.enabled){
-        self.ch3view.alpha = 1;
-    }
+    [self.ch1view setEnabled: self.ch1view.enabled];
+    [self.ch2view setEnabled: self.ch2view.enabled];
+    [self.ch3view setEnabled: self.ch3view.enabled];
 }
 
 /*enabling and disabling channels.*/
@@ -345,13 +336,11 @@
     CHRHChannelView *channel = ((CHRHChannelView*)self.selectedChannel);
     if (channel.enabled){
         channel.enabled = NO;
-        channel.alpha = .5;
         [enableBtn setTitle:@"Enable" forState:UIControlStateNormal];
         [enableBtn setTitle:@"Enable" forState:UIControlStateSelected];
     }
     else{
         channel.enabled = YES;
-        channel.alpha = 1;
         [enableBtn setTitle:@"Disable" forState:UIControlStateNormal];
         [enableBtn setTitle:@"Disable" forState:UIControlStateSelected];
     }
