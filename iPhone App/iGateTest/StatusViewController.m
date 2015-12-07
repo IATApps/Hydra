@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 CHRobotics. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "StatusViewController.h"
 #import "Channel.h"
 #import "AppDelegate.h"
 #import "Utilities.h"
 #import "HydraPacket.h"
 
-@interface ViewController ()
+@interface StatusViewController ()
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
 /* These are wrappers around all the information on the channel. */

@@ -230,7 +230,8 @@
         // Compare to the checksum provided in the packet and return if they don't match
         if (![hydra isChecksumValid])
         {
-            NSLog(@"Checksum rejected");
+            NSLog(@"iGateDidReceivedData 0xD0 Checksum rejected");
+            NSLog(@"%@", hydra);
             [BTLE_data setLength: 0];
             return;
         }
@@ -285,7 +286,7 @@
         // Compare to the checksum provided in the packet and return if they don't match
         if (![hydra isChecksumValid])
         {
-            NSLog(@"Checksum rejected");
+            NSLog(@"iGateDidReceivedData 0xCC Checksum rejected");
             [BTLE_data setLength: 0];
             return;
         }
@@ -331,12 +332,12 @@
     else if ((hydra.ptByte == 0x00) && (hydra.addressByte == 0x00))
     {
         // Compare to the checksum provided in the packet and return if they don't match
-        if (![hydra isChecksumValid])
-        {
-            NSLog(@"Checksum rejected");
-            [BTLE_data setLength: 0];
-            return;
-        }
+//        if (![hydra isChecksumValid])
+//        {
+//            NSLog(@"iGateDidReceivedData 0x00 Checksum rejected");
+//            [BTLE_data setLength: 0];
+//            return;
+//        }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"success" object:nil userInfo:nil];
     }
@@ -345,7 +346,7 @@
         // Compare to the checksum provided in the packet and return if they don't match
         if (![hydra isChecksumValid])
         {
-            NSLog(@"Checksum rejected");
+            NSLog(@"iGateDidReceivedData 0x80 Checksum rejected");
             [BTLE_data setLength: 0];
             return;
         }

@@ -40,6 +40,7 @@
 - (UInt8)addressByte;
 - (HydraChannel*)batchEntryAtIndex:(UInt8)index;
 - (BOOL)isChecksumValid;
+- (uint16_t)checksumValue;
 
 - (BOOL)isCommandFailure;
 

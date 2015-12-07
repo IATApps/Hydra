@@ -23,7 +23,7 @@
 #define CENTER_STAGE CGPointMake(160, 50)
 
 
-@interface ViewController : UIViewController 
+@interface StatusViewController : UIViewController 
 {
     CiGate *iGate;
     CiGateState _state;

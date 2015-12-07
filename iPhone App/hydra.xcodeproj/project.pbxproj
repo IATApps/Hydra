@@ -12,6 +12,7 @@
 		7F1BBEF8159177A0000741FA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1BBEF7159177A0000741FA /* CoreGraphics.framework */; };
 		7F1BBF00159177A0000741FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F1BBEFF159177A0000741FA /* main.m */; };
 		7F1BBF151591785F000741FA /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1BBF141591785F000741FA /* CoreBluetooth.framework */; };
+		C50166CF1C0DE4FC00749378 /* libiGate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE052E06175EA09C003F80AE /* libiGate.a */; };
 		C57B79D71BF79B77004DAB9B /* HydraPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C57B79D61BF79B77004DAB9B /* HydraPacket.m */; };
 		C58137A21BF5437C001238F8 /* CBPeripheral+iGateHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C581379E1BF500B5001238F8 /* CBPeripheral+iGateHelpers.m */; };
 		CE7F530F177B96C300678246 /* LCDyellow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F530E177B96C300678246 /* LCDyellow.png */; };
@@ -41,7 +42,7 @@
 		CEB9DBED171641A7006DBD4B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9DBD7171641A6006DBD4B /* AppDelegate.m */; };
 		CEB9DBF4171641A7006DBD4B /* steel_gradient.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBDE171641A7006DBD4B /* steel_gradient.jpg */; };
 		CEB9DBFE1716453A006DBD4B /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9DBF91716453A006DBD4B /* SettingsViewController.m */; };
-		CEB9DBFF1716453A006DBD4B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9DBFB1716453A006DBD4B /* ViewController.m */; };
+		CEB9DBFF1716453A006DBD4B /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9DBFB1716453A006DBD4B /* StatusViewController.m */; };
 		CEB9DC001716453A006DBD4B /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9DBFD1716453A006DBD4B /* Channel.m */; };
 		CEB9DC0217170F51006DBD4B /* blackBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DC0117170F50006DBD4B /* blackBtn.png */; };
 		CEB9DC0A17171834006DBD4B /* blackBtnSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DC0917171834006DBD4B /* blackBtnSmall.png */; };
@@ -54,9 +55,9 @@
 		7F1BBEF3159177A0000741FA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7F1BBEF5159177A0000741FA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7F1BBEF7159177A0000741FA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		7F1BBEFB159177A0000741FA /* iGateTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iGateTest-Info.plist"; sourceTree = "<group>"; };
+		7F1BBEFB159177A0000741FA /* Hydra-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hydra-Info.plist"; sourceTree = "<group>"; };
 		7F1BBEFF159177A0000741FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7F1BBF01159177A0000741FA /* iGateTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iGateTest-Prefix.pch"; sourceTree = "<group>"; };
+		7F1BBF01159177A0000741FA /* Hydra-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hydra-Prefix.pch"; sourceTree = "<group>"; };
 		7F1BBF141591785F000741FA /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		C57B79D51BF79B77004DAB9B /* HydraPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HydraPacket.h; sourceTree = "<group>"; };
 		C57B79D61BF79B77004DAB9B /* HydraPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HydraPacket.m; sourceTree = "<group>"; };
@@ -98,8 +99,8 @@
 		CEB9DBDE171641A7006DBD4B /* steel_gradient.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = steel_gradient.jpg; sourceTree = "<group>"; };
 		CEB9DBF81716453A006DBD4B /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		CEB9DBF91716453A006DBD4B /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		CEB9DBFA1716453A006DBD4B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CEB9DBFB1716453A006DBD4B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CEB9DBFA1716453A006DBD4B /* StatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusViewController.h; sourceTree = "<group>"; };
+		CEB9DBFB1716453A006DBD4B /* StatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusViewController.m; sourceTree = "<group>"; };
 		CEB9DBFC1716453A006DBD4B /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CEB9DBFD1716453A006DBD4B /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		CEB9DC0117170F50006DBD4B /* blackBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackBtn.png; sourceTree = "<group>"; };
@@ -117,6 +118,7 @@
 				7F1BBEF4159177A0000741FA /* UIKit.framework in Frameworks */,
 				7F1BBEF6159177A0000741FA /* Foundation.framework in Frameworks */,
 				CE8D3657171E314500BD64DD /* MessageUI.framework in Frameworks */,
+				C50166CF1C0DE4FC00749378 /* libiGate.a in Frameworks */,
 				7F1BBEF8159177A0000741FA /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,8 +174,8 @@
 				CE898A6B171752AC005A62FA /* DataLoggingViewController.m */,
 				CEB9DBF81716453A006DBD4B /* SettingsViewController.h */,
 				CEB9DBF91716453A006DBD4B /* SettingsViewController.m */,
-				CEB9DBFA1716453A006DBD4B /* ViewController.h */,
-				CEB9DBFB1716453A006DBD4B /* ViewController.m */,
+				CEB9DBFA1716453A006DBD4B /* StatusViewController.h */,
+				CEB9DBFB1716453A006DBD4B /* StatusViewController.m */,
 				CEB9DBFC1716453A006DBD4B /* Channel.h */,
 				CEB9DBFD1716453A006DBD4B /* Channel.m */,
 				CE8D3652171E144400BD64DD /* Utilities.h */,
@@ -191,10 +193,10 @@
 		7F1BBEFA159177A0000741FA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7F1BBEFB159177A0000741FA /* iGateTest-Info.plist */,
+				7F1BBEFB159177A0000741FA /* Hydra-Info.plist */,
 				CEA2C9E616FB9E7700AA2663 /* InfoPlist.strings */,
 				7F1BBEFF159177A0000741FA /* main.m */,
-				7F1BBF01159177A0000741FA /* iGateTest-Prefix.pch */,
+				7F1BBF01159177A0000741FA /* Hydra-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -322,7 +324,7 @@
 				CEB9DBED171641A7006DBD4B /* AppDelegate.m in Sources */,
 				C58137A21BF5437C001238F8 /* CBPeripheral+iGateHelpers.m in Sources */,
 				CEB9DBFE1716453A006DBD4B /* SettingsViewController.m in Sources */,
-				CEB9DBFF1716453A006DBD4B /* ViewController.m in Sources */,
+				CEB9DBFF1716453A006DBD4B /* StatusViewController.m in Sources */,
 				CEB9DC001716453A006DBD4B /* Channel.m in Sources */,
 				CE898A6C171752AC005A62FA /* DataLoggingViewController.m in Sources */,
 				CE8D3654171E144800BD64DD /* Utilities.m in Sources */,
@@ -345,8 +347,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Chase Roberts (E6A7XV2XK7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chase Roberts (E6A7XV2XK7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kurt Arnlund (NBX44EGYRB)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -368,9 +369,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "31226076-499B-428E-82AD-44F4C045ABE0";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "31226076-499B-428E-82AD-44F4C045ABE0";
+				PROVISIONING_PROFILE = "5b798e2c-da0e-4d03-ac38-8ca45b20c53d";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5b798e2c-da0e-4d03-ac38-8ca45b20c53d";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7s armv7";
 			};
@@ -388,8 +388,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Chase Roberts (E6A7XV2XK7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chase Roberts (E6A7XV2XK7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kurt Arnlund (NBX44EGYRB)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -404,8 +403,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "31226076-499B-428E-82AD-44F4C045ABE0";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "31226076-499B-428E-82AD-44F4C045ABE0";
+				PROVISIONING_PROFILE = "5b798e2c-da0e-4d03-ac38-8ca45b20c53d";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5b798e2c-da0e-4d03-ac38-8ca45b20c53d";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7s armv7";
@@ -415,28 +414,21 @@
 		7F1BBF0E159177A0000741FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "iGateTest/iGateTest-Prefix.pch";
-				GENERATE_MASTER_OBJECT_FILE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/iGateTest/iGateTest-Info.plist";
+				GCC_PREFIX_HEADER = "iGateTest/Hydra-Prefix.pch";
+				GENERATE_MASTER_OBJECT_FILE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/iGateTest/Hydra-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/iGateTest\"",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
 				);
-				OTHER_LDFLAGS = (
-					"-whyload",
-					"-ObjC",
-					"-force_load",
-					libiGate.a,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iatapps.llc.Hydra;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chrobotics.llc.Hydra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "454aaf13-04ca-45fb-bae3-aeed8ab5335a";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5b798e2c-da0e-4d03-ac38-8ca45b20c53d";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -444,28 +436,21 @@
 		7F1BBF0F159177A0000741FA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "iGateTest/iGateTest-Prefix.pch";
-				GENERATE_MASTER_OBJECT_FILE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/iGateTest/iGateTest-Info.plist";
+				GCC_PREFIX_HEADER = "iGateTest/Hydra-Prefix.pch";
+				GENERATE_MASTER_OBJECT_FILE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/iGateTest/Hydra-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/iGateTest\"",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
 				);
-				OTHER_LDFLAGS = (
-					"-whyload",
-					"-ObjC",
-					"-force_load",
-					libiGate.a,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iatapps.llc.Hydra;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chrobotics.llc.Hydra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "454aaf13-04ca-45fb-bae3-aeed8ab5335a";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5b798e2c-da0e-4d03-ac38-8ca45b20c53d";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

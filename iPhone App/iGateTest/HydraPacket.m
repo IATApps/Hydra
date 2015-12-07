@@ -111,19 +111,30 @@
 }
 
 - (BOOL)isChecksumValid {
+    uint16_t calculated = [self checksumCalculated];
+
+    uint16_t internal = [self checksumValue];
+
+    NSLog(@"packet checksum %04x %@ %04x internal checksum  - packet length %04x", calculated, (internal == calculated) ? @"==" : @"!=", internal, self.packet.length);
+    
+    // Compare to the checksum provided in the packet and return if they don't match
+    return (internal == calculated);
+}
+
+- (uint16_t)checksumCalculated {
     uint16_t checksum = 0;
     UInt8 *bytes = [self.packet mutableBytes];
     for(int i = 0; i < self.packet.length - 2; i++){
         uint16_t value = (uint16_t)bytes[i];
         checksum += value;
     }
+    return checksum;
+}
 
-    // Compare to the checksum provided in the packet and return if they don't match
-    uint16_t checker = ((bytes[self.packet.length-2] << 8) | bytes[self.packet.length-1]);
-
-//    NSLog(@"validating checksum %d against stored checksum %d - packet length %d", checksum, checker, self.packet.length);
-
-    return (checker == checksum);
+- (uint16_t)checksumValue {
+    UInt8 *bytes = [self.packet mutableBytes];
+    uint16_t checksum = ((bytes[self.packet.length-2] << 8) | bytes[self.packet.length-1]);
+    return checksum;
 }
 
 - (UInt8)ptByte:(UInt8)value hasData:(BOOL)hasData {
