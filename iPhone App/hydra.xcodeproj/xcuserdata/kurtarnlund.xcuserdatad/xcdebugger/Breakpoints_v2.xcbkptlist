@@ -20,11 +20,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iGateTest/AppDelegate.m"
-            timestampString = "471209928.314265"
+            timestampString = "475001616.194999"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
+            landmarkName = "-iGateDidReceivedData:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iGateTest/AppDelegate.m"
+            timestampString = "475001166.155565"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
             landmarkName = "-iGateDidReceivedData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -36,28 +52,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iGateTest/StatusViewController.m"
-            timestampString = "471211789.224027"
+            timestampString = "475003105.276636"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
-            landmarkName = "-acceptPressed:"
+            startingLineNumber = "470"
+            endingLineNumber = "470"
+            landmarkName = "-recievedConfig:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iGateTest/AppDelegate.m"
-            timestampString = "471212146.954401"
+            filePath = "iGateTest/CHRHChannelView.m"
+            timestampString = "475002177.412083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "-iGateDidReceivedData:"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "-setEnabled:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

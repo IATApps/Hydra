@@ -86,15 +86,12 @@
 - (void)setLedMode:(int)ledMode {
     switch (ledMode) {
         case 1:
-            [self setEnabled: YES];
             [self setVoltage_controlled: NO];
             break;
         case 2:
-            [self setEnabled: YES];
             [self setVoltage_controlled: YES];
             break;
         default:
-            [self setEnabled: NO];
             [self setUnknownMode];
             break;
     }

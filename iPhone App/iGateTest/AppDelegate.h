@@ -16,16 +16,19 @@
 #define CH_1_CURR @"ch1current"
 #define CH_1_MODE @"ch1mode"
 #define CH_1_FAULT @"ch1fault"
+#define CH_1_ENABLED @"ch1enable"
 
 #define CH_2_VOLT @"ch2voltage"
 #define CH_2_CURR @"ch2current"
 #define CH_2_MODE @"ch2mode"
 #define CH_2_FAULT @"ch2fault"
+#define CH_2_ENABLED @"ch2enable"
 
 #define CH_3_VOLT @"ch3voltage"
 #define CH_3_CURR @"ch3current"
 #define CH_3_MODE @"ch3mode"
 #define CH_3_FAULT @"ch3fault"
+#define CH_3_ENABLED @"ch3enable"
 
 #define IN_VOLT @"inVoltage"
 #define IN_CURR @"inCurrent"

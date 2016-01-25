@@ -34,7 +34,7 @@
         self.statusMode = YES;
         self.current = ((bytes[0] & 0x0F) << 8) + bytes[1]; // 12 bits for current
         self.voltage = (bytes[2] << 8) + bytes[3];  // 16 bits for voltage
-        self.enabled = NO;
+        self.enabled = (self.voltage > 2400);
         self.lowCurrentMode = NO;
         // fault and mode bit-pairs in upper 4 bits of current value
         self.fault = (bytes[0] >> 4) & 0x03;

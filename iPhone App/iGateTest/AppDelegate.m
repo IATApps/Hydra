@@ -250,14 +250,17 @@
                               @(ch1.current), CH_1_CURR,
                               @(ch1.fault), CH_1_FAULT,
                               @(ch1.mode), CH_1_MODE,
+                              @(ch1.enabled), CH_1_ENABLED,
                               @(ch2.voltage), CH_2_VOLT,
                               @(ch2.current), CH_2_CURR,
                               @(ch2.fault), CH_2_FAULT,
                               @(ch2.mode), CH_2_MODE,
+                              @(ch2.enabled), CH_2_ENABLED,
                               @(ch3.voltage), CH_3_VOLT,
                               @(ch3.current), CH_3_CURR,
                               @(ch3.fault), CH_3_FAULT,
                               @(ch3.mode), CH_3_MODE,
+                              @(ch3.enabled), CH_3_ENABLED,
                               @(ch4.voltage), IN_VOLT,
                               @(ch4.current), IN_CURR,
                               nil];
@@ -274,6 +277,10 @@
         if (self.ch3TargetVoltage == 0) {
             self.ch3TargetVoltage = self.ch3Voltage;
         }
+        
+        self.ch1OE = ch1.enabled;
+        self.ch2OE = ch2.enabled;
+        self.ch3OE = ch3.enabled;
         
         self.ch1Current = ch1.current;
         self.ch2Current = ch2.current;

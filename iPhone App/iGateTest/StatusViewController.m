@@ -277,7 +277,13 @@
     float voltage = 0.0;
     voltage = enabled ? [self.selectedChannel.voltage.text floatValue] : 0.0;
     current = enabled ? [self.selectedChannel.maxCurrent.text stringByReplacingOccurrencesOfString:@"MAX " withString:@""].floatValue : 0.0;
+    
+    if (!enabled) {
+        voltage_selected = YES;
+    }
 
+    [self.selectedChannel setEnabled:enabled];
+    
     switch (channel) {
         case 1:
             if (voltage_selected) {
@@ -364,6 +370,12 @@
     }
     else{
         channel.enabled = YES;
+        [channel setVoltageDisplay:2500];
+        if (voltage_selected) {
+            [channel setLedMode:2];
+        } else {
+            [channel setLedMode:1];
+        }
         [enableBtn setTitle:@"Disable" forState:UIControlStateNormal];
         [enableBtn setTitle:@"Disable" forState:UIControlStateSelected];
     }
@@ -444,6 +456,10 @@
     [self.ch1view setLedMode: [userInfo[CH_1_MODE] intValue]];
     [self.ch2view setLedMode: [userInfo[CH_2_MODE] intValue]];
     [self.ch3view setLedMode: [userInfo[CH_3_MODE] intValue]];
+    
+    [self.ch1view setEnabled: [userInfo[CH_1_ENABLED] boolValue]];
+    [self.ch2view setEnabled: [userInfo[CH_2_ENABLED] boolValue]];
+    [self.ch3view setEnabled: [userInfo[CH_3_ENABLED] boolValue]];
 }
 
 -(void)recievedConfig:(NSNotification *) notification{
