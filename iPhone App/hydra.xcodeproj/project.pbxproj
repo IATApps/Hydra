@@ -60,6 +60,7 @@
 		7F1BBEFF159177A0000741FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7F1BBF01159177A0000741FA /* Hydra-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hydra-Prefix.pch"; sourceTree = "<group>"; };
 		7F1BBF141591785F000741FA /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		C51E03AB1C61D06500F23E53 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		C54D034F1C153989000DE766 /* CHRHChannelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHRHChannelView.h; sourceTree = "<group>"; };
 		C54D03501C153989000DE766 /* CHRHChannelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHRHChannelView.m; sourceTree = "<group>"; };
 		C57B79D51BF79B77004DAB9B /* HydraPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HydraPacket.h; sourceTree = "<group>"; };
@@ -132,6 +133,7 @@
 		7F1BBEE4159177A0000741FA = {
 			isa = PBXGroup;
 			children = (
+				C51E03AB1C61D06500F23E53 /* README.md */,
 				CE897589172206E000870825 /* hydra_logo.png */,
 				CE052E06175EA09C003F80AE /* libiGate.a */,
 				CE8D3650171E07FE00BD64DD /* Default-568h@2x.png */,
