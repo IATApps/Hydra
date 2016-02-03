@@ -34,6 +34,10 @@
 - (void)reset;
 - (void)addAddress:(UInt8)address;
 - (void)addBatchForCurrent:(int)current voltage:(int)voltage enabled:(BOOL)enabled lcMode:(BOOL)lcMode;
+- (void)addBatchForVINCutoff:(int)voltage
+      voltageCutoffOverride1:(BOOL)voltage_cutoff_override_1
+      voltageCutoffOverride2:(BOOL)voltage_cutoff_override_2
+      voltageCutoffOverride3:(BOOL)voltage_cutoff_override_3;
 - (void)addChecksum;
 
 - (UInt8)ptByte;

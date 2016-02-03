@@ -12,11 +12,14 @@
 #import "HydraPacket.h"
 
 @interface SettingsViewController ()<UITextFieldDelegate>
-@property (strong, nonatomic) IBOutlet UISwitch *ch1LowCurrent;
-@property (strong, nonatomic) IBOutlet UISwitch *ch2LowCurrent;
-@property (strong, nonatomic) IBOutlet UISwitch *ch3LowCurrent;
-@property (strong, nonatomic) IBOutlet UITextField *lowVoltageCutoff;
-@property (strong, nonatomic) IBOutlet UIButton *saveBtn;
+@property (weak, nonatomic) IBOutlet UISwitch *ch1VoltageCutoffOverride;
+@property (weak, nonatomic) IBOutlet UISwitch *ch2VoltageCutoffOverride;
+@property (weak, nonatomic) IBOutlet UISwitch *ch3VoltageCutoffOverride;
+@property (weak, nonatomic) IBOutlet UISwitch *ch1LowCurrent;
+@property (weak, nonatomic) IBOutlet UISwitch *ch2LowCurrent;
+@property (weak, nonatomic) IBOutlet UISwitch *ch3LowCurrent;
+@property (weak, nonatomic) IBOutlet UITextField *lowVoltageCutoff;
+@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 @property (weak, nonatomic) IBOutlet UILabel *firmwareLabel;
 @property (weak, nonatomic) IBOutlet UIButton *firmwareButton;
 @property (nonatomic, strong) HydraPacket *hydraPacket;
@@ -58,8 +61,12 @@
     [super viewWillAppear:animated];
     self.ch1LowCurrent.on = appDelegate.ch1LC;
     self.ch2LowCurrent.on = appDelegate.ch2LC;
-    self.ch3LowCurrent.on = appDelegate.ch3LC;    
-
+    self.ch3LowCurrent.on = appDelegate.ch3LC;
+    
+    self.ch1VoltageCutoffOverride.on = appDelegate.ch1CVO;
+    self.ch2VoltageCutoffOverride.on = appDelegate.ch2CVO;
+    self.ch3VoltageCutoffOverride.on = appDelegate.ch3CVO;
+    
     CiGateState state = appDelegate.iGate.state;
     if (state != CiGateStateBonded) {
         overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 500)];
@@ -70,6 +77,13 @@
         overlayView = nil;
     }
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self firmwarePressed:self.firmwareButton];
+}
+
 
 -(void)recievedConfig:(NSNotification *) notification{
    
@@ -101,21 +115,8 @@
 - (IBAction)savePressed:(UIButton *)sender {
     sendingLVC = NO;
     [self.lowVoltageCutoff resignFirstResponder];
-    uint16_t ch1voltage = appDelegate.ch1TargetVoltage;
-    uint16_t ch1current = appDelegate.ch1MaxCurrent;
-    uint16_t ch2voltage = appDelegate.ch2TargetVoltage;
-    uint16_t ch2current = appDelegate.ch2MaxCurrent;
-    uint16_t ch3voltage = appDelegate.ch3TargetVoltage;
-    uint16_t ch3current = appDelegate.ch3MaxCurrent;
-    
-    self.hydraPacket = [[HydraPacket alloc] init];
-    [self.hydraPacket addAddress:0xAA];
-    [self.hydraPacket addBatchForCurrent:ch1current voltage:ch1voltage enabled:appDelegate.ch1OE lcMode:appDelegate.ch1LC];
-    [self.hydraPacket addBatchForCurrent:ch2current voltage:ch2voltage enabled:appDelegate.ch2OE lcMode:appDelegate.ch2LC];
-    [self.hydraPacket addBatchForCurrent:ch3current voltage:ch3voltage enabled:appDelegate.ch3OE lcMode:appDelegate.ch3LC];
-    [self.hydraPacket addChecksum];
-    
-    NSAssert([self.hydraPacket isChecksumValid], @"hydra packet checksum fail");
+
+    [self setSettingsPacket];
 
     self.saveBtn.enabled = NO;
     [self sendPacket];
@@ -126,7 +127,7 @@
     [appDelegate sendCommand:self.hydraPacket.packet];
     
     // There is no ACK for firmware requests
-    if ([self.hydraPacket addressByte] != 0xAA) {
+    if (([self.hydraPacket addressByte] != 0xAA) && ([self.hydraPacket addressByte] != 0x00)) {
         resendTimer = [NSTimer scheduledTimerWithTimeInterval:.5
                                                        target:self
                                                      selector:@selector(resendData:)
@@ -170,9 +171,37 @@
     }
 }
 
-- (void)sendLVCPacket{
-    //TODO: overwrite this to send the LVC data and not the voltage/current data.
-    sendingLVC = YES;
+//- (void)sendLVCPacket{
+//    //TODO: overwrite this to send the LVC data and not the voltage/current data.
+//    sendingLVC = YES;
+//    uint16_t ch1voltage = appDelegate.ch1TargetVoltage;
+//    uint16_t ch1current = appDelegate.ch1MaxCurrent;
+//    uint16_t ch2voltage = appDelegate.ch2TargetVoltage;
+//    uint16_t ch2current = appDelegate.ch2MaxCurrent;
+//    uint16_t ch3voltage = appDelegate.ch3TargetVoltage;
+//    uint16_t ch3current = appDelegate.ch3MaxCurrent;
+//    
+//    self.hydraPacket = [[HydraPacket alloc] init];
+//    [self.hydraPacket addAddress:0x00];
+//    [self.hydraPacket addBatchForCurrent:ch1current voltage:ch1voltage enabled:appDelegate.ch1OE lcMode:appDelegate.ch1LC];
+//    [self.hydraPacket addBatchForCurrent:ch2current voltage:ch2voltage enabled:appDelegate.ch2OE lcMode:appDelegate.ch2LC];
+//    [self.hydraPacket addBatchForCurrent:ch3current voltage:ch3voltage enabled:appDelegate.ch3OE lcMode:appDelegate.ch3LC];
+//    [self.hydraPacket addChecksum];
+//    
+//    NSAssert([self.hydraPacket isChecksumValid], @"hydra packet checksum fail");
+//    
+//    [self sendPacket];
+//}
+
+- (void)setSettingsPacket {
+    appDelegate.ch1LC = self.ch1LowCurrent.on;
+    appDelegate.ch2LC = self.ch2LowCurrent.on;
+    appDelegate.ch3LC = self.ch3LowCurrent.on;
+    appDelegate.ch1CVO = self.ch1VoltageCutoffOverride.on;
+    appDelegate.ch2CVO = self.ch2VoltageCutoffOverride.on;
+    appDelegate.ch3CVO = self.ch3VoltageCutoffOverride.on;
+    
+    uint16_t vinCutoffVoltage = MIN(MAX([self.lowVoltageCutoff.text integerValue], 0), 14);
     uint16_t ch1voltage = appDelegate.ch1TargetVoltage;
     uint16_t ch1current = appDelegate.ch1MaxCurrent;
     uint16_t ch2voltage = appDelegate.ch2TargetVoltage;
@@ -181,15 +210,14 @@
     uint16_t ch3current = appDelegate.ch3MaxCurrent;
     
     self.hydraPacket = [[HydraPacket alloc] init];
-    [self.hydraPacket addAddress:0xAA];
+    [self.hydraPacket addAddress:0x00];
     [self.hydraPacket addBatchForCurrent:ch1current voltage:ch1voltage enabled:appDelegate.ch1OE lcMode:appDelegate.ch1LC];
     [self.hydraPacket addBatchForCurrent:ch2current voltage:ch2voltage enabled:appDelegate.ch2OE lcMode:appDelegate.ch2LC];
     [self.hydraPacket addBatchForCurrent:ch3current voltage:ch3voltage enabled:appDelegate.ch3OE lcMode:appDelegate.ch3LC];
+    [self.hydraPacket addBatchForVINCutoff:vinCutoffVoltage voltageCutoffOverride1:self.ch1VoltageCutoffOverride.isOn voltageCutoffOverride2:self.ch2VoltageCutoffOverride.isOn voltageCutoffOverride3:self.ch3VoltageCutoffOverride.isOn];
     [self.hydraPacket addChecksum];
     
     NSAssert([self.hydraPacket isChecksumValid], @"hydra packet checksum fail");
-    
-    [self sendPacket];
 }
 
 - (void)firmwareVersionReport:(NSNotification *)notification {
@@ -202,9 +230,6 @@
 - (void)recievedSuccess:(NSNotification *) notification {
     [resendTimer invalidate];
     resendTimer = nil;
-    if (!sendingLVC) {
-        [self sendLVCPacket];
-    }
 }
 
 - (IBAction)swipeRight:(UISwipeGestureRecognizer *)sender {
@@ -218,6 +243,34 @@
 - (IBAction)edit:(id)sender {
     self.saveBtn.enabled = YES;
     [self.lowVoltageCutoff resignFirstResponder];
+}
+
+- (IBAction)lowCurrentInfo:(id)sender {
+    NSString *title = NSLocalizedString(@"Low Current Mode", @"Low Current Mode Title");
+    NSString *msg = NSLocalizedString(@"Each output on the Hydra can be configured to operate in high-efficiency, low-current mode. In this mode, the maximum output current is limited (on the order of 100 mA max per output), but the efficiency of each output at low currents is increased significantly.", @"Low Current Mode Explanation");
+    
+    UIAlertController *lowCurrentInfo = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    NSString *okayTitle = NSLocalizedString(@"Okay", @"Okay button title");
+    UIAlertAction *okay = [UIAlertAction actionWithTitle:okayTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [lowCurrentInfo addAction:okay];
+    [self showViewController:lowCurrentInfo sender:sender];
+}
+
+- (IBAction)lowVoltageCutoffInfo:(id)sender {
+    NSString *title = NSLocalizedString(@"Low Voltage Cutoff", @"Low Voltage Cutoff Title");
+    NSString *msg = NSLocalizedString(@"The Hydra can be configured to automatically disable all of its outputs and transition to a low-power sleep mode if the input voltage drops below a user-defined threshold. This can be used to prevent the Hydra from over-discharging batteries. Once in sleep mode, the Hydra must be power-cycled to re-enabled the outputs even if the input voltage rises above the threshold again.", @"Low Voltage Cutoff Explanation");
+    
+    UIAlertController *lowCurrentInfo = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    NSString *okayTitle = NSLocalizedString(@"Okay", @"Okay button title");
+    UIAlertAction *okay = [UIAlertAction actionWithTitle:okayTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [lowCurrentInfo addAction:okay];
+    [self showViewController:lowCurrentInfo sender:sender];
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{

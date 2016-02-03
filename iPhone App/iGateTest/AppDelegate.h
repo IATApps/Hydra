@@ -50,6 +50,7 @@
 @property int ch1Current;
 @property bool ch1OE;
 @property bool ch1LC;
+@property bool ch1CVO; // cutoff voltage override
 
 @property int ch2Voltage;
 @property int ch2TargetVoltage;
@@ -57,6 +58,7 @@
 @property int ch2Current;
 @property bool ch2OE;
 @property bool ch2LC;
+@property bool ch2CVO; // cutoff voltage override
 
 @property int ch3Voltage;
 @property int ch3TargetVoltage;
@@ -64,6 +66,7 @@
 @property int ch3Current;
 @property bool ch3OE;
 @property bool ch3LC;
+@property bool ch3CVO; // cutoff voltage override
 
 @property int inputVoltage;
 @property int inputCurrent;

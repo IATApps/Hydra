@@ -220,6 +220,34 @@
     [self.packet appendData:batch];
 }
 
+- (void)addBatchForVINCutoff:(int)voltage
+      voltageCutoffOverride1:(BOOL)voltage_cutoff_override_1
+      voltageCutoffOverride2:(BOOL)voltage_cutoff_override_2
+      voltageCutoffOverride3:(BOOL)voltage_cutoff_override_3 {
+    UInt8 bytes[] = {LSB_NIBBLE(HIGH_BYTE(0)), LOW_BYTE(0), HIGH_BYTE(voltage), LOW_BYTE(voltage)};
+    
+    if (voltage_cutoff_override_1) {
+        BIT_ON(bytes[0], 8);
+    }
+    if (voltage_cutoff_override_2) {
+        BIT_ON(bytes[0], 7);
+    }
+    if (voltage_cutoff_override_3) {
+        BIT_ON(bytes[0], 6);
+    }
+    
+    UInt8 ptByte = [self ptByte];
+    ptByte = [self ptByte:ptByte hasData:YES];
+    UInt8 batchLen = [self ptByteBatchLen:ptByte];
+    batchLen++;
+    ptByte = [self ptByte:ptByte isBatch:YES batchLen:batchLen];
+    [self setPtByte:ptByte];
+    
+    NSData *batch = [[NSMutableData alloc] initWithBytes:bytes length:sizeof(bytes)];
+    
+    [self.packet appendData:batch];
+}
+
 - (HydraChannel*)batchEntryAtIndex:(UInt8)index {
     UInt8 len = [self ptByteBatchLen:[self ptByte]];
     if (index > len) {
