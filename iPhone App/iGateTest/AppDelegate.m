@@ -322,10 +322,10 @@
         uint8_t ch3LC = (data[8]>>6)&0x01;
         uint16_t ch3TargetVoltage = (data[10] << 8)|data[11];
         
-        HydraChannel *ch1 = [hydra batchEntryAtIndex:0];
-        HydraChannel *ch2 = [hydra batchEntryAtIndex:1];
-        HydraChannel *ch3 = [hydra batchEntryAtIndex:2];
-        HydraChannel *ch4 = [hydra batchEntryAtIndex:3];
+        __unused HydraChannel *ch1 = [hydra batchEntryAtIndex:0];
+        __unused HydraChannel *ch2 = [hydra batchEntryAtIndex:1];
+        __unused HydraChannel *ch3 = [hydra batchEntryAtIndex:2];
+        __unused HydraChannel *ch4 = [hydra batchEntryAtIndex:3];
         
         self.ch1TargetVoltage = [NSNumber numberWithUnsignedInt:ch1TargetVoltage].intValue;
         self.ch2TargetVoltage = [NSNumber numberWithUnsignedInt:ch2TargetVoltage].intValue;

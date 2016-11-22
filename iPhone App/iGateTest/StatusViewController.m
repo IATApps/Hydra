@@ -102,7 +102,7 @@
     
     overlay = [Utilities overlayView];
     status = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, 320, 30)];
-    status.textAlignment = UITextAlignmentCenter;
+    //status.textAlignment = UITextAlignmentCenter;
     status.textColor = [UIColor whiteColor];
     status.backgroundColor = [UIColor clearColor];
     status.text = @"";

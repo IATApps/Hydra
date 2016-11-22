@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lXj-Sd-1HU">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Hydra-->
+        <scene sceneID="i87-oe-Ni5">
+            <objects>
+                <viewController title="Hydra" id="lXj-Sd-1HU" customClass="HydraViewController" customModule="Hydra" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dc2-Wk-jz8"/>
+                        <viewControllerLayoutGuide type="bottom" id="42K-jN-iL1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kgg-Cc-9sA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xjc-wp-9D9" customClass="VoltageInputDisplayView" customModule="Hydra" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28.000000000000007" width="414" height="78.666666666666686"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKw-yn-Tcx">
+                                        <rect key="frame" x="8" y="8" width="49" height="62.666666666666671"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="V">
+                                                <attributes>
+                                                    <font key="NSFont" size="52" name=".AppleSystemUIFont"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="in">
+                                                <attributes>
+                                                    <font key="NSFont" size="20" name=".AppleSystemUIFont"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000 V" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="26" translatesAutoresizingMaskIntoConstraints="NO" id="FVR-d7-g57">
+                                        <rect key="frame" x="220" y="8" width="186" height="63"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="52"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gf6-OV-jAX" customClass="PaddedLabel" customModule="Hydra" customModuleProvider="target">
+                                        <rect key="frame" x="65" y="8" width="68" height="62"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <attributedString key="attributedText">
+                                            <fragment>
+                                                <string key="content">Cutoff
+</string>
+                                                <attributes>
+                                                    <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                    <font key="NSFont" size="18" name=".SFNSDisplay"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="0.000 V">
+                                                <attributes>
+                                                    <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                    <font key="NSFont" size="20" name=".SFNSDisplay"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                <color key="value" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Gf6-OV-jAX" firstAttribute="top" secondItem="xjc-wp-9D9" secondAttribute="top" constant="8" id="KNk-PK-esw"/>
+                                    <constraint firstAttribute="bottom" secondItem="FVR-d7-g57" secondAttribute="bottom" constant="8" id="OeY-wW-wxQ"/>
+                                    <constraint firstItem="EKw-yn-Tcx" firstAttribute="top" secondItem="xjc-wp-9D9" secondAttribute="top" constant="8" id="Zw2-A7-VTa"/>
+                                    <constraint firstAttribute="trailing" secondItem="FVR-d7-g57" secondAttribute="trailing" constant="8" id="jD3-W2-sCk"/>
+                                    <constraint firstItem="EKw-yn-Tcx" firstAttribute="leading" secondItem="xjc-wp-9D9" secondAttribute="leading" constant="8" id="nwy-8V-aNs"/>
+                                    <constraint firstAttribute="bottom" secondItem="Gf6-OV-jAX" secondAttribute="bottom" constant="8" id="p5K-qv-Lxx"/>
+                                    <constraint firstItem="Gf6-OV-jAX" firstAttribute="leading" secondItem="EKw-yn-Tcx" secondAttribute="trailing" constant="8" id="v7d-av-kQT"/>
+                                    <constraint firstItem="FVR-d7-g57" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Gf6-OV-jAX" secondAttribute="trailing" constant="8" id="vSj-kg-I8n"/>
+                                    <constraint firstItem="FVR-d7-g57" firstAttribute="top" secondItem="xjc-wp-9D9" secondAttribute="top" constant="8" id="wiy-vs-ttU"/>
+                                    <constraint firstAttribute="bottom" secondItem="EKw-yn-Tcx" secondAttribute="bottom" constant="8" id="x5b-Sq-8kv"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="cutoffLabel" destination="Gf6-OV-jAX" id="1vb-mw-QK9"/>
+                                    <outlet property="voltageLabel" destination="FVR-d7-g57" id="pEx-kb-msb"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xjc-wp-9D9" secondAttribute="trailing" id="A01-tn-ox4"/>
+                            <constraint firstItem="xjc-wp-9D9" firstAttribute="leading" secondItem="kgg-Cc-9sA" secondAttribute="leading" id="Rjb-L6-twZ"/>
+                            <constraint firstItem="xjc-wp-9D9" firstAttribute="top" secondItem="dc2-Wk-jz8" secondAttribute="bottom" constant="8" id="nez-We-FIb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="voltageInputDisplay" destination="xjc-wp-9D9" id="2hW-Yj-ZOJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VDj-sz-GBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="103" y="198"/>
+        </scene>
+    </scenes>
+</document>

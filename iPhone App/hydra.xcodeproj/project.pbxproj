@@ -13,12 +13,21 @@
 		7F1BBF00159177A0000741FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F1BBEFF159177A0000741FA /* main.m */; };
 		7F1BBF151591785F000741FA /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1BBF141591785F000741FA /* CoreBluetooth.framework */; };
 		C50166CF1C0DE4FC00749378 /* libiGate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE052E06175EA09C003F80AE /* libiGate.a */; };
+		C538ABBC1DE3F2AD00DD0B65 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C538ABBB1DE3F2AD00DD0B65 /* Logo.png */; };
+		C538ABBE1DE4260700DD0B65 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C538ABBD1DE4260600DD0B65 /* PaddedLabel.swift */; };
 		C54D03511C153989000DE766 /* CHRHChannelView.m in Sources */ = {isa = PBXBuildFile; fileRef = C54D03501C153989000DE766 /* CHRHChannelView.m */; };
+		C552FF951DE3D737002F552E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C552FF941DE3D737002F552E /* Launch Screen.storyboard */; };
+		C552FF991DE3D757002F552E /* TopView.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C552FF961DE3D757002F552E /* TopView.jpeg */; };
+		C552FF9A1DE3D757002F552E /* AngleView.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C552FF971DE3D757002F552E /* AngleView.jpeg */; };
+		C552FF9B1DE3D757002F552E /* HeldView.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C552FF981DE3D757002F552E /* HeldView.jpeg */; };
+		C552FF9D1DE3DA81002F552E /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C552FF9C1DE3DA81002F552E /* Storyboard.storyboard */; };
+		C552FFA01DE3DF50002F552E /* VoltageInputDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552FF9F1DE3DF50002F552E /* VoltageInputDisplayView.swift */; };
+		C552FFA21DE3DFCF002F552E /* VoltageFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552FFA11DE3DFCF002F552E /* VoltageFormatter.swift */; };
+		C552FFA41DE3E680002F552E /* HydraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552FFA31DE3E680002F552E /* HydraViewController.swift */; };
 		C57B79D71BF79B77004DAB9B /* HydraPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C57B79D61BF79B77004DAB9B /* HydraPacket.m */; };
 		C58137A21BF5437C001238F8 /* CBPeripheral+iGateHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C581379E1BF500B5001238F8 /* CBPeripheral+iGateHelpers.m */; };
 		CE7F530F177B96C300678246 /* LCDyellow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F530E177B96C300678246 /* LCDyellow.png */; };
 		CE897588172205C100870825 /* hydra_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE897587172205C100870825 /* hydra_logo.png */; };
-		CE89758A172206E000870825 /* hydra_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE897589172206E000870825 /* hydra_logo.png */; };
 		CE898A6C171752AC005A62FA /* DataLoggingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE898A6B171752AC005A62FA /* DataLoggingViewController.m */; };
 		CE8D3651171E07FE00BD64DD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8D3650171E07FE00BD64DD /* Default-568h@2x.png */; };
 		CE8D3654171E144800BD64DD /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8D3653171E144700BD64DD /* Utilities.m */; };
@@ -61,8 +70,19 @@
 		7F1BBF01159177A0000741FA /* Hydra-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hydra-Prefix.pch"; sourceTree = "<group>"; };
 		7F1BBF141591785F000741FA /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		C51E03AB1C61D06500F23E53 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		C538ABBB1DE3F2AD00DD0B65 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
+		C538ABBD1DE4260600DD0B65 /* PaddedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
 		C54D034F1C153989000DE766 /* CHRHChannelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHRHChannelView.h; sourceTree = "<group>"; };
 		C54D03501C153989000DE766 /* CHRHChannelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHRHChannelView.m; sourceTree = "<group>"; };
+		C552FF941DE3D737002F552E /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		C552FF961DE3D757002F552E /* TopView.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TopView.jpeg; sourceTree = "<group>"; };
+		C552FF971DE3D757002F552E /* AngleView.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AngleView.jpeg; sourceTree = "<group>"; };
+		C552FF981DE3D757002F552E /* HeldView.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HeldView.jpeg; sourceTree = "<group>"; };
+		C552FF9C1DE3DA81002F552E /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		C552FF9E1DE3DF50002F552E /* Hydra-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hydra-Bridging-Header.h"; sourceTree = "<group>"; };
+		C552FF9F1DE3DF50002F552E /* VoltageInputDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoltageInputDisplayView.swift; sourceTree = "<group>"; };
+		C552FFA11DE3DFCF002F552E /* VoltageFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoltageFormatter.swift; sourceTree = "<group>"; };
+		C552FFA31DE3E680002F552E /* HydraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HydraViewController.swift; sourceTree = "<group>"; };
 		C57B79D51BF79B77004DAB9B /* HydraPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HydraPacket.h; sourceTree = "<group>"; };
 		C57B79D61BF79B77004DAB9B /* HydraPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HydraPacket.m; sourceTree = "<group>"; };
 		C581379D1BF500B5001238F8 /* CBPeripheral+iGateHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBPeripheral+iGateHelpers.h"; sourceTree = "<group>"; };
@@ -135,6 +155,7 @@
 			children = (
 				C51E03AB1C61D06500F23E53 /* README.md */,
 				CE897589172206E000870825 /* hydra_logo.png */,
+				C538ABBB1DE3F2AD00DD0B65 /* Logo.png */,
 				CE052E06175EA09C003F80AE /* libiGate.a */,
 				CE8D3650171E07FE00BD64DD /* Default-568h@2x.png */,
 				CE95746617988A5C00C374A1 /* hydraTODO.rtf */,
@@ -167,6 +188,12 @@
 		7F1BBEF9159177A0000741FA /* iGateTest */ = {
 			isa = PBXGroup;
 			children = (
+				C552FF941DE3D737002F552E /* Launch Screen.storyboard */,
+				C552FF9C1DE3DA81002F552E /* Storyboard.storyboard */,
+				C552FFA31DE3E680002F552E /* HydraViewController.swift */,
+				C552FF9F1DE3DF50002F552E /* VoltageInputDisplayView.swift */,
+				C552FFA11DE3DFCF002F552E /* VoltageFormatter.swift */,
+				C538ABBD1DE4260600DD0B65 /* PaddedLabel.swift */,
 				CEB9DBF7171641DA006DBD4B /* images */,
 				CE052E08175EA402003F80AE /* iGate.h */,
 				C58137A11BF515F0001238F8 /* CiGateDelegate.h */,
@@ -193,6 +220,7 @@
 				C581379E1BF500B5001238F8 /* CBPeripheral+iGateHelpers.m */,
 				C5936A231BF7DE6B005345C3 /* BitUtilities.h */,
 				7F1BBEFA159177A0000741FA /* Supporting Files */,
+				C552FF9E1DE3DF50002F552E /* Hydra-Bridging-Header.h */,
 			);
 			path = iGateTest;
 			sourceTree = "<group>";
@@ -211,6 +239,9 @@
 		CEB9DBF7171641DA006DBD4B /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C552FF961DE3D757002F552E /* TopView.jpeg */,
+				C552FF971DE3D757002F552E /* AngleView.jpeg */,
+				C552FF981DE3D757002F552E /* HeldView.jpeg */,
 				CE8FA136173AA9D000189C70 /* diagnostics.png */,
 				CEB9DC0117170F50006DBD4B /* blackBtn.png */,
 				CE8FA143173AC4C100189C70 /* seperator_line.png */,
@@ -262,10 +293,12 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CHRH;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0810;
 				TargetAttributes = {
 					7F1BBEEE159177A0000741FA = {
 						DevelopmentTeam = H8E2LSZV55;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -295,12 +328,16 @@
 				CEA2C9E916FB9EBB00AA2663 /* MainStoryboard.storyboard in Resources */,
 				CEB9DBE3171641A7006DBD4B /* controlKnobFrameII.png in Resources */,
 				CEB9DBE5171641A7006DBD4B /* LCDblue.png in Resources */,
+				C552FF951DE3D737002F552E /* Launch Screen.storyboard in Resources */,
 				CEB9DBE6171641A7006DBD4B /* redLedOff.png in Resources */,
 				CEB9DBE7171641A7006DBD4B /* redLedOn.png in Resources */,
 				CEB9DBE8171641A7006DBD4B /* controlKnobII.png in Resources */,
 				CEB9DBE9171641A7006DBD4B /* home.png in Resources */,
+				C552FF991DE3D757002F552E /* TopView.jpeg in Resources */,
 				CEB9DBEB171641A7006DBD4B /* settings.png in Resources */,
 				CEB9DBEC171641A7006DBD4B /* SimpleDarkGradient.png in Resources */,
+				C552FF9A1DE3D757002F552E /* AngleView.jpeg in Resources */,
+				C552FF9B1DE3D757002F552E /* HeldView.jpeg in Resources */,
 				CEB9DBF4171641A7006DBD4B /* steel_gradient.jpg in Resources */,
 				CEB9DC0217170F51006DBD4B /* blackBtn.png in Resources */,
 				CEB9DC0A17171834006DBD4B /* blackBtnSmall.png in Resources */,
@@ -308,7 +345,7 @@
 				CEB9DC0E171734EF006DBD4B /* lightBtn.png in Resources */,
 				CE8D3651171E07FE00BD64DD /* Default-568h@2x.png in Resources */,
 				CE897588172205C100870825 /* hydra_logo.png in Resources */,
-				CE89758A172206E000870825 /* hydra_logo.png in Resources */,
+				C538ABBC1DE3F2AD00DD0B65 /* Logo.png in Resources */,
 				CE8FA137173AA9D000189C70 /* diagnostics.png in Resources */,
 				CE8FA139173AA9F900189C70 /* commands_icon.png in Resources */,
 				CE8FA13D173AAF2400189C70 /* graph.png in Resources */,
@@ -316,6 +353,7 @@
 				CE8FA144173AC4C100189C70 /* seperator_line.png in Resources */,
 				CE7F530F177B96C300678246 /* LCDyellow.png in Resources */,
 				CE95746717988A5D00C374A1 /* hydraTODO.rtf in Resources */,
+				C552FF9D1DE3DA81002F552E /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,7 +365,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C57B79D71BF79B77004DAB9B /* HydraPacket.m in Sources */,
+				C552FFA41DE3E680002F552E /* HydraViewController.swift in Sources */,
 				7F1BBF00159177A0000741FA /* main.m in Sources */,
+				C538ABBE1DE4260700DD0B65 /* PaddedLabel.swift in Sources */,
 				CEB9DBED171641A7006DBD4B /* AppDelegate.m in Sources */,
 				C58137A21BF5437C001238F8 /* CBPeripheral+iGateHelpers.m in Sources */,
 				CEB9DBFE1716453A006DBD4B /* SettingsViewController.m in Sources */,
@@ -337,6 +377,8 @@
 				CE8D3654171E144800BD64DD /* Utilities.m in Sources */,
 				CE8FA142173ABB2E00189C70 /* BattChargingViewController.m in Sources */,
 				C54D03511C153989000DE766 /* CHRHChannelView.m in Sources */,
+				C552FFA01DE3DF50002F552E /* VoltageInputDisplayView.swift in Sources */,
+				C552FFA21DE3DFCF002F552E /* VoltageFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,7 +394,9 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Kurt Arnlund (NBX44EGYRB)";
@@ -376,11 +420,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "5b798e2c-da0e-4d03-ac38-8ca45b20c53d";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5b798e2c-da0e-4d03-ac38-8ca45b20c53d";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7s armv7";
 			};
 			name = Debug;
 		};
@@ -393,7 +434,9 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Kurt Arnlund (NBX44EGYRB)";
@@ -409,25 +452,27 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "5b798e2c-da0e-4d03-ac38-8ca45b20c53d";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5b798e2c-da0e-4d03-ac38-8ca45b20c53d";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7s armv7";
 			};
 			name = Release;
 		};
 		7F1BBF0E159177A0000741FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = H8E2LSZV55;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iGateTest/Hydra-Prefix.pch";
 				GENERATE_MASTER_OBJECT_FILE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/iGateTest/Hydra-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
@@ -435,8 +480,10 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chrobotics.llc.Hydra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5b798e2c-da0e-4d03-ac38-8ca45b20c53d";
+				SWIFT_OBJC_BRIDGING_HEADER = "iGateTest/Hydra-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -444,12 +491,16 @@
 		7F1BBF0F159177A0000741FA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = H8E2LSZV55;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iGateTest/Hydra-Prefix.pch";
 				GENERATE_MASTER_OBJECT_FILE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/iGateTest/Hydra-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
@@ -457,8 +508,9 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chrobotics.llc.Hydra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5b798e2c-da0e-4d03-ac38-8ca45b20c53d";
+				SWIFT_OBJC_BRIDGING_HEADER = "iGateTest/Hydra-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
