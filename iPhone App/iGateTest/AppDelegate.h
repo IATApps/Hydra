@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "iGate.h"
+#import "Hydra-Swift.h"
+
 #define DOCUMENTS_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 
 #define MILLI_SCALER 1000
@@ -34,10 +36,9 @@
 #define IN_CURR @"inCurrent"
 
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,CiGateDelegate>
-{
-    CFUUIDRef tmpUUID;
-}
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@property (nonatomic, strong) HydraComm *hydraComm;
+//@property (nonatomic, strong) HydraState *hydraState;
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) CiGate *iGate;
 @property (nonatomic, strong) NSUUID *serviceUUID;
@@ -73,9 +74,6 @@
 
 @property float lowVoltageCutoff;
 
-- (void)iGateDidUpdateState:(CiGateState)iGateState;
-- (void)iGateDidReceivedData:(NSData *)data;
-- (void)iGateDidUpdateConnectDevRSSI:(NSNumber *)rssi error:(NSError *)error;
 - (void)sendData:(NSString*)dataString;
 - (void)sendCommand:(NSData*)valData;
 @end

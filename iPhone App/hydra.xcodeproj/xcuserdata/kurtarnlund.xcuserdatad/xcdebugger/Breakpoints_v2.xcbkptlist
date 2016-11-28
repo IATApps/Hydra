@@ -20,13 +20,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iGateTest/AppDelegate.m"
-            timestampString = "475001166.155565"
+            timestampString = "501984827.901126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "-iGateDidReceivedData:"
-            landmarkType = "7">
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "@implementation AppDelegate"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -74,7 +74,7 @@
             startingLineNumber = "152"
             endingLineNumber = "152"
             landmarkName = "-resendData:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -90,7 +90,7 @@
             startingLineNumber = "231"
             endingLineNumber = "231"
             landmarkName = "-recievedSuccess:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -106,7 +106,7 @@
             startingLineNumber = "131"
             endingLineNumber = "131"
             landmarkName = "-sendPacket"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -10,15 +10,31 @@
 
 @implementation Utilities
 
-+(UIView*)overlayView{
++ (UIView *)overlayView{
     UIScreen *screen = [UIScreen mainScreen];
     CGRect fullScreen = screen.bounds;
     UIView *view = [[UIView alloc] initWithFrame:fullScreen];
-    view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.85];
+    view.backgroundColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.85];
     UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     activity.center = view.center;
     [view addSubview:activity];
     [activity startAnimating];
+    return view;
+}
+
++ (UIView *)overlayViewWithTitle:(NSString *)title {
+    UIScreen *screen = [UIScreen mainScreen];
+    CGRect fullScreen = screen.bounds;
+    UIView *view = [[UIView alloc] initWithFrame:fullScreen];
+    view.backgroundColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.85];
+    UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activity.center = view.center;
+    [view addSubview:activity];
+    [activity startAnimating];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.text = title;
+    
     return view;
 }
 

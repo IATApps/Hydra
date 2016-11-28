@@ -22,20 +22,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xjc-wp-9D9" customClass="VoltageInputDisplayView" customModule="Hydra" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28.000000000000007" width="414" height="78.666666666666686"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="76"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKw-yn-Tcx">
-                                        <rect key="frame" x="8" y="8" width="49" height="62.666666666666671"/>
+                                        <rect key="frame" x="8" y="8" width="46" height="60"/>
                                         <attributedString key="attributedText">
                                             <fragment content="V">
                                                 <attributes>
-                                                    <font key="NSFont" size="52" name=".AppleSystemUIFont"/>
+                                                    <font key="NSFont" size="50" name=".AppleSystemUIFont"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
                                             <fragment content="in">
                                                 <attributes>
-                                                    <font key="NSFont" size="20" name=".AppleSystemUIFont"/>
+                                                    <font key="NSFont" size="18" name=".AppleSystemUIFont"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -43,29 +43,22 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000 V" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="26" translatesAutoresizingMaskIntoConstraints="NO" id="FVR-d7-g57">
-                                        <rect key="frame" x="220" y="8" width="186" height="63"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="52"/>
+                                        <rect key="frame" x="227" y="8" width="179" height="60.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gf6-OV-jAX" customClass="PaddedLabel" customModule="Hydra" customModuleProvider="target">
-                                        <rect key="frame" x="65" y="8" width="68" height="62"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Gf6-OV-jAX" customClass="PaddedLabel" customModule="Hydra" customModuleProvider="target">
+                                        <rect key="frame" x="62.000000000000007" y="8" width="54.666666666666679" height="59.666666666666671"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <attributedString key="attributedText">
                                             <fragment>
                                                 <string key="content">Cutoff
-</string>
+0.000 V</string>
                                                 <attributes>
                                                     <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="18" name=".SFNSDisplay"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="0.000 V">
-                                                <attributes>
-                                                    <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="20" name=".SFNSDisplay"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    <font key="NSFont" size="16" name=".SFNSDisplay"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
@@ -77,6 +70,12 @@
                                                 <color key="value" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
@@ -95,14 +94,160 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="cutoffLabel" destination="Gf6-OV-jAX" id="1vb-mw-QK9"/>
+                                    <outlet property="title" destination="EKw-yn-Tcx" id="28J-td-uEi"/>
                                     <outlet property="voltageLabel" destination="FVR-d7-g57" id="pEx-kb-msb"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aU2-9B-DTP" customClass="VoltageOutputDisplayView" customModule="Hydra" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="111.66666666666666" width="414" height="112.99999999999997"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2Rl-hp-jcv">
+                                        <rect key="frame" x="8" y="8" width="81" height="59.999999999999986"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="V1">
+                                                <attributes>
+                                                    <font key="NSFont" size="50" name=".AppleSystemUIFont"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="out">
+                                                <attributes>
+                                                    <font key="NSFont" size="18" name=".AppleSystemUIFont"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="30V-3o-28D" customClass="PaddedLabel" customModule="Hydra" customModuleProvider="target">
+                                        <rect key="frame" x="97.000000000000014" y="8" width="85.333333333333357" height="59.999999999999986"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <attributedString key="attributedText">
+                                            <fragment>
+                                                <string key="content">Current
+0.000 mA</string>
+                                                <attributes>
+                                                    <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                    <font key="NSFont" size="16" name=".SFNSDisplay"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                <color key="value" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000 V" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="26" translatesAutoresizingMaskIntoConstraints="NO" id="fyb-v1-kMK">
+                                        <rect key="frame" x="227" y="8" width="179" height="59.999999999999986"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="CRy-za-zis">
+                                        <rect key="frame" x="100.99999999999999" y="79.999999999999986" width="77.666666666666643" height="21"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="0.000 mA">
+                                                <attributes>
+                                                    <font key="NSFont" size="18" name=".SFNSDisplay"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CO0-rV-Ajw" userLabel="OnOffView">
+                                        <rect key="frame" x="8" y="75.999999999999986" width="81" height="29"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OFF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggw-uf-1Aw">
+                                                <rect key="frame" x="25.333333333333339" y="4" width="31.666666666666661" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="Ggw-uf-1Aw" firstAttribute="top" secondItem="CO0-rV-Ajw" secondAttribute="top" constant="4" id="NiQ-uv-JDJ"/>
+                                            <constraint firstItem="Ggw-uf-1Aw" firstAttribute="centerX" secondItem="CO0-rV-Ajw" secondAttribute="centerX" id="hmR-OK-fX9"/>
+                                            <constraint firstAttribute="height" secondItem="Ggw-uf-1Aw" secondAttribute="height" constant="8" id="pRk-PT-fw8"/>
+                                            <constraint firstItem="Ggw-uf-1Aw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CO0-rV-Ajw" secondAttribute="leading" constant="4" id="pTv-OZ-wSu"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                <color key="value" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="h4Q-wW-49h">
+                                        <rect key="frame" x="345" y="79.999999999999986" width="61" height="21"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="0.000 V">
+                                                <attributes>
+                                                    <font key="NSFont" size="18" name=".SFNSDisplay"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="CO0-rV-Ajw" firstAttribute="leading" secondItem="2Rl-hp-jcv" secondAttribute="leading" id="2Ua-eQ-psG"/>
+                                    <constraint firstItem="fyb-v1-kMK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="30V-3o-28D" secondAttribute="trailing" constant="8" id="2xg-DE-bdm"/>
+                                    <constraint firstItem="2Rl-hp-jcv" firstAttribute="top" secondItem="aU2-9B-DTP" secondAttribute="top" constant="8" id="48L-Xq-p3z"/>
+                                    <constraint firstAttribute="trailing" secondItem="fyb-v1-kMK" secondAttribute="trailing" constant="8" id="5XR-IB-Uko"/>
+                                    <constraint firstItem="2Rl-hp-jcv" firstAttribute="leading" secondItem="aU2-9B-DTP" secondAttribute="leading" constant="8" id="B5j-zm-2Bs"/>
+                                    <constraint firstItem="CRy-za-zis" firstAttribute="leading" secondItem="30V-3o-28D" secondAttribute="leading" constant="4" id="DUZ-p5-J1o"/>
+                                    <constraint firstItem="30V-3o-28D" firstAttribute="top" secondItem="aU2-9B-DTP" secondAttribute="top" constant="8" id="TGt-Ak-F9P"/>
+                                    <constraint firstItem="30V-3o-28D" firstAttribute="height" secondItem="2Rl-hp-jcv" secondAttribute="height" id="TvQ-YK-nV6"/>
+                                    <constraint firstItem="CO0-rV-Ajw" firstAttribute="top" secondItem="2Rl-hp-jcv" secondAttribute="bottom" constant="8" id="bjA-se-BQp"/>
+                                    <constraint firstItem="CRy-za-zis" firstAttribute="trailing" secondItem="30V-3o-28D" secondAttribute="trailing" constant="-4" id="fKo-lL-Nw0"/>
+                                    <constraint firstAttribute="trailing" secondItem="h4Q-wW-49h" secondAttribute="trailing" constant="8" id="hj4-MU-WNl"/>
+                                    <constraint firstItem="CO0-rV-Ajw" firstAttribute="width" secondItem="2Rl-hp-jcv" secondAttribute="width" id="hw2-wZ-9Xl"/>
+                                    <constraint firstItem="30V-3o-28D" firstAttribute="leading" secondItem="2Rl-hp-jcv" secondAttribute="trailing" constant="8" id="kVi-qh-GKw"/>
+                                    <constraint firstAttribute="bottom" secondItem="CO0-rV-Ajw" secondAttribute="bottom" constant="8" id="qn2-jm-60D"/>
+                                    <constraint firstItem="CRy-za-zis" firstAttribute="baseline" secondItem="Ggw-uf-1Aw" secondAttribute="baseline" id="sQh-Ij-65T"/>
+                                    <constraint firstItem="fyb-v1-kMK" firstAttribute="top" secondItem="aU2-9B-DTP" secondAttribute="top" constant="8" id="uw6-Lu-oda"/>
+                                    <constraint firstItem="h4Q-wW-49h" firstAttribute="baseline" secondItem="Ggw-uf-1Aw" secondAttribute="baseline" id="y9B-wS-2dM"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="channel">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="currentLabel" destination="30V-3o-28D" id="y1z-k0-OLM"/>
+                                    <outlet property="currentTargetLabel" destination="CRy-za-zis" id="POn-xN-Lnq"/>
+                                    <outlet property="modeLabel" destination="Ggw-uf-1Aw" id="vaj-Ka-uEW"/>
+                                    <outlet property="title" destination="2Rl-hp-jcv" id="cLd-v9-ynR"/>
+                                    <outlet property="voltageLabel" destination="fyb-v1-kMK" id="uD2-Wd-NHD"/>
+                                    <outlet property="voltageTargetLabel" destination="h4Q-wW-49h" id="PtP-H3-J9h"/>
                                 </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="aU2-9B-DTP" firstAttribute="top" secondItem="xjc-wp-9D9" secondAttribute="bottom" constant="8" id="7YJ-nx-VPx"/>
                             <constraint firstAttribute="trailing" secondItem="xjc-wp-9D9" secondAttribute="trailing" id="A01-tn-ox4"/>
+                            <constraint firstAttribute="trailing" secondItem="aU2-9B-DTP" secondAttribute="trailing" id="Kxe-CU-fdv"/>
                             <constraint firstItem="xjc-wp-9D9" firstAttribute="leading" secondItem="kgg-Cc-9sA" secondAttribute="leading" id="Rjb-L6-twZ"/>
+                            <constraint firstItem="aU2-9B-DTP" firstAttribute="leading" secondItem="kgg-Cc-9sA" secondAttribute="leading" id="YO3-1p-lyo"/>
                             <constraint firstItem="xjc-wp-9D9" firstAttribute="top" secondItem="dc2-Wk-jz8" secondAttribute="bottom" constant="8" id="nez-We-FIb"/>
                         </constraints>
                     </view>
@@ -112,7 +257,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VDj-sz-GBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="103" y="198"/>
+            <point key="canvasLocation" x="102.89855072463769" y="197.28260869565219"/>
         </scene>
     </scenes>
 </document>

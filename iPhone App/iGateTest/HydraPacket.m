@@ -315,5 +315,11 @@
 //    packet[18] = checksum & 0xFF;
 //}
 
+- (BOOL)checkPtByte:(UInt8)ptByte addressByte:(UInt8)addressByte {
+    if ((self.ptByte == 0xD0) && (self.addressByte == 0x55)) {
+        return true;
+    }
+    return false;
+}
 
 @end

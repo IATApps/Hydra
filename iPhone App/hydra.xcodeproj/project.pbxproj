@@ -26,6 +26,15 @@
 		C552FFA41DE3E680002F552E /* HydraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552FFA31DE3E680002F552E /* HydraViewController.swift */; };
 		C57B79D71BF79B77004DAB9B /* HydraPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C57B79D61BF79B77004DAB9B /* HydraPacket.m */; };
 		C58137A21BF5437C001238F8 /* CBPeripheral+iGateHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C581379E1BF500B5001238F8 /* CBPeripheral+iGateHelpers.m */; };
+		C5A2E32D1DE4321600F3D069 /* HydraComm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2E32C1DE4321600F3D069 /* HydraComm.swift */; };
+		C5A2E32F1DE631E900F3D069 /* HydraState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2E32E1DE631E900F3D069 /* HydraState.swift */; };
+		C5A2E3311DE649BD00F3D069 /* VoltageOutputDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2E3301DE649BD00F3D069 /* VoltageOutputDisplayView.swift */; };
+		C5A2E3331DE64BC000F3D069 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2E3321DE64BC000F3D069 /* StringExtensions.swift */; };
+		C5A2E3351DE64CD700F3D069 /* CurrentFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2E3341DE64CD700F3D069 /* CurrentFormatter.swift */; };
+		C5A2E3371DEB9D7D00F3D069 /* HydraStateOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2E3361DEB9D7D00F3D069 /* HydraStateOverlay.swift */; };
+		C5A2E3391DEBA64E00F3D069 /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5A2E3381DEBA64E00F3D069 /* OverlayView.xib */; };
+		C5A2E33B1DEBA6BB00F3D069 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2E33A1DEBA6BB00F3D069 /* OverlayView.swift */; };
+		C5A2E33D1DEBBEF800F3D069 /* AngleViewTrans.png in Resources */ = {isa = PBXBuildFile; fileRef = C5A2E33C1DEBBEF800F3D069 /* AngleViewTrans.png */; };
 		CE7F530F177B96C300678246 /* LCDyellow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F530E177B96C300678246 /* LCDyellow.png */; };
 		CE897588172205C100870825 /* hydra_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE897587172205C100870825 /* hydra_logo.png */; };
 		CE898A6C171752AC005A62FA /* DataLoggingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE898A6B171752AC005A62FA /* DataLoggingViewController.m */; };
@@ -89,6 +98,15 @@
 		C581379E1BF500B5001238F8 /* CBPeripheral+iGateHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+iGateHelpers.m"; sourceTree = "<group>"; };
 		C58137A11BF515F0001238F8 /* CiGateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CiGateDelegate.h; sourceTree = "<group>"; };
 		C5936A231BF7DE6B005345C3 /* BitUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitUtilities.h; sourceTree = "<group>"; };
+		C5A2E32C1DE4321600F3D069 /* HydraComm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HydraComm.swift; sourceTree = "<group>"; };
+		C5A2E32E1DE631E900F3D069 /* HydraState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HydraState.swift; sourceTree = "<group>"; };
+		C5A2E3301DE649BD00F3D069 /* VoltageOutputDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoltageOutputDisplayView.swift; sourceTree = "<group>"; };
+		C5A2E3321DE64BC000F3D069 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		C5A2E3341DE64CD700F3D069 /* CurrentFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentFormatter.swift; sourceTree = "<group>"; };
+		C5A2E3361DEB9D7D00F3D069 /* HydraStateOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HydraStateOverlay.swift; sourceTree = "<group>"; };
+		C5A2E3381DEBA64E00F3D069 /* OverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverlayView.xib; sourceTree = "<group>"; };
+		C5A2E33A1DEBA6BB00F3D069 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		C5A2E33C1DEBBEF800F3D069 /* AngleViewTrans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AngleViewTrans.png; sourceTree = "<group>"; };
 		CE052E06175EA09C003F80AE /* libiGate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libiGate.a; sourceTree = "<group>"; };
 		CE052E08175EA402003F80AE /* iGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGate.h; sourceTree = "<group>"; };
 		CE7F530E177B96C300678246 /* LCDyellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LCDyellow.png; sourceTree = "<group>"; };
@@ -188,13 +206,21 @@
 		7F1BBEF9159177A0000741FA /* iGateTest */ = {
 			isa = PBXGroup;
 			children = (
+				CEB9DBF7171641DA006DBD4B /* images */,
 				C552FF941DE3D737002F552E /* Launch Screen.storyboard */,
+				C5A2E3381DEBA64E00F3D069 /* OverlayView.xib */,
 				C552FF9C1DE3DA81002F552E /* Storyboard.storyboard */,
 				C552FFA31DE3E680002F552E /* HydraViewController.swift */,
 				C552FF9F1DE3DF50002F552E /* VoltageInputDisplayView.swift */,
+				C5A2E3301DE649BD00F3D069 /* VoltageOutputDisplayView.swift */,
 				C552FFA11DE3DFCF002F552E /* VoltageFormatter.swift */,
+				C5A2E3341DE64CD700F3D069 /* CurrentFormatter.swift */,
 				C538ABBD1DE4260600DD0B65 /* PaddedLabel.swift */,
-				CEB9DBF7171641DA006DBD4B /* images */,
+				C5A2E32C1DE4321600F3D069 /* HydraComm.swift */,
+				C5A2E32E1DE631E900F3D069 /* HydraState.swift */,
+				C5A2E3321DE64BC000F3D069 /* StringExtensions.swift */,
+				C5A2E3361DEB9D7D00F3D069 /* HydraStateOverlay.swift */,
+				C5A2E33A1DEBA6BB00F3D069 /* OverlayView.swift */,
 				CE052E08175EA402003F80AE /* iGate.h */,
 				C58137A11BF515F0001238F8 /* CiGateDelegate.h */,
 				CEB9DBD6171641A6006DBD4B /* AppDelegate.h */,
@@ -241,6 +267,7 @@
 			children = (
 				C552FF961DE3D757002F552E /* TopView.jpeg */,
 				C552FF971DE3D757002F552E /* AngleView.jpeg */,
+				C5A2E33C1DEBBEF800F3D069 /* AngleViewTrans.png */,
 				C552FF981DE3D757002F552E /* HeldView.jpeg */,
 				CE8FA136173AA9D000189C70 /* diagnostics.png */,
 				CEB9DC0117170F50006DBD4B /* blackBtn.png */,
@@ -294,6 +321,7 @@
 			attributes = {
 				CLASSPREFIX = CHRH;
 				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "Ingenious Arts and Technologies LLC";
 				TargetAttributes = {
 					7F1BBEEE159177A0000741FA = {
 						DevelopmentTeam = H8E2LSZV55;
@@ -326,6 +354,7 @@
 			files = (
 				CEA2C9E716FB9E7700AA2663 /* InfoPlist.strings in Resources */,
 				CEA2C9E916FB9EBB00AA2663 /* MainStoryboard.storyboard in Resources */,
+				C5A2E3391DEBA64E00F3D069 /* OverlayView.xib in Resources */,
 				CEB9DBE3171641A7006DBD4B /* controlKnobFrameII.png in Resources */,
 				CEB9DBE5171641A7006DBD4B /* LCDblue.png in Resources */,
 				C552FF951DE3D737002F552E /* Launch Screen.storyboard in Resources */,
@@ -338,6 +367,7 @@
 				CEB9DBEC171641A7006DBD4B /* SimpleDarkGradient.png in Resources */,
 				C552FF9A1DE3D757002F552E /* AngleView.jpeg in Resources */,
 				C552FF9B1DE3D757002F552E /* HeldView.jpeg in Resources */,
+				C5A2E33D1DEBBEF800F3D069 /* AngleViewTrans.png in Resources */,
 				CEB9DBF4171641A7006DBD4B /* steel_gradient.jpg in Resources */,
 				CEB9DC0217170F51006DBD4B /* blackBtn.png in Resources */,
 				CEB9DC0A17171834006DBD4B /* blackBtnSmall.png in Resources */,
@@ -368,17 +398,24 @@
 				C552FFA41DE3E680002F552E /* HydraViewController.swift in Sources */,
 				7F1BBF00159177A0000741FA /* main.m in Sources */,
 				C538ABBE1DE4260700DD0B65 /* PaddedLabel.swift in Sources */,
+				C5A2E3351DE64CD700F3D069 /* CurrentFormatter.swift in Sources */,
 				CEB9DBED171641A7006DBD4B /* AppDelegate.m in Sources */,
 				C58137A21BF5437C001238F8 /* CBPeripheral+iGateHelpers.m in Sources */,
 				CEB9DBFE1716453A006DBD4B /* SettingsViewController.m in Sources */,
 				CEB9DBFF1716453A006DBD4B /* StatusViewController.m in Sources */,
 				CEB9DC001716453A006DBD4B /* Channel.m in Sources */,
+				C5A2E3311DE649BD00F3D069 /* VoltageOutputDisplayView.swift in Sources */,
 				CE898A6C171752AC005A62FA /* DataLoggingViewController.m in Sources */,
 				CE8D3654171E144800BD64DD /* Utilities.m in Sources */,
 				CE8FA142173ABB2E00189C70 /* BattChargingViewController.m in Sources */,
 				C54D03511C153989000DE766 /* CHRHChannelView.m in Sources */,
+				C5A2E33B1DEBA6BB00F3D069 /* OverlayView.swift in Sources */,
 				C552FFA01DE3DF50002F552E /* VoltageInputDisplayView.swift in Sources */,
+				C5A2E32F1DE631E900F3D069 /* HydraState.swift in Sources */,
+				C5A2E3371DEB9D7D00F3D069 /* HydraStateOverlay.swift in Sources */,
+				C5A2E32D1DE4321600F3D069 /* HydraComm.swift in Sources */,
 				C552FFA21DE3DFCF002F552E /* VoltageFormatter.swift in Sources */,
+				C5A2E3331DE64BC000F3D069 /* StringExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,7 +519,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iGateTest/Hydra-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -509,7 +546,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.chrobotics.llc.Hydra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iGateTest/Hydra-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

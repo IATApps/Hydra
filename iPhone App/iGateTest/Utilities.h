@@ -6,11 +6,10 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 
 @interface Utilities : NSObject
-+(UIView*)overlayView;
-+ (NSString *) stringToHex:(NSString *)str;
++ (UIView *)overlayView;
++ (NSString *)stringToHex:(NSString *)str;
 
 @end

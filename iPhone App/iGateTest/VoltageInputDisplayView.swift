@@ -3,26 +3,38 @@
 //  hydra
 //
 //  Created by Kurt Arnlund on 11/21/16.
-//
+//  Ingenious Arts and Technologies LLC
 //
 
 import UIKit
 
-extension NSAttributedString {
-    func fullRange() -> NSRange {
-        return NSMakeRange(0, self.length)
-    }
-}
-
 class VoltageInputDisplayView : UIView {
     
+    @IBOutlet weak var title: UILabel!
     @IBOutlet weak var cutoffLabel: UILabel!
     @IBOutlet weak var voltageLabel: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        update(voltage: 0.0, cutoff: 0.0)
+        observeNotifications()
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        
-        self.update(voltage: 12.0, cutoff: 9)
+    }
+    
+    func observeNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(VoltageInputDisplayView.hydraStateUpdated), name: HydraState.uiNotifName(), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: HydraState.uiNotifName(), object: nil)
+    }
+    
+    func hydraStateUpdated(withNotification notification: NSNotification) {
+        let input = HydraState.sharedInstance.inputVoltageAndCurrent()
+        update(voltage: input.voltage, cutoff: input.current)
     }
     
     func update(voltage: Float, cutoff: Float) {
@@ -31,12 +43,11 @@ class VoltageInputDisplayView : UIView {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 
-        
         let cutoffTitle = "Cutoff"
         let cutoffTitleAttribs = [NSFontAttributeName : UIFont(name: "Helvetica", size: 14)!]
         
         let cutoffVoltageTitle = "\n".appending(VoltageFormatter().string(from: NSNumber(value: cutoff))!)
-        let cutoffVoltageAttribs = [NSFontAttributeName : UIFont(name: "Helvetica", size: 20)!]
+        let cutoffVoltageAttribs = [NSFontAttributeName : UIFont(name: "Helvetica", size: 16)!]
         
         let cutoffTxt = NSMutableAttributedString(string: cutoffTitle, attributes: cutoffTitleAttribs)
         cutoffTxt.append(NSMutableAttributedString(string: cutoffVoltageTitle, attributes: cutoffVoltageAttribs))
@@ -45,7 +56,7 @@ class VoltageInputDisplayView : UIView {
         
         cutoffLabel.attributedText = cutoffTxt
     }
-
+    
 }
 
 

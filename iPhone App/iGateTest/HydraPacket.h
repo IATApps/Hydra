@@ -46,6 +46,8 @@
 - (BOOL)isChecksumValid;
 - (uint16_t)checksumValue;
 
+- (BOOL)checkPtByte:(UInt8)ptByte addressByte:(UInt8)addressByte;
+
 - (BOOL)isCommandFailure;
 
 @end

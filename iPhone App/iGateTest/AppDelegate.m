@@ -10,12 +10,11 @@
 #import "Utilities.h"
 #import "HydraPacket.h"
 
+
 @implementation AppDelegate
 {
     // Member data for storing received characters over the Bluetooth connection
-    NSMutableData* BTLE_data;
-    int BTLE_length;
-    int haveConfigData;
+//    NSMutableData* BTLE_data;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -38,12 +37,11 @@
     self.inputVoltage = 0;
     self.inputCurrent = 0;
     
-    // Create array for storing data
-    BTLE_data = [[NSMutableData alloc] initWithCapacity: 50];
-    BTLE_length = 0;
-    haveConfigData = 0;
+    [HydraState sharedInstance];
+    [HydraStateOverlay sharedInstance];
     
-    [self pair];
+    self.hydraComm = [[HydraComm alloc] init];
+    [self.hydraComm pair];
     
     return YES;
 }
@@ -68,9 +66,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"DidBecomeActive"
-     object:self];
+//    [[NSNotificationCenter defaultCenter]
+//     postNotificationName:@"DidBecomeActive"
+//     object:self];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -82,83 +80,10 @@
 
 #pragma mark - 
 
-- (void)pair {
-    self.serviceUUID = [[NSUUID alloc] initWithUUIDString:@"B5161D82-AAB0-4E55-8D96-C59D816E6971"];
-    
-    [self.iGate setDelegate:nil];
-    
-    NSString *bonded = [[NSUserDefaults standardUserDefaults] objectForKey:@"bonded"];
-    if (bonded || self.bondedUUID) {
-        if (!self.bondedUUID) {
-            self.bondedUUID = [[NSUUID alloc] initWithUUIDString:bonded];
-        }
-        self.iGate = [[CiGate alloc] initWithDelegate:self autoConnectFlag:YES BondDevUUID:(__bridge CFUUIDRef)(self.bondedUUID) serviceUuidStr:self.serviceUUID.UUIDString];
-    } else {
-        self.iGate = [[CiGate alloc] initWithDelegate:self autoConnectFlag:YES serviceUuidStr:self.serviceUUID.UUIDString];
-    }
-    
-    [self.iGate startSearch];
-}
+
 
 #pragma mark - CiGateDelegate methods
 /*
- Invoked whenever the central manager's state is updated.
- */
-- (void)iGateDidUpdateState:(CiGateState)iGateState
-{
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt: iGateState],@"state", nil];
-    
-    switch (iGateState) {
-        case CiGateStateInit:
-            NSLog(@"iGate Init");
-            break;
-        case CiGateStatePoweredOff:
-            NSLog(@"iGate Powered Off");
-            break;
-        case CiGateStateUnknown:
-            NSLog(@"iGate Unknown");
-            break;
-        case CiGateStateResetting:
-            NSLog(@"iGate Resetting");
-            break;
-        case CiGateStateUnsupported:
-            NSLog(@"iGate Unsupported");
-            break;
-        case CiGateStateUnauthorized:
-            NSLog(@"iGate Unauthorized");
-            break;
-        case CiGateStateIdle:
-            NSLog(@"iGate Idle");
-            break;
-        case CiGateStateSearching:
-            NSLog(@"iGate Searching");
-            break;
-        case CiGateStateConnecting:
-            NSLog(@"iGate Connecting");
-            break;
-        case CiGateStateConnected:
-            NSLog(@"iGate Connected");
-            CFUUIDRef uuid = [self.iGate getConnectDevUUID];
-            self.bondedUUID = (__bridge NSUUID*)uuid;
-            [self.iGate stopSearch];
-            [self pair];
-            break;
-        case CiGateStateBonded:
-            NSLog(@"iGate Bonded");
-            NSLog(@"BONDED! %@ UUID:  %@", [self.iGate getConnectDevName], [self.iGate getConnectDevUUID]);
-            [[NSUserDefaults standardUserDefaults] setObject:self.bondedUUID.UUIDString forKey:@"bonded"];
-            [self.iGate readConnectDevAddr];
-            break;
-            
-        default:
-            break;
-    }
-    
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"stateUpdate"
-     object:nil userInfo:dict];
-}
-
 - (void)iGateDidReceivedData:(NSData *)nsdata
 {
     int index = 0;
@@ -346,7 +271,6 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"recievedConfig" object:nil userInfo:nil];
         
         // Set flag indicating that we've received configuration data for the Hydra
-        haveConfigData = 1;
         [BTLE_data setLength: 0];
     }
     // Success packet.  Indicates that a register write happened successfully
@@ -400,6 +324,8 @@
 //  self.recDataStr=[self.recDataStr stringByAppendingFormat:@"type:%02d,addr:%04x%02x%06x",addr->type,addr->nap,addr->uap,addr->lap];
 //  self.recData.text=self.recDataStr;
 }
+ 
+*/
 
 - (void)sendCommand:(NSData*)valData {
     CiGateState state = self.iGate.state;
