@@ -74,6 +74,6 @@
 
 @property float lowVoltageCutoff;
 
-- (void)sendData:(NSString*)dataString;
-- (void)sendCommand:(NSData*)valData;
+//- (void)sendData:(NSString*)dataString;
+//- (void)sendCommand:(NSData*)valData;
 @end

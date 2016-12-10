@@ -119,7 +119,7 @@
         internal = calculated;
     }
 
-    NSLog(@"calculated checksum %04x %@ %04x internal checksum  - packet length %04x", calculated, (internal == calculated) ? @"==" : @"!=", internal, self.packet.length);
+    NSLog(@"calculated checksum %04x %@ %04x internal checksum  - packet length %04lx", calculated, (internal == calculated) ? @"==" : @"!=", internal, (unsigned long)self.packet.length);
     
     // Compare to the checksum provided in the packet and return if they don't match
     return (internal == calculated);

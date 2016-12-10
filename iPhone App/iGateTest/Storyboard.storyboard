@@ -43,13 +43,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000 V" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="26" translatesAutoresizingMaskIntoConstraints="NO" id="FVR-d7-g57">
-                                        <rect key="frame" x="227" y="8" width="179" height="60.666666666666671"/>
+                                        <rect key="frame" x="227" y="8" width="179" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Gf6-OV-jAX" customClass="PaddedLabel" customModule="Hydra" customModuleProvider="target">
-                                        <rect key="frame" x="62.000000000000007" y="8" width="54.666666666666679" height="59.666666666666671"/>
+                                        <rect key="frame" x="62" y="8" width="55" height="60"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <attributedString key="attributedText">
                                             <fragment>
@@ -64,17 +64,11 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                                <color key="value" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
-                                                <integer key="value" value="8"/>
+                                                <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
-                                                <integer key="value" value="8"/>
+                                                <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
@@ -99,10 +93,10 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aU2-9B-DTP" customClass="VoltageOutputDisplayView" customModule="Hydra" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="111.66666666666666" width="414" height="112.99999999999997"/>
+                                <rect key="frame" x="0.0" y="112" width="414" height="113"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2Rl-hp-jcv">
-                                        <rect key="frame" x="8" y="8" width="81" height="59.999999999999986"/>
+                                        <rect key="frame" x="8" y="8" width="81" height="60"/>
                                         <attributedString key="attributedText">
                                             <fragment content="V1">
                                                 <attributes>
@@ -120,7 +114,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="30V-3o-28D" customClass="PaddedLabel" customModule="Hydra" customModuleProvider="target">
-                                        <rect key="frame" x="97.000000000000014" y="8" width="85.333333333333357" height="59.999999999999986"/>
+                                        <rect key="frame" x="97" y="8" width="78" height="60"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <attributedString key="attributedText">
                                             <fragment>
@@ -135,28 +129,22 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                                <color key="value" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
-                                                <integer key="value" value="8"/>
+                                                <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
-                                                <integer key="value" value="8"/>
+                                                <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000 V" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="26" translatesAutoresizingMaskIntoConstraints="NO" id="fyb-v1-kMK">
-                                        <rect key="frame" x="227" y="8" width="179" height="59.999999999999986"/>
+                                        <rect key="frame" x="227" y="8" width="179" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="CRy-za-zis">
-                                        <rect key="frame" x="100.99999999999999" y="79.999999999999986" width="77.666666666666643" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="CRy-za-zis" customClass="PaddedLabel" customModule="Hydra" customModuleProvider="target">
+                                        <rect key="frame" x="97" y="80" width="78" height="21"/>
                                         <attributedString key="attributedText">
                                             <fragment content="0.000 mA">
                                                 <attributes>
@@ -166,12 +154,20 @@
                                             </fragment>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CO0-rV-Ajw" userLabel="OnOffView">
-                                        <rect key="frame" x="8" y="75.999999999999986" width="81" height="29"/>
+                                        <rect key="frame" x="8" y="76" width="81" height="29"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OFF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggw-uf-1Aw">
-                                                <rect key="frame" x="25.333333333333339" y="4" width="31.666666666666661" height="21"/>
+                                                <rect key="frame" x="25" y="4" width="32" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -184,17 +180,9 @@
                                             <constraint firstAttribute="height" secondItem="Ggw-uf-1Aw" secondAttribute="height" constant="8" id="pRk-PT-fw8"/>
                                             <constraint firstItem="Ggw-uf-1Aw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CO0-rV-Ajw" secondAttribute="leading" constant="4" id="pTv-OZ-wSu"/>
                                         </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                                <color key="value" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="h4Q-wW-49h">
-                                        <rect key="frame" x="345" y="79.999999999999986" width="61" height="21"/>
+                                        <rect key="frame" x="344" y="80" width="62" height="21"/>
                                         <attributedString key="attributedText">
                                             <fragment content="0.000 V">
                                                 <attributes>
@@ -213,11 +201,11 @@
                                     <constraint firstItem="2Rl-hp-jcv" firstAttribute="top" secondItem="aU2-9B-DTP" secondAttribute="top" constant="8" id="48L-Xq-p3z"/>
                                     <constraint firstAttribute="trailing" secondItem="fyb-v1-kMK" secondAttribute="trailing" constant="8" id="5XR-IB-Uko"/>
                                     <constraint firstItem="2Rl-hp-jcv" firstAttribute="leading" secondItem="aU2-9B-DTP" secondAttribute="leading" constant="8" id="B5j-zm-2Bs"/>
-                                    <constraint firstItem="CRy-za-zis" firstAttribute="leading" secondItem="30V-3o-28D" secondAttribute="leading" constant="4" id="DUZ-p5-J1o"/>
+                                    <constraint firstItem="CRy-za-zis" firstAttribute="leading" secondItem="30V-3o-28D" secondAttribute="leading" id="DUZ-p5-J1o"/>
                                     <constraint firstItem="30V-3o-28D" firstAttribute="top" secondItem="aU2-9B-DTP" secondAttribute="top" constant="8" id="TGt-Ak-F9P"/>
                                     <constraint firstItem="30V-3o-28D" firstAttribute="height" secondItem="2Rl-hp-jcv" secondAttribute="height" id="TvQ-YK-nV6"/>
                                     <constraint firstItem="CO0-rV-Ajw" firstAttribute="top" secondItem="2Rl-hp-jcv" secondAttribute="bottom" constant="8" id="bjA-se-BQp"/>
-                                    <constraint firstItem="CRy-za-zis" firstAttribute="trailing" secondItem="30V-3o-28D" secondAttribute="trailing" constant="-4" id="fKo-lL-Nw0"/>
+                                    <constraint firstItem="CRy-za-zis" firstAttribute="trailing" secondItem="30V-3o-28D" secondAttribute="trailing" id="fKo-lL-Nw0"/>
                                     <constraint firstAttribute="trailing" secondItem="h4Q-wW-49h" secondAttribute="trailing" constant="8" id="hj4-MU-WNl"/>
                                     <constraint firstItem="CO0-rV-Ajw" firstAttribute="width" secondItem="2Rl-hp-jcv" secondAttribute="width" id="hw2-wZ-9Xl"/>
                                     <constraint firstItem="30V-3o-28D" firstAttribute="leading" secondItem="2Rl-hp-jcv" secondAttribute="trailing" constant="8" id="kVi-qh-GKw"/>
@@ -229,6 +217,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="channel">
                                         <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>

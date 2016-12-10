@@ -10,10 +10,26 @@ import UIKit
 
 @IBDesignable class PaddedLabel : UILabel {
     
-    @IBInspectable var topInset: NSNumber! = 0
-    @IBInspectable var bottomInset: NSNumber! = 0
-    @IBInspectable var leftInset: NSNumber! = 0
-    @IBInspectable var rightInset: NSNumber! = 0
+    @IBInspectable var topInset = CGFloat(0.0) {
+        didSet {
+            self.invalidateIntrinsicContentSize()
+        }
+    }
+    @IBInspectable var bottomInset = CGFloat(0.0)  {
+        didSet {
+            self.invalidateIntrinsicContentSize()
+        }
+    }
+    @IBInspectable var leftInset = CGFloat(0.0)  {
+        didSet {
+            self.invalidateIntrinsicContentSize()
+        }
+    }
+    @IBInspectable var rightInset = CGFloat(0.0)  {
+        didSet {
+            self.invalidateIntrinsicContentSize()
+        }
+    }
     
     required init(coder: NSCoder) {
         super.init(coder: coder)!
@@ -26,8 +42,8 @@ import UIKit
 
     override var intrinsicContentSize: CGSize {
         let intrinsicSuperViewContentSize = super.intrinsicContentSize;
-        let myHeight = intrinsicSuperViewContentSize.height + CGFloat(topInset.doubleValue) + CGFloat(bottomInset.doubleValue);
-        let myWidth = intrinsicSuperViewContentSize.width + CGFloat(leftInset.doubleValue) + CGFloat(rightInset.doubleValue);
+        let myHeight = intrinsicSuperViewContentSize.height + topInset + bottomInset;
+        let myWidth = intrinsicSuperViewContentSize.width + leftInset + rightInset;
         return CGSize(width: myWidth, height: myHeight);
     }
 }

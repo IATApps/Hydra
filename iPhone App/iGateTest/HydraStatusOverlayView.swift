@@ -1,5 +1,5 @@
 //
-//  OverlayView.swift
+//  HydraStatusOverlayView.swift
 //  hydra
 //
 //  Created by Kurt Arnlund on 11/27/16.
@@ -8,17 +8,17 @@
 
 import Foundation
 
-class OverlayView : UIView {
-    @IBOutlet weak var loadedOverlayView : OverlayView?
+class HydraStatusOverlayView : UIView {
+    @IBOutlet weak var loadedHydraStatusOverlayView : HydraStatusOverlayView?
     @IBOutlet weak var spinner : UIActivityIndicatorView?
     @IBOutlet weak var title : UILabel?
     @IBOutlet weak var hydraImage : UIImageView?
     
-    static func loadFromXib() -> OverlayView {
+    static func loadFromXib() -> HydraStatusOverlayView {
         let fullScreen = UIScreen.main.bounds
-        let container = OverlayView.init(frame: fullScreen)
-        Bundle.main.loadNibNamed("OverlayView", owner: container, options: nil)
-        let overlayView = container.loadedOverlayView!
+        let container = HydraStatusOverlayView.init(frame: fullScreen)
+        Bundle.main.loadNibNamed("HydraStatusOverlayView", owner: container, options: nil)
+        let overlayView = container.loadedHydraStatusOverlayView!
         overlayView.frame = fullScreen
         container.addSubview(overlayView)
         overlayView.spinner?.startAnimating()
@@ -37,7 +37,7 @@ class OverlayView : UIView {
 //            }
 //        }, completion: nil)
         
-        self.hydraImage?.alpha = 1.0
+        self.hydraImage?.alpha = 0.5
         UIView.animate(withDuration: 1.0, delay: 0, options: [.beginFromCurrentState, .repeat, .autoreverse], animations: {
             self.hydraImage?.alpha = 0.2
         }, completion: { Bool in

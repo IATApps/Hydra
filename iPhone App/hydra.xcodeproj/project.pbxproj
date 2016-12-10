@@ -12,10 +12,8 @@
 		7F1BBEF8159177A0000741FA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1BBEF7159177A0000741FA /* CoreGraphics.framework */; };
 		7F1BBF00159177A0000741FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F1BBEFF159177A0000741FA /* main.m */; };
 		7F1BBF151591785F000741FA /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1BBF141591785F000741FA /* CoreBluetooth.framework */; };
-		C50166CF1C0DE4FC00749378 /* libiGate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE052E06175EA09C003F80AE /* libiGate.a */; };
 		C538ABBC1DE3F2AD00DD0B65 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C538ABBB1DE3F2AD00DD0B65 /* Logo.png */; };
 		C538ABBE1DE4260700DD0B65 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C538ABBD1DE4260600DD0B65 /* PaddedLabel.swift */; };
-		C54D03511C153989000DE766 /* CHRHChannelView.m in Sources */ = {isa = PBXBuildFile; fileRef = C54D03501C153989000DE766 /* CHRHChannelView.m */; };
 		C552FF951DE3D737002F552E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C552FF941DE3D737002F552E /* Launch Screen.storyboard */; };
 		C552FF991DE3D757002F552E /* TopView.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C552FF961DE3D757002F552E /* TopView.jpeg */; };
 		C552FF9A1DE3D757002F552E /* AngleView.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C552FF971DE3D757002F552E /* AngleView.jpeg */; };
@@ -32,12 +30,17 @@
 		C5A2E3331DE64BC000F3D069 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2E3321DE64BC000F3D069 /* StringExtensions.swift */; };
 		C5A2E3351DE64CD700F3D069 /* CurrentFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2E3341DE64CD700F3D069 /* CurrentFormatter.swift */; };
 		C5A2E3371DEB9D7D00F3D069 /* HydraStateOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2E3361DEB9D7D00F3D069 /* HydraStateOverlay.swift */; };
-		C5A2E3391DEBA64E00F3D069 /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5A2E3381DEBA64E00F3D069 /* OverlayView.xib */; };
-		C5A2E33B1DEBA6BB00F3D069 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2E33A1DEBA6BB00F3D069 /* OverlayView.swift */; };
+		C5A2E3391DEBA64E00F3D069 /* HydraStatusOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5A2E3381DEBA64E00F3D069 /* HydraStatusOverlayView.xib */; };
+		C5A2E33B1DEBA6BB00F3D069 /* HydraStatusOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2E33A1DEBA6BB00F3D069 /* HydraStatusOverlayView.swift */; };
 		C5A2E33D1DEBBEF800F3D069 /* AngleViewTrans.png in Resources */ = {isa = PBXBuildFile; fileRef = C5A2E33C1DEBBEF800F3D069 /* AngleViewTrans.png */; };
+		C5E71AB51DED470900180AAC /* IATBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C563B9041DECFBCE00AE51D6 /* IATBluetooth.framework */; };
+		C5E71ABC1DEE0B4B00180AAC /* iGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E71ABB1DEE0B4B00180AAC /* iGate.swift */; };
+		C5FE4C521DF8F2F1008FCFBC /* IATBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C563B9041DECFBCE00AE51D6 /* IATBluetooth.framework */; };
+		C5FE4C531DF8F2F1008FCFBC /* IATBluetooth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C563B9041DECFBCE00AE51D6 /* IATBluetooth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C5FE4C8E1DFB3E73008FCFBC /* IATFoundationUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5FE4C851DFB3E16008FCFBC /* IATFoundationUtilities.framework */; };
+		C5FE4C8F1DFB3E73008FCFBC /* IATFoundationUtilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C5FE4C851DFB3E16008FCFBC /* IATFoundationUtilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE7F530F177B96C300678246 /* LCDyellow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F530E177B96C300678246 /* LCDyellow.png */; };
 		CE897588172205C100870825 /* hydra_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE897587172205C100870825 /* hydra_logo.png */; };
-		CE898A6C171752AC005A62FA /* DataLoggingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE898A6B171752AC005A62FA /* DataLoggingViewController.m */; };
 		CE8D3651171E07FE00BD64DD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8D3650171E07FE00BD64DD /* Default-568h@2x.png */; };
 		CE8D3654171E144800BD64DD /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8D3653171E144700BD64DD /* Utilities.m */; };
 		CE8D3657171E314500BD64DD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8D3655171E310700BD64DD /* MessageUI.framework */; };
@@ -45,11 +48,9 @@
 		CE8FA139173AA9F900189C70 /* commands_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8FA138173AA9F900189C70 /* commands_icon.png */; };
 		CE8FA13D173AAF2400189C70 /* graph.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8FA13C173AAF2400189C70 /* graph.png */; };
 		CE8FA13F173AB48E00189C70 /* batteryicon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8FA13E173AB48E00189C70 /* batteryicon.png */; };
-		CE8FA142173ABB2E00189C70 /* BattChargingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8FA141173ABB2D00189C70 /* BattChargingViewController.m */; };
 		CE8FA144173AC4C100189C70 /* seperator_line.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8FA143173AC4C100189C70 /* seperator_line.png */; };
 		CE95746717988A5D00C374A1 /* hydraTODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CE95746617988A5C00C374A1 /* hydraTODO.rtf */; };
 		CEA2C9E716FB9E7700AA2663 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEA2C9E616FB9E7700AA2663 /* InfoPlist.strings */; };
-		CEA2C9E916FB9EBB00AA2663 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA2C9E816FB9EBB00AA2663 /* MainStoryboard.storyboard */; };
 		CEB9DBE3171641A7006DBD4B /* controlKnobFrameII.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBCC171641A6006DBD4B /* controlKnobFrameII.png */; };
 		CEB9DBE5171641A7006DBD4B /* LCDblue.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBCE171641A6006DBD4B /* LCDblue.png */; };
 		CEB9DBE6171641A7006DBD4B /* redLedOff.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBCF171641A6006DBD4B /* redLedOff.png */; };
@@ -60,14 +61,79 @@
 		CEB9DBEC171641A7006DBD4B /* SimpleDarkGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBD5171641A6006DBD4B /* SimpleDarkGradient.png */; };
 		CEB9DBED171641A7006DBD4B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9DBD7171641A6006DBD4B /* AppDelegate.m */; };
 		CEB9DBF4171641A7006DBD4B /* steel_gradient.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DBDE171641A7006DBD4B /* steel_gradient.jpg */; };
-		CEB9DBFE1716453A006DBD4B /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9DBF91716453A006DBD4B /* SettingsViewController.m */; };
-		CEB9DBFF1716453A006DBD4B /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9DBFB1716453A006DBD4B /* StatusViewController.m */; };
 		CEB9DC001716453A006DBD4B /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9DBFD1716453A006DBD4B /* Channel.m */; };
 		CEB9DC0217170F51006DBD4B /* blackBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DC0117170F50006DBD4B /* blackBtn.png */; };
 		CEB9DC0A17171834006DBD4B /* blackBtnSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DC0917171834006DBD4B /* blackBtnSmall.png */; };
 		CEB9DC0C1717221E006DBD4B /* controlCanvas.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DC0B1717221E006DBD4B /* controlCanvas.png */; };
 		CEB9DC0E171734EF006DBD4B /* lightBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9DC0D171734EF006DBD4B /* lightBtn.png */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C563B9031DECFBCE00AE51D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C563B8FE1DECFBCD00AE51D6 /* IATBluetooth.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C563B8E41DECFBCD00AE51D6;
+			remoteInfo = IATBluetooth;
+		};
+		C563B9051DECFBCE00AE51D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C563B8FE1DECFBCD00AE51D6 /* IATBluetooth.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C563B8ED1DECFBCD00AE51D6;
+			remoteInfo = IATBluetoothTests;
+		};
+		C5E71AB61DEE0A8E00180AAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C563B8FE1DECFBCD00AE51D6 /* IATBluetooth.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C563B8E31DECFBCD00AE51D6;
+			remoteInfo = IATBluetooth;
+		};
+		C5FE4C541DF8F2F1008FCFBC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C563B8FE1DECFBCD00AE51D6 /* IATBluetooth.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C563B8E31DECFBCD00AE51D6;
+			remoteInfo = IATBluetooth;
+		};
+		C5FE4C841DFB3E16008FCFBC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5FE4C7F1DFB3E15008FCFBC /* IATFoundationUtilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C5FE4C651DFB3E15008FCFBC;
+			remoteInfo = IATFoundationUtilities;
+		};
+		C5FE4C861DFB3E16008FCFBC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5FE4C7F1DFB3E15008FCFBC /* IATFoundationUtilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C5FE4C6E1DFB3E15008FCFBC;
+			remoteInfo = IATFoundationUtilitiesTests;
+		};
+		C5FE4C901DFB3E73008FCFBC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5FE4C7F1DFB3E15008FCFBC /* IATFoundationUtilities.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C5FE4C641DFB3E15008FCFBC;
+			remoteInfo = IATFoundationUtilities;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C5FE4C561DF8F2F1008FCFBC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C5FE4C8F1DFB3E73008FCFBC /* IATFoundationUtilities.framework in Embed Frameworks */,
+				C5FE4C531DF8F2F1008FCFBC /* IATBluetooth.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7F1BBEEF159177A0000741FA /* Hydra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hydra.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,11 +158,11 @@
 		C552FF9F1DE3DF50002F552E /* VoltageInputDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoltageInputDisplayView.swift; sourceTree = "<group>"; };
 		C552FFA11DE3DFCF002F552E /* VoltageFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoltageFormatter.swift; sourceTree = "<group>"; };
 		C552FFA31DE3E680002F552E /* HydraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HydraViewController.swift; sourceTree = "<group>"; };
+		C563B8FE1DECFBCD00AE51D6 /* IATBluetooth.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IATBluetooth.xcodeproj; path = IATBluetooth/IATBluetooth.xcodeproj; sourceTree = "<group>"; };
 		C57B79D51BF79B77004DAB9B /* HydraPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HydraPacket.h; sourceTree = "<group>"; };
 		C57B79D61BF79B77004DAB9B /* HydraPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HydraPacket.m; sourceTree = "<group>"; };
 		C581379D1BF500B5001238F8 /* CBPeripheral+iGateHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBPeripheral+iGateHelpers.h"; sourceTree = "<group>"; };
 		C581379E1BF500B5001238F8 /* CBPeripheral+iGateHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+iGateHelpers.m"; sourceTree = "<group>"; };
-		C58137A11BF515F0001238F8 /* CiGateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CiGateDelegate.h; sourceTree = "<group>"; };
 		C5936A231BF7DE6B005345C3 /* BitUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitUtilities.h; sourceTree = "<group>"; };
 		C5A2E32C1DE4321600F3D069 /* HydraComm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HydraComm.swift; sourceTree = "<group>"; };
 		C5A2E32E1DE631E900F3D069 /* HydraState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HydraState.swift; sourceTree = "<group>"; };
@@ -104,11 +170,14 @@
 		C5A2E3321DE64BC000F3D069 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		C5A2E3341DE64CD700F3D069 /* CurrentFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentFormatter.swift; sourceTree = "<group>"; };
 		C5A2E3361DEB9D7D00F3D069 /* HydraStateOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HydraStateOverlay.swift; sourceTree = "<group>"; };
-		C5A2E3381DEBA64E00F3D069 /* OverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverlayView.xib; sourceTree = "<group>"; };
-		C5A2E33A1DEBA6BB00F3D069 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		C5A2E3381DEBA64E00F3D069 /* HydraStatusOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HydraStatusOverlayView.xib; sourceTree = "<group>"; };
+		C5A2E33A1DEBA6BB00F3D069 /* HydraStatusOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HydraStatusOverlayView.swift; sourceTree = "<group>"; };
 		C5A2E33C1DEBBEF800F3D069 /* AngleViewTrans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AngleViewTrans.png; sourceTree = "<group>"; };
+		C5E71AB91DEE0AFB00180AAC /* iGate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iGate.h; sourceTree = "<group>"; };
+		C5E71ABA1DEE0B1100180AAC /* CiGateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CiGateDelegate.h; sourceTree = "<group>"; };
+		C5E71ABB1DEE0B4B00180AAC /* iGate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iGate.swift; sourceTree = "<group>"; };
+		C5FE4C7F1DFB3E15008FCFBC /* IATFoundationUtilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IATFoundationUtilities.xcodeproj; path = IATFoundationUtilities/IATFoundationUtilities.xcodeproj; sourceTree = "<group>"; };
 		CE052E06175EA09C003F80AE /* libiGate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libiGate.a; sourceTree = "<group>"; };
-		CE052E08175EA402003F80AE /* iGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGate.h; sourceTree = "<group>"; };
 		CE7F530E177B96C300678246 /* LCDyellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LCDyellow.png; sourceTree = "<group>"; };
 		CE897587172205C100870825 /* hydra_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hydra_logo.png; sourceTree = "<group>"; };
 		CE897589172206E000870825 /* hydra_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hydra_logo.png; sourceTree = "<group>"; };
@@ -156,11 +225,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5E71AB51DED470900180AAC /* IATBluetooth.framework in Frameworks */,
 				7F1BBF151591785F000741FA /* CoreBluetooth.framework in Frameworks */,
+				C5FE4C8E1DFB3E73008FCFBC /* IATFoundationUtilities.framework in Frameworks */,
 				7F1BBEF4159177A0000741FA /* UIKit.framework in Frameworks */,
+				C5FE4C521DF8F2F1008FCFBC /* IATBluetooth.framework in Frameworks */,
 				7F1BBEF6159177A0000741FA /* Foundation.framework in Frameworks */,
 				CE8D3657171E314500BD64DD /* MessageUI.framework in Frameworks */,
-				C50166CF1C0DE4FC00749378 /* libiGate.a in Frameworks */,
 				7F1BBEF8159177A0000741FA /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,12 +242,15 @@
 		7F1BBEE4159177A0000741FA = {
 			isa = PBXGroup;
 			children = (
+				C5FE4C7F1DFB3E15008FCFBC /* IATFoundationUtilities.xcodeproj */,
+				C563B8FE1DECFBCD00AE51D6 /* IATBluetooth.xcodeproj */,
 				C51E03AB1C61D06500F23E53 /* README.md */,
 				CE897589172206E000870825 /* hydra_logo.png */,
 				C538ABBB1DE3F2AD00DD0B65 /* Logo.png */,
 				CE052E06175EA09C003F80AE /* libiGate.a */,
 				CE8D3650171E07FE00BD64DD /* Default-568h@2x.png */,
 				CE95746617988A5C00C374A1 /* hydraTODO.rtf */,
+				C5E71AB81DEE0AC600180AAC /* libiGate */,
 				7F1BBEF9159177A0000741FA /* iGateTest */,
 				7F1BBEF2159177A0000741FA /* Frameworks */,
 				7F1BBEF0159177A0000741FA /* Products */,
@@ -208,7 +282,7 @@
 			children = (
 				CEB9DBF7171641DA006DBD4B /* images */,
 				C552FF941DE3D737002F552E /* Launch Screen.storyboard */,
-				C5A2E3381DEBA64E00F3D069 /* OverlayView.xib */,
+				C5A2E3381DEBA64E00F3D069 /* HydraStatusOverlayView.xib */,
 				C552FF9C1DE3DA81002F552E /* Storyboard.storyboard */,
 				C552FFA31DE3E680002F552E /* HydraViewController.swift */,
 				C552FF9F1DE3DF50002F552E /* VoltageInputDisplayView.swift */,
@@ -220,9 +294,7 @@
 				C5A2E32E1DE631E900F3D069 /* HydraState.swift */,
 				C5A2E3321DE64BC000F3D069 /* StringExtensions.swift */,
 				C5A2E3361DEB9D7D00F3D069 /* HydraStateOverlay.swift */,
-				C5A2E33A1DEBA6BB00F3D069 /* OverlayView.swift */,
-				CE052E08175EA402003F80AE /* iGate.h */,
-				C58137A11BF515F0001238F8 /* CiGateDelegate.h */,
+				C5A2E33A1DEBA6BB00F3D069 /* HydraStatusOverlayView.swift */,
 				CEB9DBD6171641A6006DBD4B /* AppDelegate.h */,
 				CEB9DBD7171641A6006DBD4B /* AppDelegate.m */,
 				C54D034F1C153989000DE766 /* CHRHChannelView.h */,
@@ -260,6 +332,34 @@
 				7F1BBF01159177A0000741FA /* Hydra-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C563B8FF1DECFBCD00AE51D6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C563B9041DECFBCE00AE51D6 /* IATBluetooth.framework */,
+				C563B9061DECFBCE00AE51D6 /* IATBluetoothTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C5E71AB81DEE0AC600180AAC /* libiGate */ = {
+			isa = PBXGroup;
+			children = (
+				C5E71AB91DEE0AFB00180AAC /* iGate.h */,
+				C5E71ABA1DEE0B1100180AAC /* CiGateDelegate.h */,
+				C5E71ABB1DEE0B4B00180AAC /* iGate.swift */,
+			);
+			path = libiGate;
+			sourceTree = "<group>";
+		};
+		C5FE4C801DFB3E15008FCFBC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C5FE4C851DFB3E16008FCFBC /* IATFoundationUtilities.framework */,
+				C5FE4C871DFB3E16008FCFBC /* IATFoundationUtilitiesTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		CEB9DBF7171641DA006DBD4B /* images */ = {
@@ -303,10 +403,14 @@
 				7F1BBEEB159177A0000741FA /* Sources */,
 				7F1BBEEC159177A0000741FA /* Frameworks */,
 				7F1BBEED159177A0000741FA /* Resources */,
+				C5FE4C561DF8F2F1008FCFBC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C5E71AB71DEE0A8E00180AAC /* PBXTargetDependency */,
+				C5FE4C551DF8F2F1008FCFBC /* PBXTargetDependency */,
+				C5FE4C911DFB3E73008FCFBC /* PBXTargetDependency */,
 			);
 			name = Hydra;
 			productName = iGateTest;
@@ -340,6 +444,16 @@
 			mainGroup = 7F1BBEE4159177A0000741FA;
 			productRefGroup = 7F1BBEF0159177A0000741FA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C563B8FF1DECFBCD00AE51D6 /* Products */;
+					ProjectRef = C563B8FE1DECFBCD00AE51D6 /* IATBluetooth.xcodeproj */;
+				},
+				{
+					ProductGroup = C5FE4C801DFB3E15008FCFBC /* Products */;
+					ProjectRef = C5FE4C7F1DFB3E15008FCFBC /* IATFoundationUtilities.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				7F1BBEEE159177A0000741FA /* Hydra */,
@@ -347,14 +461,44 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		C563B9041DECFBCE00AE51D6 /* IATBluetooth.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = IATBluetooth.framework;
+			remoteRef = C563B9031DECFBCE00AE51D6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C563B9061DECFBCE00AE51D6 /* IATBluetoothTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = IATBluetoothTests.xctest;
+			remoteRef = C563B9051DECFBCE00AE51D6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5FE4C851DFB3E16008FCFBC /* IATFoundationUtilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = IATFoundationUtilities.framework;
+			remoteRef = C5FE4C841DFB3E16008FCFBC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5FE4C871DFB3E16008FCFBC /* IATFoundationUtilitiesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = IATFoundationUtilitiesTests.xctest;
+			remoteRef = C5FE4C861DFB3E16008FCFBC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		7F1BBEED159177A0000741FA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				CEA2C9E716FB9E7700AA2663 /* InfoPlist.strings in Resources */,
-				CEA2C9E916FB9EBB00AA2663 /* MainStoryboard.storyboard in Resources */,
-				C5A2E3391DEBA64E00F3D069 /* OverlayView.xib in Resources */,
+				C5A2E3391DEBA64E00F3D069 /* HydraStatusOverlayView.xib in Resources */,
 				CEB9DBE3171641A7006DBD4B /* controlKnobFrameII.png in Resources */,
 				CEB9DBE5171641A7006DBD4B /* LCDblue.png in Resources */,
 				C552FF951DE3D737002F552E /* Launch Screen.storyboard in Resources */,
@@ -401,18 +545,14 @@
 				C5A2E3351DE64CD700F3D069 /* CurrentFormatter.swift in Sources */,
 				CEB9DBED171641A7006DBD4B /* AppDelegate.m in Sources */,
 				C58137A21BF5437C001238F8 /* CBPeripheral+iGateHelpers.m in Sources */,
-				CEB9DBFE1716453A006DBD4B /* SettingsViewController.m in Sources */,
-				CEB9DBFF1716453A006DBD4B /* StatusViewController.m in Sources */,
 				CEB9DC001716453A006DBD4B /* Channel.m in Sources */,
 				C5A2E3311DE649BD00F3D069 /* VoltageOutputDisplayView.swift in Sources */,
-				CE898A6C171752AC005A62FA /* DataLoggingViewController.m in Sources */,
 				CE8D3654171E144800BD64DD /* Utilities.m in Sources */,
-				CE8FA142173ABB2E00189C70 /* BattChargingViewController.m in Sources */,
-				C54D03511C153989000DE766 /* CHRHChannelView.m in Sources */,
-				C5A2E33B1DEBA6BB00F3D069 /* OverlayView.swift in Sources */,
+				C5A2E33B1DEBA6BB00F3D069 /* HydraStatusOverlayView.swift in Sources */,
 				C552FFA01DE3DF50002F552E /* VoltageInputDisplayView.swift in Sources */,
 				C5A2E32F1DE631E900F3D069 /* HydraState.swift in Sources */,
 				C5A2E3371DEB9D7D00F3D069 /* HydraStateOverlay.swift in Sources */,
+				C5E71ABC1DEE0B4B00180AAC /* iGate.swift in Sources */,
 				C5A2E32D1DE4321600F3D069 /* HydraComm.swift in Sources */,
 				C552FFA21DE3DFCF002F552E /* VoltageFormatter.swift in Sources */,
 				C5A2E3331DE64BC000F3D069 /* StringExtensions.swift in Sources */,
@@ -420,6 +560,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C5E71AB71DEE0A8E00180AAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IATBluetooth;
+			targetProxy = C5E71AB61DEE0A8E00180AAC /* PBXContainerItemProxy */;
+		};
+		C5FE4C551DF8F2F1008FCFBC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IATBluetooth;
+			targetProxy = C5FE4C541DF8F2F1008FCFBC /* PBXContainerItemProxy */;
+		};
+		C5FE4C911DFB3E73008FCFBC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IATFoundationUtilities;
+			targetProxy = C5FE4C901DFB3E73008FCFBC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		7F1BBF0B159177A0000741FA /* Debug */ = {
@@ -500,6 +658,7 @@
 		7F1BBF0E159177A0000741FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
@@ -508,7 +667,7 @@
 				GCC_PREFIX_HEADER = "iGateTest/Hydra-Prefix.pch";
 				GENERATE_MASTER_OBJECT_FILE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/iGateTest/Hydra-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)",
@@ -520,7 +679,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "iGateTest/Hydra-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0.1;
-				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -528,6 +686,7 @@
 		7F1BBF0F159177A0000741FA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
@@ -536,7 +695,7 @@
 				GCC_PREFIX_HEADER = "iGateTest/Hydra-Prefix.pch";
 				GENERATE_MASTER_OBJECT_FILE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/iGateTest/Hydra-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)",
@@ -547,7 +706,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iGateTest/Hydra-Bridging-Header.h";
 				SWIFT_VERSION = 3.0.1;
-				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

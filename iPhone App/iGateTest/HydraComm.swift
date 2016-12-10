@@ -8,9 +8,8 @@
 
 import Foundation
 
-class HydraComm : NSObject, CiGateDelegate {
+class HydraComm : NSObject, CiGateComDelegate {
     
-    var serviceUUID : UUID?
     var bondedUUID : UUID?
     
     lazy var btleData = Data(capacity: 1024)
@@ -18,65 +17,64 @@ class HydraComm : NSObject, CiGateDelegate {
     var iGate : CiGate?
     
     override func finalize() {
-        self.serviceUUID = nil
         self.iGate = nil
     }
     
     var unsubscribedFromDataTimer : Timer?
     
+    private func serviceUUID() -> UUID {
+        return UUID(uuidString: "B5161D82-AAB0-4E55-8D96-C59D816E6971")!
+    }
+    
     public func pair() {
-        self.serviceUUID = UUID(uuidString: "B5161D82-AAB0-4E55-8D96-C59D816E6971")
-        
-        self.iGate?.delegate = nil
+        self.iGate?.comDelegate = nil
         
         if let bonded = UserDefaults.standard.object(forKey: "bonded") {
             self.bondedUUID = UUID(uuidString: bonded as! String)
         }
-        if self.bondedUUID != .none {
-            self.iGate = CiGate(delegate: self, autoConnectFlag: true, bondDevUUID: self.bondedUUID as! CFUUID!, serviceUuidStr: serviceUUID?.uuidString)
-        } else {
-            self.iGate = CiGate(delegate: self, autoConnectFlag: true, serviceUuidStr: self.serviceUUID?.uuidString)
-        }
-        
-        // KURT: Calling this startSearch causes an error that searching cannot be performer before bt is in the powered on state 
-//        self.iGate?.startSearch()        
+            self.iGate = nil
+            self.iGate = CiGate(delegate: self, autoConnect: true, serviceUUIDstr: self.serviceUUID().uuidString)
+            self.iGate?.startSearch()
     }
-
-    func iGateDidUpdateState(_ iGateState: CiGateState) {
-        switch (iGateState) {
-            case CiGateStateInit:
+    
+    func didUpdate(iGate: CiGate, state: CiGateState) {
+        switch (state) {
+            case .initialized:
                 print("iGate Init")
                 break;
-            case CiGateStatePoweredOff:
+            case .powered_off:
                 print("iGate Powered Off")
-                NotificationCenter.default.post(name: HydraStateOverlay.iGateEvent()!, object: nil, userInfo: [HydraStateOverlay.iGateEventUserInfoStateKey() : HydraStateOverlay.iGateOverlayStates.bt_off.rawValue])
+                displayOverlayState(state: .bt_off)
+                self.pair()
                 break;
-            case CiGateStateUnknown:
+            case .unknown:
                 print("iGate Unknown")
                 break;
-            case CiGateStateResetting:
+            case .resetting:
                 print("iGate Resetting")
                 break;
-            case CiGateStateUnsupported:
+            case .unsupported:
                 print("iGate Unsupported")
+                displayOverlayState(state: .bt_unsupported)
                 break;
-            case CiGateStateUnauthorized:
+            case .unauthorized:
                 print("iGate Unauthorized")
+                displayOverlayState(state: .bt_unauthorized)
                 break;
-            case CiGateStateIdle:
+            case .idle:
                 print("iGate Idle")
                 break;
-            case CiGateStateSearching:
+            case .searching:
                 print("iGate Searching")
-                NotificationCenter.default.post(name: HydraStateOverlay.iGateEvent()!, object: nil, userInfo: [HydraStateOverlay.iGateEventUserInfoStateKey() : HydraStateOverlay.iGateOverlayStates.searching.rawValue])
+                displayOverlayState(state: .searching)
                 break;
-            case CiGateStateConnecting:
+            case .connecting:
                 print("iGate Connecting")
-                NotificationCenter.default.post(name: HydraStateOverlay.iGateEvent()!, object: nil, userInfo: [HydraStateOverlay.iGateEventUserInfoStateKey() : HydraStateOverlay.iGateOverlayStates.connecting.rawValue])
+                displayOverlayState(state: .connecting)
                 break;
-            case CiGateStateConnected:
+            case .connected:
                 print("iGate Connected")
-                NotificationCenter.default.post(name: HydraStateOverlay.iGateEvent()!, object: nil, userInfo: [HydraStateOverlay.iGateEventUserInfoStateKey() : HydraStateOverlay.iGateOverlayStates.connected.rawValue])
+                displayOverlayState(state: .connected)
                 if #available(iOS 10.0, *) {
                     unsubscribedFromDataTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { timer in
                         self.iGate?.startSearch()
@@ -84,34 +82,29 @@ class HydraComm : NSObject, CiGateDelegate {
                 } else {
                     // Fallback on earlier versions
                 }
-                var uuidStr : String?
-                let devCfUuid = self.iGate!.getConnectDevUUID().takeRetainedValue()
-                uuidStr = CFUUIDCreateString(nil, devCfUuid) as String
-                self.bondedUUID = UUID(uuidString: uuidStr!)
+                self.bondedUUID = self.iGate!.bondedDevUUID
                 self.iGate?.stopSearch()
-                if (self.iGate == .none) {
-                    self.pair()
-                }
+                self.pair()
                 break;
-            case CiGateStateBonded:
+            case .bonded:
                 print("iGate Bonded")
-                let uuidStr = CFUUIDCreateString(nil, self.iGate?.getConnectDevUUID() as! CFUUID!)
+                let uuidStr = self.iGate?.connectedDevUUID?.uuidString ?? "unknown"
                 let bondedUuidStr = (self.bondedUUID?.uuidString)! as String
-                let deviceName = self.iGate?.getConnectDevName()
-                print("BONDED TO %@ [UUID:  %@  |  Bonded UUID: %@]",  deviceName!, uuidStr as! String, bondedUuidStr)
+                let deviceName = self.iGate?.connectedDevName
+                print("BONDED TO %@ [UUID:  %@  |  Bonded UUID: %@]",  deviceName!, uuidStr, bondedUuidStr)
                 UserDefaults.standard.set(bondedUuidStr, forKey:"bonded")
-                self.iGate?.readConnectDevAddr()
-                break;
-                
-            default:
                 break;
         }
         
-        let dict = ["state" : NSNumber(value: iGateState)];
+        let dict = ["state" : NSNumber(value: state.rawValue)];
         NotificationCenter.default.post( Notification(name: Notification.Name(rawValue: "stateUpdate"), object: nil, userInfo: dict) )        
     }
     
-    func iGateDidReceivedData(_ data: Data!) {
+    private func displayOverlayState(state: HydraStateOverlay.iGateOverlayStates) {
+        NotificationCenter.default.post(name: HydraStateOverlay.iGateEvent()!, object: nil, userInfo: [HydraStateOverlay.iGateEventUserInfoStateKey() : state.rawValue])
+    }
+    
+    func didReceiveData(iGate: CiGate, data: Data) {
         if unsubscribedFromDataTimer != nil {
             unsubscribedFromDataTimer?.invalidate()
             unsubscribedFromDataTimer = nil

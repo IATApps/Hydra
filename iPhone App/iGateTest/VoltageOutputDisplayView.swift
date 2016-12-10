@@ -8,15 +8,17 @@
 
 import UIKit
 
-class VoltageOutputDisplayView : UIView {
+@IBDesignable class VoltageOutputDisplayView : UIView {
     
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var currentLabel: UILabel!
-    @IBOutlet weak var currentTargetLabel: UILabel!
-    @IBOutlet weak var voltageLabel: UILabel!
-    @IBOutlet weak var voltageTargetLabel: UILabel!
-    @IBInspectable var channel: NSNumber = 1
-    @IBOutlet weak var modeLabel: UILabel!
+    @IBOutlet weak var title: UILabel?
+    @IBOutlet weak var currentLabel: UILabel?
+    @IBOutlet weak var currentTargetLabel: UILabel?
+    @IBOutlet weak var voltageLabel: UILabel?
+    @IBOutlet weak var voltageTargetLabel: UILabel?
+    @IBInspectable var channel = Int(1)
+    @IBOutlet weak var modeLabel: UILabel?
+    @IBInspectable var highlightColor = UIColor.white
+    
     var editing : Bool! = false {
         didSet {
             updateModeText()
@@ -51,8 +53,8 @@ class VoltageOutputDisplayView : UIView {
     }
     
     func update(outputTuple: (voltage: Float, targetVoltage: Float, current: Float, targetCurrent: Float) ) {
-        voltageLabel.text = VoltageFormatter().string(from: NSNumber(value: outputTuple.voltage))
-        voltageTargetLabel.text = VoltageFormatter().string(from: NSNumber(value: outputTuple.targetCurrent) )
+        voltageLabel?.text = VoltageFormatter().string(from: NSNumber(value: outputTuple.voltage))
+        voltageTargetLabel?.text = VoltageFormatter().string(from: NSNumber(value: outputTuple.targetCurrent) )
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -68,16 +70,16 @@ class VoltageOutputDisplayView : UIView {
 
         currentTxt.addAttributes([NSForegroundColorAttributeName : UIColor.white, NSParagraphStyleAttributeName : paragraphStyle], range: currentTxt.fullRange() )
         
-        currentLabel.attributedText = currentTxt
+        currentLabel?.attributedText = currentTxt
         
-        currentTargetLabel.text = CurrentFormatter().string(from: NSNumber(value: outputTuple.targetCurrent) )
+        currentTargetLabel?.text = CurrentFormatter().string(from: NSNumber(value: outputTuple.targetCurrent) )
     }
     
     func updateModeText() {
         if let channelSettings = HydraState.sharedInstance.getChannel(number:Int(channel)) {
-            modeLabel.text = modeText(onState:channelSettings.enabled)
+            modeLabel?.text = modeText(onState:channelSettings.enabled)
         } else {
-            modeLabel.text = modeText(onState:false)
+            modeLabel?.text = modeText(onState:false)
         }
     }
     

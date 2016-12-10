@@ -19,7 +19,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
     // 00000000-0000-0000-0C86-003D067A170D  -> UUID for a sample of NVC_MDCS71
     // If the app want to connect to a known device only, set the bonded UUID when
     // init iGate, or use setBondDevUUID.
@@ -41,7 +40,9 @@
     [HydraStateOverlay sharedInstance];
     
     self.hydraComm = [[HydraComm alloc] init];
-    [self.hydraComm pair];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.hydraComm pair];
+    });
     
     return YES;
 }
@@ -325,8 +326,6 @@
 //  self.recData.text=self.recDataStr;
 }
  
-*/
-
 - (void)sendCommand:(NSData*)valData {
     CiGateState state = self.iGate.state;
     if (state == CiGateStateBonded)
@@ -451,5 +450,7 @@
     }
     
 }
+ */
+
 
 @end

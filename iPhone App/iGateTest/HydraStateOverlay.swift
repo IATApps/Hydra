@@ -10,7 +10,7 @@ import Foundation
 
 class HydraStateOverlay : NSObject {
     
-    var overlay : OverlayView?
+    var overlay : HydraStatusOverlayView?
     
     enum iGateOverlayStates : String {
         case searching = "Searching"
@@ -18,6 +18,8 @@ class HydraStateOverlay : NSObject {
         case connected = "Connected"
         case bt_off = "Bluetooth Off"
         case bt_on = "Bluetooth On"
+        case bt_unsupported = "Bluetooth is not supported on this device"
+        case bt_unauthorized = "This app is not authorized by iOS to use Bluetooth"
     }
     
     class func iGateEvent() -> Notification.Name? {
@@ -65,7 +67,7 @@ class HydraStateOverlay : NSObject {
     
     func loadOverlay() {
         if overlay == nil {
-            overlay = OverlayView.loadFromXib()
+            overlay = HydraStatusOverlayView.loadFromXib()
         }
     }
 }
