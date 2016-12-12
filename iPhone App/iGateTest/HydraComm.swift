@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HydraComm : NSObject, CiGateComDelegate {
+@objc class HydraComm : NSObject, CiGateComDelegate {
     
     var bondedUUID : UUID?
     
@@ -17,6 +17,7 @@ class HydraComm : NSObject, CiGateComDelegate {
     var iGate : CiGate?
     
     override func finalize() {
+        self.iGate?.comDelegate = nil
         self.iGate = nil
     }
     
@@ -27,14 +28,22 @@ class HydraComm : NSObject, CiGateComDelegate {
     }
     
     public func pair() {
-        self.iGate?.comDelegate = nil
-        
         if let bonded = UserDefaults.standard.object(forKey: "bonded") {
             self.bondedUUID = UUID(uuidString: bonded as! String)
         }
-            self.iGate = nil
+        if self.iGate == nil {
             self.iGate = CiGate(delegate: self, autoConnect: true, serviceUUIDstr: self.serviceUUID().uuidString)
-            self.iGate?.startSearch()
+        }
+        self.iGate?.startSearch()
+    }
+    
+    public func stop() {
+        self.iGate?.stopSearch()
+    }
+    
+    public func disconnect() {
+        self.iGate?.disconnect()
+        displayOverlayState(state: .disconnecting)
     }
     
     func didUpdate(iGate: CiGate, state: CiGateState) {
@@ -52,6 +61,7 @@ class HydraComm : NSObject, CiGateComDelegate {
                 break;
             case .resetting:
                 print("iGate Resetting")
+                displayOverlayState(state: .resetting)
                 break;
             case .unsupported:
                 print("iGate Unsupported")
@@ -76,15 +86,13 @@ class HydraComm : NSObject, CiGateComDelegate {
                 print("iGate Connected")
                 displayOverlayState(state: .connected)
                 if #available(iOS 10.0, *) {
-                    unsubscribedFromDataTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { timer in
-                        self.iGate?.startSearch()
-                    })
+//                    unsubscribedFromDataTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { timer in
+//                        self.iGate?.startSearch()
+//                    })
                 } else {
                     // Fallback on earlier versions
                 }
                 self.bondedUUID = self.iGate!.bondedDevUUID
-                self.iGate?.stopSearch()
-                self.pair()
                 break;
             case .bonded:
                 print("iGate Bonded")
@@ -287,11 +295,11 @@ class HydraComm : NSObject, CiGateComDelegate {
 //        }
     }
     
-    func iGateDidUpdateConnectDevRSSI(_ rssi: NSNumber!, error: Error!) {
-        print("iGateDidUpdateConnectDevRSSI")
-    }
+//    func iGateDidUpdateConnectDevRSSI(_ rssi: NSNumber!, error: Error!) {
+//        print("iGateDidUpdateConnectDevRSSI")
+//    }
     
-    func iGateDidUpdateConnectDevAddr(_ addr: UnsafeMutablePointer<CBluetoothAddr>!) {
-        print("iGateDidUpdateConnectDevAddr")
-    }
+//    func iGateDidUpdateConnectDevAddr(_ addr: UnsafeMutablePointer<CBluetoothAddr>!) {
+//        print("iGateDidUpdateConnectDevAddr")
+//    }
 }

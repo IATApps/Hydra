@@ -21,6 +21,16 @@
 		C5FE4C981DFB736F008FCFBC /* IATFoundationUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5FE4C941DFB4206008FCFBC /* IATFoundationUtilities.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C521CCFD1DFB8D1A00AA0969 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C563B8DB1DECFBCD00AE51D6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C563B8E31DECFBCD00AE51D6;
+			remoteInfo = IATBluetooth;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		C563B8E41DECFBCD00AE51D6 /* IATBluetooth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IATBluetooth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C563B8E71DECFBCD00AE51D6 /* IATBluetooth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IATBluetooth.h; sourceTree = "<group>"; };
@@ -157,6 +167,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C521CCFE1DFB8D1A00AA0969 /* PBXTargetDependency */,
 			);
 			name = IATBluetoothTests;
 			productName = IATBluetoothTests;
@@ -244,6 +255,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C521CCFE1DFB8D1A00AA0969 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C563B8E31DECFBCD00AE51D6 /* IATBluetooth */;
+			targetProxy = C521CCFD1DFB8D1A00AA0969 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C563B8F61DECFBCD00AE51D6 /* Debug */ = {

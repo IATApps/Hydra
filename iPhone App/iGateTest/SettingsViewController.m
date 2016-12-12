@@ -8,7 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "AppDelegate.h"
-#import "iGate.h"
+//#import "iGate.h"
 #import "HydraPacket.h"
 
 @interface SettingsViewController ()<UITextFieldDelegate>

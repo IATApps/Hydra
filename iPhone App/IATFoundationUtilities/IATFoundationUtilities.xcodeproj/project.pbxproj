@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		C5FE4C6F1DFB3E15008FCFBC /* IATFoundationUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5FE4C651DFB3E15008FCFBC /* IATFoundationUtilities.framework */; };
-		C5FE4C741DFB3E15008FCFBC /* IATFoundationUtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FE4C731DFB3E15008FCFBC /* IATFoundationUtilitiesTests.swift */; };
+		C5FE4C741DFB3E15008FCFBC /* FoundationUtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FE4C731DFB3E15008FCFBC /* FoundationUtilitiesTests.swift */; };
 		C5FE4C761DFB3E15008FCFBC /* IATFoundationUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = C5FE4C681DFB3E15008FCFBC /* IATFoundationUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5FE4C8A1DFB3E39008FCFBC /* IATOneTimeTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FE4C881DFB3E39008FCFBC /* IATOneTimeTrigger.swift */; };
 		C5FE4C8B1DFB3E39008FCFBC /* IATTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FE4C891DFB3E39008FCFBC /* IATTimer.swift */; };
-		C5FE4C8D1DFB3E4B008FCFBC /* IATBluetoothOnTimeTriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FE4C8C1DFB3E4B008FCFBC /* IATBluetoothOnTimeTriggerTests.swift */; };
+		C5FE4C8D1DFB3E4B008FCFBC /* OnTimeTriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FE4C8C1DFB3E4B008FCFBC /* OnTimeTriggerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,11 +30,11 @@
 		C5FE4C681DFB3E15008FCFBC /* IATFoundationUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IATFoundationUtilities.h; sourceTree = "<group>"; };
 		C5FE4C691DFB3E15008FCFBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5FE4C6E1DFB3E15008FCFBC /* IATFoundationUtilitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IATFoundationUtilitiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C5FE4C731DFB3E15008FCFBC /* IATFoundationUtilitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IATFoundationUtilitiesTests.swift; sourceTree = "<group>"; };
+		C5FE4C731DFB3E15008FCFBC /* FoundationUtilitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationUtilitiesTests.swift; sourceTree = "<group>"; };
 		C5FE4C751DFB3E15008FCFBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5FE4C881DFB3E39008FCFBC /* IATOneTimeTrigger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IATOneTimeTrigger.swift; sourceTree = "<group>"; };
 		C5FE4C891DFB3E39008FCFBC /* IATTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IATTimer.swift; sourceTree = "<group>"; };
-		C5FE4C8C1DFB3E4B008FCFBC /* IATBluetoothOnTimeTriggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IATBluetoothOnTimeTriggerTests.swift; sourceTree = "<group>"; };
+		C5FE4C8C1DFB3E4B008FCFBC /* OnTimeTriggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTimeTriggerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +88,8 @@
 		C5FE4C721DFB3E15008FCFBC /* IATFoundationUtilitiesTests */ = {
 			isa = PBXGroup;
 			children = (
-				C5FE4C8C1DFB3E4B008FCFBC /* IATBluetoothOnTimeTriggerTests.swift */,
-				C5FE4C731DFB3E15008FCFBC /* IATFoundationUtilitiesTests.swift */,
+				C5FE4C8C1DFB3E4B008FCFBC /* OnTimeTriggerTests.swift */,
+				C5FE4C731DFB3E15008FCFBC /* FoundationUtilitiesTests.swift */,
 				C5FE4C751DFB3E15008FCFBC /* Info.plist */,
 			);
 			path = IATFoundationUtilitiesTests;
@@ -217,8 +217,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5FE4C8D1DFB3E4B008FCFBC /* IATBluetoothOnTimeTriggerTests.swift in Sources */,
-				C5FE4C741DFB3E15008FCFBC /* IATFoundationUtilitiesTests.swift in Sources */,
+				C5FE4C8D1DFB3E4B008FCFBC /* OnTimeTriggerTests.swift in Sources */,
+				C5FE4C741DFB3E15008FCFBC /* FoundationUtilitiesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,11 +276,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -327,6 +327,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -351,7 +352,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 			};
 			name = Debug;
 		};
@@ -373,7 +373,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
-				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 			};
 			name = Release;
 		};
@@ -381,9 +380,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = H8E2LSZV55;
 				INFOPLIST_FILE = IATFoundationUtilitiesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iat.IATFoundationUtilitiesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -394,6 +395,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = H8E2LSZV55;
 				INFOPLIST_FILE = IATFoundationUtilitiesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -422,6 +424,7 @@
 				C5FE4C7B1DFB3E15008FCFBC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C5FE4C7C1DFB3E15008FCFBC /* Build configuration list for PBXNativeTarget "IATFoundationUtilitiesTests" */ = {
 			isa = XCConfigurationList;
@@ -430,6 +433,7 @@
 				C5FE4C7E1DFB3E15008FCFBC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -14,17 +14,19 @@ public let kBTDiscoveryDisconnectPeripheralUUIDKey = "cb_peripheral_uuid"
 
 public let kBTRequestDisconnect = NSNotification.Name("kBTRequestDisconnect")
 
-public protocol BTDiscoveryEventDelegate : NSObjectProtocol {
-    func bluetoothEvent(state: BTDiscoveryEvent)
+@objc public protocol BTDiscoveryEventDelegate : NSObjectProtocol {
+    func bluetoothEvent(event: BTDiscoveryEvent)
 }
 
-public enum BTDiscoveryEvent {
+@objc public enum BTDiscoveryEvent : Int {
     case scanning_started
     case scanning_stopped
     case scanning_timed_out
     case scanning_found_devices
     case scanning_found_pairable_devices
     case scanning_found_no_devices
+    case scanning_rejected_device_due_to_signal_strength
+    case scanning_rejected_device_due_to_advertisement_data
     case central_manager_state_restoring
     case central_manager_state_unknown
     case central_manager_state_unsupported
@@ -50,6 +52,8 @@ public extension BTDiscoveryEvent {
         case .scanning_found_devices: return NSNotification.Name("scanning_found_devices")
         case .scanning_found_pairable_devices: return NSNotification.Name("scanning_found_pairable_devices")
         case .scanning_found_no_devices: return NSNotification.Name("scanning_found_no_devices")
+        case .scanning_rejected_device_due_to_signal_strength: return NSNotification.Name("scanning_rejected_device_due_to_signal_strength")
+        case .scanning_rejected_device_due_to_advertisement_data: return NSNotification.Name("scanning_rejected_device_due_to_advertisement_data")
         case .central_manager_state_restoring: return NSNotification.Name("central_manager_state_restoring")
         case .central_manager_state_unknown: return NSNotification.Name("central_manager_state_unknown")
         case .central_manager_state_unsupported: return NSNotification.Name("central_manager_state_unsupported")
@@ -84,8 +88,8 @@ public extension BTDiscoveryEvent {
 
 @objc public class IATBTDiscovery : NSObject {
     let eventQueue = DispatchQueue.init(label: "bluetooth event queue")
-    var peripherals : [IATBTPeripheral]? = []
-    var isScanning : Bool {
+    public var peripherals : [IATBTPeripheral]? = []
+    public var isScanning : Bool {
         get {
             guard let peripherals = self.peripherals else {
                 return false
@@ -100,18 +104,21 @@ public extension BTDiscoveryEvent {
             return
         }
     }
-    var isBtOn : Bool = false
+    public var isBtOn : Bool = false
     var scanTimeoutTimer : IATTimer?
     var lastSeenTimer : IATTimer?
-    var delegate :BTDiscoveryEventDelegate?
+    public let scanTimeout : TimeInterval
+    public var delegate :BTDiscoveryEventDelegate? = nil
     
-    static let sharedInstance : IATBTDiscovery = IATBTDiscovery()
+    static public let sharedInstance : IATBTDiscovery = IATBTDiscovery()
     
     private override init() {
+        self.scanTimeout = 0
         super.init()
     }
     
-    public init(name: String, withServices services: [IATBTService]?) {
+    public init(name: String, withServices services: [IATBTService]?, scanTimeout: TimeInterval = 0) {
+        self.scanTimeout = scanTimeout
         super.init()
         let group = IATBTServiceGroup(discovery: self, services: services)
         let peripheral = IATBTPeripheral(name: name, discovery: self, serviceGroup: group)
@@ -122,12 +129,6 @@ public extension BTDiscoveryEvent {
     deinit {
         self.doneObservingNotifications()
         self.peripherals?.removeAll(keepingCapacity: true)
-    }
-    
-    func informDelegateOfEvent(event: BTDiscoveryEvent) {
-        event.notifyFromMainQueue { (event) in
-            self.delegate?.bluetoothEvent(state: event)
-        }
     }
     
     public func startScanning() {
@@ -141,10 +142,12 @@ public extension BTDiscoveryEvent {
             return
         }
 
-        self.scanTimeoutTimer = IATTimer(withDuration: 4, whenExpired: {
-            self.informDelegateOfEvent(event: BTDiscoveryEvent.scanning_timed_out)
-            self.stopScanning()
-        })
+        if self.scanTimeout > 0 {
+            self.scanTimeoutTimer = IATTimer(withDuration: self.scanTimeout, whenExpired: {
+                self.informDelegateOfEvent(event: BTDiscoveryEvent.scanning_timed_out)
+                self.stopScanning()
+            })
+        }
         
         eventQueue.async {
             for peripheral in peripherals {
@@ -178,7 +181,7 @@ public extension BTDiscoveryEvent {
             })
         }
     }
-
+    
     private func startObservingNotifications() {
         NotificationCenter.default.addObserver(forName: kBTRequestDisconnect, object: nil, queue: nil, using:{ notification in
             // if a specific peripheral is requested then find it and disconnect
@@ -203,6 +206,12 @@ public extension BTDiscoveryEvent {
         }
     }
     
+    public func disconnect() {
+        self.peripherals?.forEach({ (peripheral) in
+            peripheral.disconnect()
+        })
+    }
+    
     private func disconnect(peripheral: CBPeripheral) {
         if let oneOfOurPeripherals = self.peripherals?.first(where: { oneOfOurPeripherals in
             return oneOfOurPeripherals.peripheralUUID?.uuidString == peripheral.identifier.uuidString
@@ -212,6 +221,12 @@ public extension BTDiscoveryEvent {
     }
     
     // MARK: - Utilities
+    
+    func informDelegateOfEvent(event: BTDiscoveryEvent) {
+        event.notifyFromMainQueue { (event) in
+            self.delegate?.bluetoothEvent(event: event)
+        }
+    }
     
     public func isKnownPeripheral(peripheral: CBPeripheral) -> Bool {
         return self.peripherals?.first(where: { oneOfOurPeripherals in

@@ -15,32 +15,23 @@ import Foundation
 import CoreBluetooth
 import IATFoundationUtilities
 
-public protocol IATBTServiceGroupProtocol : NSObjectProtocol {
-    func acquired(serviceGroup: IATBTServiceGroup)
-    func failedToAcquire(serviceGroup: IATBTServiceGroup)
-}
-
-@objc public class IATBTServiceGroup : NSObject, IATBTServiceGroupProtocol {
-    weak var delegate : IATBTServiceGroupProtocol?
+@objc public class IATBTServiceGroup : NSObject {
     var services : [IATBTService]?
     var serviceAcquisitionTimer : IATFoundationUtilities.IATTimer?
-    private var notified : Bool = false
     private weak var discovery: IATBTDiscovery?
     private var notifyOnlyOncePerConnection = IATOneTimeTrigger(name: "service group success or failure")
-        
 //        IATFoundationUtilities.IATOneTimeTrigger(name: "service group success or fail")
     
     private override init() {
         super.init()
     }
     
-    public convenience init(discovery: IATBTDiscovery, delegate: IATBTServiceGroupProtocol? = nil) {
-        self.init(discovery: discovery, services: [IATBTDeviceInformationService()], delegate: delegate)
+    @objc public convenience init(discovery: IATBTDiscovery) {
+        self.init(discovery: discovery, services: [IATBTDeviceInformationService()])
     }
     
-    public init(discovery: IATBTDiscovery, services: [IATBTService]? = [IATBTDeviceInformationService()], delegate: IATBTServiceGroupProtocol? = nil) {
+    @objc public init(discovery: IATBTDiscovery, services: [IATBTService]? = [IATBTDeviceInformationService()]) {
         self.discovery = discovery
-        self.delegate = delegate
         self.services = services
         super.init()
     }
@@ -53,16 +44,13 @@ public protocol IATBTServiceGroupProtocol : NSObjectProtocol {
         for service in services {
             service.reset()
         }
-        notified = false
     }
     
     public func serviceUUIDs() -> [CBUUID]? {
         return self.services.flatMap{ array in
-            if let service = array.first {
-                return [service.uuid]
-            } else {
-                return nil
-            }
+            return array.map({ (service) -> CBUUID in
+                return service.uuid
+            })
         }
     }
 
@@ -104,7 +92,8 @@ public protocol IATBTServiceGroupProtocol : NSObjectProtocol {
     
     public func startAquiringServices(forPeripheral peripheral: CBPeripheral) {
         if self.startServiceAquisitionTimer() == true {
-            peripheral.discoverServices(self.serviceUUIDs())
+            let serviceUUIDs = self.serviceUUIDs()
+            peripheral.discoverServices(serviceUUIDs)
         }
     }
     
@@ -112,12 +101,10 @@ public protocol IATBTServiceGroupProtocol : NSObjectProtocol {
         if serviceAcquisitionTimer != nil {
             serviceAcquisitionTimer?.stop()
         }
-        serviceAcquisitionTimer = IATFoundationUtilities.IATTimer(withDuration: 3, whenExpired: {
-            if self.checkForServiceAcquisition() == false {
-                self.notify(reason: .device_connection_failed_to_find_all_required_services_and_characteristics)
-                //WARNING: 
-                NotificationCenter.default.post(name: kBTRequestDisconnect, object: nil)
-            }
+        serviceAcquisitionTimer = IATFoundationUtilities.IATTimer(withDuration: 8, whenExpired: {
+            self.notifyOnce(event: .device_connection_failed_to_find_all_required_services_and_characteristics)
+            //WARNING:
+            NotificationCenter.default.post(name: kBTRequestDisconnect, object: nil)
         })
         return true
     }
@@ -128,60 +115,60 @@ public protocol IATBTServiceGroupProtocol : NSObjectProtocol {
     }
     
     public func checkForServiceAcquisition() -> Bool {
-        if self.allRequiredServicesAndCharacteristicsAcquired() == true {
+        if self.allServicesAndCharacteristicsAcquired() == true {
             self.stopServiceAquisitionTimer()
-            self.notify(reason: .device_connection_found_all_required_services_and_characteristics)
+            self.notifyOnce(event: .device_connection_found_all_required_services_and_characteristics)
             return true
         }
         return false
     }
     
-    public func notify(reason event: BTDiscoveryEvent) {
-        notifyOnlyOncePerConnection.doThis { 
-            event.notify { (event) in
-                switch event {
-                case .device_connection_failed_to_find_all_required_services_and_characteristics:
-                    self.delegate?.failedToAcquire(serviceGroup: self)
-                case .device_connection_found_all_required_services_and_characteristics:
-                    self.delegate?.acquired(serviceGroup: self)
-                default:
-                    print("ServiceGroup should notify for event %@", event.notificationName.rawValue)
-                }
-            }
+    public func notifyOnce(event: BTDiscoveryEvent) {
+        notifyOnlyOncePerConnection.doThis {
+            self.notify(event: event)
+        }
+    }
+    
+    public func notify(event: BTDiscoveryEvent) {
+        event.notify { (event) in
+            self.discovery?.informDelegateOfEvent(event: event)
         }
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        guard let services = self.services else {
+        guard let ourDefinedServices = self.services else {
             return
         }
-        if let uuidToServiceMap = peripheral.services.flatMap({ (cb_service) -> [String:CBService]? in
-            [(cb_service.first?.uuid.uuidString)! : cb_service.first!]
-            }) {
-            for service in services {
-                service.peripheral(peripheral, uuidToServiceMap: uuidToServiceMap, didDiscoverServicesWithError: error)
-            }
+        guard let discoveredServices = peripheral.services else {
+            return
+        }
+
+        var uuidToServiceMap = [String:CBService]()
+            
+        discoveredServices.forEach({ (service) in
+            print("discovered service ", service.uuid.uuidString)
+            uuidToServiceMap[service.uuid.uuidString] = service
+        })
+        
+        for service in ourDefinedServices {
+            service.peripheral(peripheral, uuidToServiceMap: uuidToServiceMap, didDiscoverServicesWithError: error)
         }
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor discoveredService: CBService, error: Error?) {
-        guard let services = self.services else {
+        guard let ourDefinedServices = self.services else {
             return
         }
-        for service in services {
-            if service.isMatch(forService: discoveredService) {
-                service.peripheral(peripheral, didDiscoverCharacteristicsFor: discoveredService, error: error)
-            }
+        print("discovered service ", discoveredService.uuid.uuidString)
+        if let matchingService = ourDefinedServices.first(where: { (service) -> Bool in
+            return service.isMatch(forService: discoveredService)
+        }) {
+            print("matched with our service ", matchingService.uuid.uuidString)
+            matchingService.peripheral(peripheral, didDiscoverCharacteristicsFor: discoveredService, error: error)
         }
-        _ = self.checkForServiceAcquisition()
-    }
-
-    // Optional overrides in subclasses
-    open func acquired(serviceGroup: IATBTServiceGroup) {
-        print("IATBTServiceGroup %@ needs a delegate assigned to it", self)
-    }
-    
-    open func failedToAcquire(serviceGroup: IATBTServiceGroup) {
-        print("IATBTServiceGroup %@ needs a delegate assigned to it", self)
+        let allDone = self.checkForServiceAcquisition()
+        if allDone == true {
+            self.notify(event: .device_connected)
+        }
     }
 }

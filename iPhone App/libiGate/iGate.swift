@@ -37,7 +37,7 @@ protocol CiGateComDelegate : class {
 //    func didUpdateConnected(iGate: CiGate, address: CBluetoothAddr)
 //}
 
-class CiGate {
+class CiGate : NSObject, BTDiscoveryEventDelegate {
     private var _state : CiGateState = .initialized
     var state : CiGateState {
         set {
@@ -74,6 +74,8 @@ class CiGate {
         self.bondedDevUUID = nil
         self.serviceUUIDstr = serviceUUIDstr
         self.iGateDiscovery = IATBTDiscovery(name: "iGate", withServices: [iGateComService, iGateDIService])
+        super.init()
+        self.iGateDiscovery.delegate = self
         self.commonStartup()
     }
 
@@ -82,18 +84,22 @@ class CiGate {
         self.serviceUUIDstr = serviceUUIDstr
         self.bondedDevUUID = bondedDevUUID
         self.iGateDiscovery = IATBTDiscovery(name: "iGate", withServices: [iGateComService, iGateDIService])
+        super.init()
+        self.iGateDiscovery.delegate = self
         self.commonStartup()
     }
     
     func startSearch() {
-        //TODO: This is a stub function right now.   Make it work.
         self.state = .searching
         self.iGateDiscovery.startScanning()
     }
 
     func stopSearch() {
-        //TODO: This is a stub function right now.   Make it work.
-        
+        self.iGateDiscovery.stopScanning()
+    }
+    
+    func disconnect() {
+        self.iGateDiscovery.disconnect()
     }
     
     func getConnectedDevRSSI(asyncCallback: @escaping (NSNumber) -> Void ) {
@@ -112,31 +118,38 @@ class CiGate {
     
     private func commonStartup() {
         self.notifyNewState()
-        
-        NotificationCenter.default.addObserver(forName: BTDiscoveryEvents(central_manager_state_authorized).notificationName, object: nil, queue: OperationQueue.main, using: { notification in
+    }
+    
+    func bluetoothEvent(event: BTDiscoveryEvent) {
+        var error = false
+        switch event {
+        case .central_manager_state_unauthorized:
             self.state = .unauthorized
-        })
-
-        NotificationCenter.default.addObserver(forName: kBTDiscoveryBluetoothTurnedOff, object: nil, queue: OperationQueue.main, using: { notification in
+        case .central_manager_state_powered_off:
             self.state = .powered_off
-        })
-
-        NotificationCenter.default.addObserver(forName: kBTDiscoveryBluetoothTurnedOn, object: nil, queue: OperationQueue.main, using: { notification in
+        case .central_manager_state_powered_on:
             if self.state == .searching {
-                DispatchQueue.main.async {
-                    self.iGateDiscovery.startScanning()
-                }
+                self.iGateDiscovery.startScanning()
             }
-        })
-
-        NotificationCenter.default.addObserver(forName: kBTDiscoveryBluetoothUnsupported, object: nil, queue: OperationQueue.main, using: { notification in
+        case .central_manager_state_unsupported:
             self.state = .unsupported
-        })
-
-        NotificationCenter.default.addObserver(forName: kBTDiscoveryPairingStarted, object: nil, queue: OperationQueue.main, using: { notification in
+        case .scanning_found_pairable_devices:
+            break
+        case .device_connection_started:
             self.state = .connecting
-        })
-
+        case .device_connected:
+            self.state = .connected
+            self.iGateDiscovery.stopScanning()
+        case .device_disconnected:
+            self.state = .initialized
+        default:
+            error = true
+        }
+        if error == false {
+            print("CiGate bluetooth event \""+event.notificationName.rawValue+"\"")
+        } else {
+            print("CiGate not handling event \""+event.notificationName.rawValue+"\"")
+        }
     }
     
     private func notifyNewState() {

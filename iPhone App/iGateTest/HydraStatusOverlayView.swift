@@ -26,6 +26,16 @@ class HydraStatusOverlayView : UIView {
         UIApplication.shared.keyWindow?.bringSubview(toFront: overlayView)
         return overlayView
     }
+    
+    func display() {
+        self.spinner?.startAnimating()
+        self.alpha = 1.0
+        self.title?.alpha = 1.0
+        self.spinner?.alpha = 1.0
+        self.hydraImage?.alpha = 1.0
+        UIApplication.shared.keyWindow?.addSubview(self)
+        UIApplication.shared.keyWindow?.bringSubview(toFront: self)
+    }
 
     func searching() {
 //        UIView.animateKeyframesWithDuration(2, delay: 0, options: [.beginFromCurrentState, .repeat, .autoreverse], animations: {

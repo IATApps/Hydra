@@ -231,14 +231,28 @@
                                     <outlet property="voltageTargetLabel" destination="h4Q-wW-49h" id="PtP-H3-J9h"/>
                                 </connections>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="81A-am-Dfd">
+                                <rect key="frame" x="336" y="692" width="78" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="XsR-PE-FRD"/>
+                                </constraints>
+                                <state key="normal" title="Disconnect">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="disconnect:" destination="lXj-Sd-1HU" eventType="touchUpInside" id="AnR-GJ-bRc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="42K-jN-iL1" firstAttribute="top" secondItem="81A-am-Dfd" secondAttribute="bottom" id="40Q-9x-Qeo"/>
                             <constraint firstItem="aU2-9B-DTP" firstAttribute="top" secondItem="xjc-wp-9D9" secondAttribute="bottom" constant="8" id="7YJ-nx-VPx"/>
                             <constraint firstAttribute="trailing" secondItem="xjc-wp-9D9" secondAttribute="trailing" id="A01-tn-ox4"/>
                             <constraint firstAttribute="trailing" secondItem="aU2-9B-DTP" secondAttribute="trailing" id="Kxe-CU-fdv"/>
                             <constraint firstItem="xjc-wp-9D9" firstAttribute="leading" secondItem="kgg-Cc-9sA" secondAttribute="leading" id="Rjb-L6-twZ"/>
                             <constraint firstItem="aU2-9B-DTP" firstAttribute="leading" secondItem="kgg-Cc-9sA" secondAttribute="leading" id="YO3-1p-lyo"/>
+                            <constraint firstAttribute="trailing" secondItem="81A-am-Dfd" secondAttribute="trailing" id="myQ-g0-szx"/>
                             <constraint firstItem="xjc-wp-9D9" firstAttribute="top" secondItem="dc2-Wk-jz8" secondAttribute="bottom" constant="8" id="nez-We-FIb"/>
                         </constraints>
                     </view>

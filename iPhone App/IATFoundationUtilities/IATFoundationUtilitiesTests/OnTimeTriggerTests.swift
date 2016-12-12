@@ -9,7 +9,7 @@
 import XCTest
 @testable import IATFoundationUtilities
 
-class IATBluetoothOnTimeTriggerTests: XCTestCase {
+class OnTimeTriggerTests: XCTestCase {
     
     let triggerRequired : IATOneTimeTrigger = IATOneTimeTrigger(name: "Tests")
     var triggerOptional : IATOneTimeTrigger?

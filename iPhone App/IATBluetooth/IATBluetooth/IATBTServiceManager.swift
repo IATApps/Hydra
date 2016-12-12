@@ -48,16 +48,6 @@ let kIATBT_Service_Disconnected_Notification = Notification.Name("kIATBT_Service
         self.serviceGroup?.reset()
     }
     
-    static func sendBTServiceNotificationWithIsBluetoothConnected(isConnected: Bool) {
-        let connectionDetails = ["isConnected": isConnected];
-        NotificationCenter.default.post(name: kIATBT_Service_Changed_Status_Notification, object: nil, userInfo: connectionDetails)
-        if isConnected == true {
-            NotificationCenter.default.post(name: kIATBT_Service_Connected_Notification, object: nil, userInfo: nil)
-        } else {
-            NotificationCenter.default.post(name: kIATBT_Service_Disconnected_Notification, object: nil, userInfo: nil)
-        }
-    }
-    
     open func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard peripheral == self.peripheral else {
             return

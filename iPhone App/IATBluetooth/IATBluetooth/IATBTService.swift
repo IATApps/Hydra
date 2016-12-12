@@ -9,14 +9,14 @@
 import Foundation
 import CoreBluetooth
 
-protocol IATBTServicePeripheralProtocol {
+@objc protocol IATBTServicePeripheralProtocol {
     func peripheral(_ peripheral: CBPeripheral, uuidToServiceMap:[String:CBService], didDiscoverServicesWithError: Error?)
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?)
 }
 
-@objc public class IATBTService : NSObject, IATBTServicePeripheralProtocol, CBPeripheralDelegate {
+@objc public class IATBTService : NSObject, IATBTServicePeripheralProtocol/*, CBPeripheralDelegate*/ {
     let uuid : CBUUID!
-    let characteristicUUIDs : Set<String>! // UUID string set
+    var characteristicUUIDs = Set<String>() // UUID string set
     private let required : Bool
     public weak var service : CBService?
     private var nameToCharacteristicMap: [String:String]!  // Key : UUID string map
@@ -30,13 +30,14 @@ protocol IATBTServicePeripheralProtocol {
         self.init(serviceUUID: serviceUUID, required: required, characteristicDescriptions: [:])
     }
 
-    public init(serviceUUID: String!, required: Bool, characteristicDescriptions: [String:String]!) {
+    public init(serviceUUID: String!, required: Bool, characteristicDescriptions: [String:String]? = [:]) {
         self.uuid = CBUUID(string: serviceUUID)
         self.service = nil
         self.required = required
-        let allUUIDs = Set(characteristicDescriptions.values)
+        let characteristics = (characteristicDescriptions ?? [:]).values
+        let allUUIDs = Set(characteristics)
         self.characteristicUUIDs = allUUIDs
-        self.nameToCharacteristicMap = characteristicDescriptions
+        self.nameToCharacteristicMap = characteristicDescriptions ?? [:]
         self.characteristicUUIDtoCBCharacteristicMap = [:]
         super.init()
     }
@@ -61,11 +62,14 @@ protocol IATBTServicePeripheralProtocol {
     
     public func alreadyAcquiredCharacteristics() -> Bool {
         guard self.characteristicUUIDs.count > 0 else {
+            print("service ", self.uuid.uuidString, " has no characteristicUUIDs stored")
             return false
         }
         guard self.characteristicUUIDtoCBCharacteristicMap.count > 0 else {
+            print("service ", self.uuid.uuidString, " has no characteristicUUIDtoCBCharacteristicMap")
             return false
         }
+        print("service ", self.uuid.uuidString, " characteristicUUIDtoCBCharacteristicMap.count=", self.characteristicUUIDtoCBCharacteristicMap.count, " self.characteristicUUIDs.count=", self.characteristicUUIDs.count)
         return self.characteristicUUIDtoCBCharacteristicMap.count == self.characteristicUUIDs.count
     }
     
@@ -85,12 +89,21 @@ protocol IATBTServicePeripheralProtocol {
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        print(peripheral, service.characteristics ?? "[none]")
-        if self.isMatch(forService: service) && self.alreadyAcquiredCharacteristics() == false {
+        //print(peripheral, service.characteristics ?? "[none]")
+        let alreadyAcquired = self.alreadyAcquiredCharacteristics()
+        print("peripheral discovered characteristics for service ", service.uuid.uuidString, alreadyAcquired ? " [ALREADY ACQUIRED]" : "")
+        if self.isMatch(forService: service) && alreadyAcquired == false {
             if let characteristics = service.characteristics {
+                var characteristicUUIDs = Set<String>()
                 for characteristic in characteristics {
-                    self.characteristicUUIDtoCBCharacteristicMap[characteristic.uuid.uuidString] = characteristic
+                    let uuidStr = characteristic.uuid.uuidString
+                    characteristicUUIDs.insert(uuidStr)
+                    self.characteristicUUIDtoCBCharacteristicMap[uuidStr] = characteristic
                 }
+                if self.characteristicUUIDs.count == 0  {
+                   self.characteristicUUIDs = characteristicUUIDs
+                }
+                print("characteristics ", characteristicUUIDs)
             }
         }
     }

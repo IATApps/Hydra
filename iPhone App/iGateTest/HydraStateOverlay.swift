@@ -13,6 +13,8 @@ class HydraStateOverlay : NSObject {
     var overlay : HydraStatusOverlayView?
     
     enum iGateOverlayStates : String {
+        case disconnecting = "Disconnecting"
+        case resetting = "Resetting"
         case searching = "Searching"
         case connecting = "Connecting"
         case connected = "Connected"
@@ -55,11 +57,10 @@ class HydraStateOverlay : NSObject {
                 loadOverlay()
                 overlay?.title?.text = state.rawValue
                 
-                if state == .bt_off || state == .searching {
-                    overlay?.searching()
-                }
                 if state == .connecting {
                     overlay?.connecting()
+                } else {
+                    overlay?.searching()
                 }
             }
         }
@@ -68,6 +69,8 @@ class HydraStateOverlay : NSObject {
     func loadOverlay() {
         if overlay == nil {
             overlay = HydraStatusOverlayView.loadFromXib()
+        } else {
+            overlay?.display()
         }
     }
 }

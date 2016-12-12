@@ -9,7 +9,7 @@
 import XCTest
 @testable import IATFoundationUtilities
 
-class IATFoundationUtilitiesTests: XCTestCase {
+class FoundationUtilitiesTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iGate.h"
+//#import "iGate.h"
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 #define RADIANS_TO_DEGREES(radians) ((radians) * 180 / M_PI)
 #define MAX_VOLTAGE 14

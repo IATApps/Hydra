@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iGate.h"
-#import "Hydra-Swift.h"
 
 #define DOCUMENTS_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 
@@ -35,12 +33,11 @@
 #define IN_VOLT @"inVoltage"
 #define IN_CURR @"inCurrent"
 
+@class HydraComm;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 @property (nonatomic, strong) HydraComm *hydraComm;
-//@property (nonatomic, strong) HydraState *hydraState;
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, strong) CiGate *iGate;
 @property (nonatomic, strong) NSUUID *serviceUUID;
 @property (nonatomic, strong) NSUUID *bondedUUID;
 @property bool logData;

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Utilities.h"
+#import "Hydra-Swift.h"
 #import "HydraPacket.h"
 
 
@@ -76,7 +77,6 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     self.serviceUUID = nil;
-    self.iGate = nil;
 }
 
 #pragma mark - 

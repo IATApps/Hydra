@@ -28,19 +28,19 @@ import IATFoundationUtilities
 
 
 @objc public class IATBTPeripheral : NSObject {
-    let name: String
+    let name: String?
     weak var discovery: IATBTDiscovery?
     var centralManager: CBCentralManager?
-    var peripheral : CBPeripheral?
-    var peripheralUUID : UUID?
-    var serviceManager : IATBTServiceManager?
-    let serviceGroup : IATBTServiceGroup
-    var advertisementData: [String:Any]?
+    public var peripheral : CBPeripheral?
+    public var peripheralUUID : UUID?
+    public var serviceManager : IATBTServiceManager?
+    public let serviceGroup : IATBTServiceGroup
+    public var advertisementData: [String:Any]?
     var disconnectActions : (() -> Void)?
     var scanTimer : IATFoundationUtilities.IATTimer?
     var lastSeenTimer : IATFoundationUtilities.IATTimer?
-    var localName : String?
-    var isScanning : Bool {
+    public var localName : String?
+    public var isScanning : Bool {
         get {
             return (self.centralManager?.isScanning) ?? false
         }
@@ -48,9 +48,12 @@ import IATFoundationUtilities
     weak var eventQueue : DispatchQueue?
     let signalStrengthEvaluator : IATBTPeripheralSignalStrengthValidator
     let advertisementEvaluator : IATBTPeripheralDeviceAdvertisementValidator
-    var foundUnpairables = IATFoundationUtilities.IATOneTimeTrigger(name: "Found Unpairable Devices")
+    var foundPairableDevices = IATFoundationUtilities.IATOneTimeTrigger(name: "Found Pairable Devices")
+    var restorable = false
+    var showPowerAlert = true
+    var reconnectOnDisconnect = true
     
-    public init(name: String, discovery: IATBTDiscovery, serviceGroup: IATBTServiceGroup, eventQueue: DispatchQueue = DispatchQueue(label: "iat.bt.peripheral", qos: .background, attributes: DispatchQueue.Attributes(), autoreleaseFrequency: .inherit, target: nil)) {
+    public init(name: String?, discovery: IATBTDiscovery, serviceGroup: IATBTServiceGroup, eventQueue: DispatchQueue = DispatchQueue(label: "iat.bt.peripheral", qos: .background, attributes: DispatchQueue.Attributes(), autoreleaseFrequency: .inherit, target: nil)) {
         self.name = name
         self.discovery = discovery
         self.serviceGroup = serviceGroup
@@ -60,6 +63,7 @@ import IATFoundationUtilities
         self.centralManager = nil
         self.advertisementData = nil
         self.peripheral = nil
+        self.peripheralUUID = nil
         super.init()
     }
     
@@ -101,7 +105,7 @@ import IATFoundationUtilities
     }
 
     open func startScan() {
-        eventQueue?.async {
+//        eventQueue?.async {
             self.setup()
             guard self.centralManager?.isScanning == false else {
                 return
@@ -112,7 +116,7 @@ import IATFoundationUtilities
             if self.peripheralUUID == nil || self.reconnectConnectedPeripherals() == false {
                 self.scanForMatchingPeripherals()
             }
-        }
+//        }
     }
     
     open func stopScan() {
@@ -132,50 +136,61 @@ import IATFoundationUtilities
     }
     
     //MARK: Private Methods
-    private func setup() {
+    internal func setup() {
         guard self.centralManager == nil else {
             return
         }
-        self.centralManager = CBCentralManager.init(delegate: self, queue: self.eventQueue, options: [CBCentralManagerOptionShowPowerAlertKey:NSNumber(value: true), CBCentralManagerOptionRestoreIdentifierKey: self.name])
+        var options : [String : Any]? = [:]
+        if self.restorable == true {
+            options?[CBCentralManagerOptionRestoreIdentifierKey] = self.name
+        }
+        let showPowerAlert = true
+        if showPowerAlert == true {
+            options?[CBCentralManagerOptionShowPowerAlertKey] = showPowerAlert
+        }
+        
+        self.centralManager = CBCentralManager.init(delegate: self, queue: self.eventQueue, options: options)
     }
-    
 
     //MARK: Static Methods
-    static func sendBTServiceNotificationWithIsBluetoothConnected(isConnected: Bool) {
-        let connectionDetails = ["isConnected": isConnected];
-        NotificationCenter.default.post(name: kIATBT_Service_Changed_Status_Notification, object: nil, userInfo: connectionDetails)
-        if isConnected == true {
-            NotificationCenter.default.post(name: kIATBT_Service_Connected_Notification, object: nil, userInfo: nil)
-        } else {
-            NotificationCenter.default.post(name: kIATBT_Service_Disconnected_Notification, object: nil, userInfo: nil)
-        }
-    }
-    //self.serviceGroup?.peripheral(peripheral, didDiscoverServices: error)
-
 }
 
 extension IATBTPeripheral : CBCentralManagerDelegate {
-    // MARK: - CentralManager delegate
-    private func postNotificationForEvent(event: BTDiscoveryEvent) {
+    private func notify(event: BTDiscoveryEvent) {
         event.notifyFromMainQueue { (event) in
             self.discovery?.informDelegateOfEvent(event: event)
         }
     }
     
+    // MARK: - Internal CoreBluetooth Tomfollery to optionally support state restoration
+    // F#$% You CoreBluetooth for checking if the state restoration method exists.
+    // We should have more powerful options at our disposal.
+    
+    override public func responds(to aSelector: Selector!) -> Bool {
+        if aSelector == #selector(IATBTPeripheral.centralManager(_:willRestoreState:)) {
+            if self.restorable == false {
+                return false
+            }
+        }
+        return super.responds(to: aSelector)
+    }
+
+    // MARK: - CentralManager delegate
+    
     open func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .unsupported:
-            self.postNotificationForEvent(event: .central_manager_state_unsupported)
+            self.notify(event: .central_manager_state_unsupported)
         case .poweredOn:
-            self.postNotificationForEvent(event: .central_manager_state_powered_on)
+            self.notify(event: .central_manager_state_powered_on)
         case .poweredOff:
-            self.postNotificationForEvent(event: .central_manager_state_powered_off)
+            self.notify(event: .central_manager_state_powered_off)
         case .resetting:
-            self.postNotificationForEvent(event: .central_manager_state_resetting)
+            self.notify(event: .central_manager_state_resetting)
         case .unauthorized:
-            self.postNotificationForEvent(event: .central_manager_state_unauthorized)
+            self.notify(event: .central_manager_state_unauthorized)
         case .unknown:
-            self.postNotificationForEvent(event: .central_manager_state_unknown)
+            self.notify(event: .central_manager_state_unknown)
         }
     }
     
@@ -190,7 +205,6 @@ extension IATBTPeripheral : CBCentralManagerDelegate {
 
         // check peripheral to see if it conforms to all the services that we are expecting?
         if peripheral == self.peripheral {
-            self.postNotificationForEvent(event: .device_connection_started)
             self.serviceManager = IATBTServiceManager(withPeripheral: peripheral, serviceGroup: self.serviceGroup)
             DispatchQueue.main.async {
                 self.serviceGroup.startAquiringServices(forPeripheral: peripheral)
@@ -199,7 +213,7 @@ extension IATBTPeripheral : CBCentralManagerDelegate {
     }
     
     open func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-        self.postNotificationForEvent(event: .central_manager_state_restoring)
+        self.notify(event: .central_manager_state_restoring)
     }
     
     open func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -208,6 +222,11 @@ extension IATBTPeripheral : CBCentralManagerDelegate {
     
     open func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         // from here follow a reconnection strategy
+        self.reset()
+        self.notify(event: .device_disconnected)
+        if self.reconnectOnDisconnect == false {
+            self.centralManager?.stopScan()
+        }
     }
     
     open func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
@@ -225,18 +244,19 @@ extension IATBTPeripheral : CBCentralManagerDelegate {
         }
         
         if signalStrengthEvaluator.validate(peripheral: peripheral, advertisementData: advertisementData, rssi: RSSI) == false {
+            self.notify(event: .scanning_rejected_device_due_to_signal_strength)
             return
         }
         
         if advertisementEvaluator.validate(peripheral: peripheral, advertisementData: advertisementData, rssi: RSSI) == false {
-            self.foundUnpairables.doThis(once: {
-                self.postNotificationForEvent(event: .scanning_found_pairable_devices)
-            }, resetAfter: 3,
-               onReset: {
-                print("kBTDiscoveryFoundUnpairables has been reset")
-            })
+            self.notify(event: .scanning_rejected_device_due_to_advertisement_data)
             return
         }
+
+        self.foundPairableDevices.doThis(once: {
+            print("central manager " + (self.centralManager?.isScanning == true ? "scanning" : ""))
+            self.notify(event: .scanning_found_pairable_devices)
+        })
         
         if isConnectable && self.peripheral == nil {
             self.peripheral = peripheral
@@ -245,9 +265,18 @@ extension IATBTPeripheral : CBCentralManagerDelegate {
             
             self.serviceManager = nil
             
-            self.postNotificationForEvent(event: .device_connection_started)
+            self.notify(event: .device_connection_started)
 
             self.centralManager?.connect(peripheral)
         }
+    }
+    
+    private func reset() {
+        self.foundPairableDevices.reset { 
+            print("foundPairableDevices has been reset")
+        }
+        self.peripheral = nil
+        self.serviceGroup.reset()
+        self.serviceManager?.reset()
     }
 }
