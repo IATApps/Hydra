@@ -12,10 +12,10 @@ import IATFoundationUtilities
 
 public let kBTDiscoveryDisconnectPeripheralUUIDKey = "cb_peripheral_uuid"
 
-public let kBTRequestDisconnect = NSNotification.Name("kBTRequestDisconnect")
+public let kBTRequestDisconnect = Notification.Name("kBTRequestDisconnect")
 
 @objc public protocol BTDiscoveryEventDelegate : NSObjectProtocol {
-    func bluetoothEvent(event: BTDiscoveryEvent)
+    func bluetoothEvent(_ event: BTDiscoveryEvent)
 }
 
 @objc public enum BTDiscoveryEvent : Int {
@@ -71,14 +71,14 @@ public extension BTDiscoveryEvent {
         }
     }
     
-    func notify(additionalActions: ((_: BTDiscoveryEvent) -> Void)? ) {
+    func notify(_ additionalActions: ((_: BTDiscoveryEvent) -> Void)? ) {
         NotificationCenter.default.post(name: self.notificationName, object: self)
         additionalActions?(self)
     }
     
     func notifyFromMainQueue(additionalActions: ((_: BTDiscoveryEvent) -> Void)?) {
         DispatchQueue.main.async {
-            self.notify(additionalActions: additionalActions)
+            self.notify(additionalActions)
         }
     }
 }
@@ -112,7 +112,7 @@ public extension BTDiscoveryEvent {
     
     static public let sharedInstance : IATBTDiscovery = IATBTDiscovery()
     
-    private override init() {
+    fileprivate override init() {
         self.scanTimeout = 0
         super.init()
     }
@@ -182,7 +182,7 @@ public extension BTDiscoveryEvent {
         }
     }
     
-    private func startObservingNotifications() {
+    fileprivate func startObservingNotifications() {
         NotificationCenter.default.addObserver(forName: kBTRequestDisconnect, object: nil, queue: nil, using:{ notification in
             // if a specific peripheral is requested then find it and disconnect
             if let peripheralUUID = notification.userInfo?[kBTDiscoveryDisconnectPeripheralUUIDKey] as? String {
@@ -224,7 +224,12 @@ public extension BTDiscoveryEvent {
     
     func informDelegateOfEvent(event: BTDiscoveryEvent) {
         event.notifyFromMainQueue { (event) in
-            self.delegate?.bluetoothEvent(event: event)
+            self.delegate?.bluetoothEvent(event)
+        }
+        if event == .device_connected {
+            self.peripherals?.forEach({ (peripheral) in
+                peripheral.serviceGroupAcquiredServices()
+            })
         }
     }
     

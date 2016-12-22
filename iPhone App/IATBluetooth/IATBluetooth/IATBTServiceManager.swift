@@ -17,12 +17,12 @@ let kIATBT_Service_Changed_Status_Notification = Notification.Name("kIATBT_Servi
 let kIATBT_Service_Connected_Notification = Notification.Name("kIATBT_Service_Connected_Notification")
 let kIATBT_Service_Disconnected_Notification = Notification.Name("kIATBT_Service_Disconnected_Notification")
 
-@objc public class IATBTServiceManager : NSObject, CBPeripheralDelegate {
-    private weak var peripheral : CBPeripheral?
-    private weak var serviceGroup : IATBTServiceGroup?
-    private weak var peripheralDelegatePassthrough : CBPeripheralDelegate?
+@objc open class IATBTServiceManager : NSObject, CBPeripheralDelegate {
+    fileprivate weak var peripheral : CBPeripheral?
+    fileprivate weak var serviceGroup : IATBTServiceGroup?
+    fileprivate weak var peripheralDelegatePassthrough : CBPeripheralDelegate?
     
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
     
@@ -34,18 +34,18 @@ let kIATBT_Service_Disconnected_Notification = Notification.Name("kIATBT_Service
     }
     
     deinit {
+        self.resetForReconnection()
         serviceGroup = nil
-        self.reset()
     }
-    
-    public func reset() {
+
+    open func resetForReconnection() {
         guard peripheral != nil else {
             return
         }
         
         peripheral?.delegate = nil
         peripheral = nil
-        self.serviceGroup?.reset()
+        self.serviceGroup?.resetForReconnection()
     }
     
     open func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
@@ -65,6 +65,20 @@ let kIATBT_Service_Disconnected_Notification = Notification.Name("kIATBT_Service
         self.peripheralDelegatePassthrough?.peripheral!(peripheral, didDiscoverServices: error)
     }
     
+    open func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        if let data = characteristic.value {
+            print("incoming ", data)
+        }
+    }
+    
+    open func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+        print("RSSI ", RSSI.intValue)
+    }
+    
+    open func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        print("written")
+    }
+
     open func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard peripheral == self.peripheral else {
             return
