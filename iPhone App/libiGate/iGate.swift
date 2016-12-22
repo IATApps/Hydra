@@ -87,7 +87,7 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
     var bondedDevUUID : UUID?
     weak var comDelegate : CiGateComDelegate?
     let iGateDiscovery : IATBTDiscovery
-    let iGateComService = IATBTService(serviceUUID: "B5161D82-AAB0-4E55-8D96-C59D816E6971", required: true, characteristicDescriptions: [:])
+    let iGateComService = IATBTService(serviceUUID: "B5161D82-AAB0-4E55-8D96-C59D816E6971", required: true, characteristicDescriptions: ["data":"2A4D", "config":"2A4F"])
     let iGateDIService = IATBTDeviceInformationService()
     
     init(delegate comDelegate: CiGateComDelegate, autoConnect:Bool, serviceUUIDstr:String ) {
@@ -189,8 +189,10 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
             self.state = .connecting
         case .device_connected:
             self.state = .connected
-            //MARK: This does not stop scanning.  It doesn't work here.
-//            self.iGateDiscovery.stopScanning()
+            self.notify(on: true, characteristicNamed: "data")
+            self.iGateDiscovery.performOnCharacteristic(named: "data", { (peripheral, characteristic) in
+                peripheral.readValue(for: characteristic)
+            })
         case .device_disconnected:
             self.state = .disconnected
         case .attempting_to_reconnect:
