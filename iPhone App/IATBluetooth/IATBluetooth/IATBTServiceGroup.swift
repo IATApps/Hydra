@@ -188,6 +188,17 @@ import IATFoundationUtilities
         }
     }
     
+    public func characteristic(named name: String) -> CBCharacteristic? {
+        if let services = self.services {
+            for service in services {
+                if let characteristic = service.characteristic(named: name) {
+                    return characteristic
+                }
+            }
+        }
+        return nil
+    }
+    
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard let ourDefinedServices = self.services else {
             return
