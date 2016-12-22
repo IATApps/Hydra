@@ -94,10 +94,10 @@ import CoreBluetooth
         // from a fully discovered peripheral or if we should give up and just 
         // disconnect because the peripheral was never fully discovered.
         // fully discovered == (services and characteristics were found)
-//        guard self.service != nil else {
-//            print("service ", self.uuid.uuidString, " has no cbservice stored")
-//            return false
-//        }
+        // guard self.service != nil else {
+        //     print("service ", self.uuid.uuidString, " has no cbservice stored")
+        // return false
+        // }
         
         guard self.characteristicUUIDs.count > 0 else {
             return false
@@ -126,7 +126,6 @@ import CoreBluetooth
     }
     
     open func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        //print(peripheral, service.characteristics ?? "[none]")
         let alreadyAcquired = self.alreadyAcquiredCharacteristics()
         print("peripheral discovered characteristics for service ", service.uuid.uuidString, alreadyAcquired ? " [ALREADY ACQUIRED]" : "")
         if self.isMatch(forService: service) && alreadyAcquired == false {
