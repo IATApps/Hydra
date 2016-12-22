@@ -95,7 +95,7 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
         self.bondedDevUUID = nil
         self.serviceUUIDstr = serviceUUIDstr
         self.iGateDiscovery = IATBTDiscovery(name: "iGate", withServices: [iGateComService, iGateDIService])
-        self.iGateDiscovery.peripherals?.first?.signalStrengthEvaluator = NearbySignalStrengthValidator()
+        self.iGateDiscovery.peripherals.first?.signalStrengthEvaluator = NearbySignalStrengthValidator()
         super.init()
         self.iGateDiscovery.delegate = self
         self.commonStartup()
@@ -106,7 +106,7 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
         self.serviceUUIDstr = serviceUUIDstr
         self.bondedDevUUID = bondedDevUUID
         self.iGateDiscovery = IATBTDiscovery(name: "iGate", withServices: [iGateComService, iGateDIService])
-        self.iGateDiscovery.peripherals?.first?.signalStrengthEvaluator = NearbySignalStrengthValidator()
+        self.iGateDiscovery.peripherals.first?.signalStrengthEvaluator = NearbySignalStrengthValidator()
         super.init()
         self.iGateDiscovery.delegate = self
         self.commonStartup()
@@ -134,23 +134,21 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
     
     func sendData(toDevice: Data, characteristicNamed characteristicKey:String) {
         //TODO: This is setup for Thync right now
-        if let characteristic = self.thyncService.characteristic(named: characteristicKey) {
-            self.mainDevice()?.peripheral?.writeValue(toDevice, for: characteristic, type: .withoutResponse)
+        self.iGateDiscovery.performOnCharacteristic(named: characteristicKey) { (peripheral, characteristic) in
+            peripheral.writeValue(toDevice, for: characteristic, type: .withoutResponse)
         }
     }
     
     func notify(on: Bool, characteristicNamed characteristicKey:String) {
-        if let characteristic = self.thyncService.characteristic(named: characteristicKey) {
+        self.iGateDiscovery.performOnCharacteristic(named: characteristicKey) { (peripheral, characteristic) in
             let isNotifying = characteristic.isNotifying
             
             if isNotifying != on {
                 print("setting notify " + (on ? "ON" : "OFF") + " for characteristic "  + characteristicKey + " (" + characteristic.uuid.uuidString + ")")
-                self.mainDevice()?.peripheral?.setNotifyValue(true, for: characteristic)
+                peripheral.setNotifyValue(true, for: characteristic)
             } else {
                 print("notify is already " + (on ? "ON" : "OFF") + " for characteristic "  + characteristicKey + " (" + characteristic.uuid.uuidString + ")")
             }
-        } else {
-            print("notify cannot find characteristic named " + characteristicKey)
         }
     }
 
@@ -158,13 +156,13 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
     }
     
     func mainDevice() -> IATBTPeripheral? {
-        return self.iGateDiscovery.peripherals?.first
+        return self.iGateDiscovery.peripherals.first
     }
 
     //MARK: - Private
     
     private func strengthEvaluator() -> NearbySignalStrengthValidator? {
-        return self.iGateDiscovery.peripherals?.first?.signalStrengthEvaluator as? NearbySignalStrengthValidator
+        return self.iGateDiscovery.peripherals.first?.signalStrengthEvaluator as? NearbySignalStrengthValidator
     }
     
     private func commonStartup() {
