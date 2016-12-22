@@ -8,20 +8,26 @@
 
 import Foundation
 
-@objc public class IATTimer : NSObject {
-    private let timer : Timer
+@objc open class IATTimer : NSObject {
+    fileprivate let timer : Timer
     
     public init(withDuration duration: TimeInterval, whenExpired: @escaping () -> Void ) {
         timer = Timer.scheduledTimer(withTimeInterval: duration, repeats: false, block: { (timer) in
             whenExpired()
         })
     }
-    
+
+    public init(withInterval interval: TimeInterval, repeatingAction: @escaping () -> Void ) {
+        timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: { (timer) in
+            repeatingAction()
+        })
+    }
+
     deinit {
         stop()
     }
     
-    public func stop() {
+    open func stop() {
         if timer.isValid == true {
             timer.invalidate()
         }

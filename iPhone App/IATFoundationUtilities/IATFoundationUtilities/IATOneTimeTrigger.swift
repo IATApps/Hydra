@@ -8,17 +8,17 @@
 
 import Foundation
 
-@objc public class IATOneTimeTrigger : NSObject {
-    private let name : String
-    private var triggered = false
-    private var resetTimer : IATTimer?
+@objc open class IATOneTimeTrigger : NSObject {
+    fileprivate let name : String
+    fileprivate var triggered = false
+    fileprivate var resetTimer : IATTimer?
     
     public init(name: String) {
         self.name = name
         super.init()
     }
     
-    public func doThis(once: (() -> Void)? ) {
+    open func doThis(_ once: (() -> Void)? ) {
         guard self.triggered == false else {
             return
         }
@@ -27,7 +27,7 @@ import Foundation
         return
     }
     
-    public func reset(once: (() -> Void)? = nil ) {
+    open func reset(_ once: (() -> Void)? = nil ) {
         guard self.triggered == true else {
             return
         }
@@ -37,14 +37,14 @@ import Foundation
         return
     }
 
-    public func doThis(once: (() -> Void)?, resetAfter: TimeInterval, onReset: (() -> Void)?) {
+    open func doThis(_ once: (() -> Void)?, resetAfter: TimeInterval, onReset: (() -> Void)?) {
         let action = {
             once?()
             self.resetTimer = IATTimer(withDuration: resetAfter, whenExpired: {
-                self.reset(once: onReset)
+                self.reset(onReset)
             })
         }
         
-        doThis(once: action)
+        doThis(action)
     }
 }
