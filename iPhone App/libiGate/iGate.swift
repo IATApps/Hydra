@@ -9,6 +9,7 @@
 import Foundation
 import CoreBluetooth
 import IATBluetooth
+import IATFoundationUtilities
 
 enum CiGateState : Int {
     case initialized    // State unknown, update imminent.
@@ -18,10 +19,12 @@ enum CiGateState : Int {
     case unsupported	// Something wrong, iOS device not support BTLE or not power on.
     case unauthorized   // The app is not authorized to use Bluetooth Low Energy.
     case idle           // Bluetooth is currently powered on and available to use.
+    case reconnectionSearch // The iGate is searching to reconnect to the previous device connected.
     case searching      // The iGate is searching to a device.
     case connecting     // the iGate is connecting to a device.
     case connected      // The igate is connected with a device.
     case bonded         // The igate is bondeded (and the connection is encypted)
+    case disconnected
 }
 
 protocol CiGateComDelegate : class {
@@ -29,13 +32,31 @@ protocol CiGateComDelegate : class {
     func didReceiveData(iGate: CiGate, data: Data)
 }
 
-//protocol CiGateRssiDelegate {
-//    func didUpdateConnected(iGate: CiGate, rssi: NSNumber, error: Error?)
-//}
-//
-//protocol CiGateBtAddrDelegate {
-//    func didUpdateConnected(iGate: CiGate, address: CBluetoothAddr)
-//}
+class NearbySignalStrengthValidator : IATBTPeripheralSignalStrengthValidator {
+    var strengthLimit : Int = -70
+    func searchingLimit() {
+        strengthLimit = -70
+    }
+    
+    func reconnectionLimit() {
+        strengthLimit = -126
+    }
+    
+    override func validate(_ peripheral: CBPeripheral, advertisementData: [String : Any], rssi: NSNumber) -> Bool {
+        if super.validate(peripheral, advertisementData: advertisementData, rssi: rssi) == false {
+            print("signal strength ", rssi.intValue, " out of range")
+            return false
+        }
+        
+        if rssi.intValue < strengthLimit {
+            print("signal strength ", rssi.intValue, " not in custom limit ", strengthLimit)
+            return false
+        }
+        
+        return true
+    }
+}
+
 
 class CiGate : NSObject, BTDiscoveryEventDelegate {
     private var _state : CiGateState = .initialized
@@ -74,6 +95,7 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
         self.bondedDevUUID = nil
         self.serviceUUIDstr = serviceUUIDstr
         self.iGateDiscovery = IATBTDiscovery(name: "iGate", withServices: [iGateComService, iGateDIService])
+        self.iGateDiscovery.peripherals?.first?.signalStrengthEvaluator = NearbySignalStrengthValidator()
         super.init()
         self.iGateDiscovery.delegate = self
         self.commonStartup()
@@ -84,6 +106,7 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
         self.serviceUUIDstr = serviceUUIDstr
         self.bondedDevUUID = bondedDevUUID
         self.iGateDiscovery = IATBTDiscovery(name: "iGate", withServices: [iGateComService, iGateDIService])
+        self.iGateDiscovery.peripherals?.first?.signalStrengthEvaluator = NearbySignalStrengthValidator()
         super.init()
         self.iGateDiscovery.delegate = self
         self.commonStartup()
@@ -109,18 +132,46 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
         }
     }
     
-    func sendData(toDevice: Data) {
-        //TODO: This is a stub function right now.   Make it work.
-        
+    func sendData(toDevice: Data, characteristicNamed characteristicKey:String) {
+        //TODO: This is setup for Thync right now
+        if let characteristic = self.thyncService.characteristic(named: characteristicKey) {
+            self.mainDevice()?.peripheral?.writeValue(toDevice, for: characteristic, type: .withoutResponse)
+        }
+    }
+    
+    func notify(on: Bool, characteristicNamed characteristicKey:String) {
+        if let characteristic = self.thyncService.characteristic(named: characteristicKey) {
+            let isNotifying = characteristic.isNotifying
+            
+            if isNotifying != on {
+                print("setting notify " + (on ? "ON" : "OFF") + " for characteristic "  + characteristicKey + " (" + characteristic.uuid.uuidString + ")")
+                self.mainDevice()?.peripheral?.setNotifyValue(true, for: characteristic)
+            } else {
+                print("notify is already " + (on ? "ON" : "OFF") + " for characteristic "  + characteristicKey + " (" + characteristic.uuid.uuidString + ")")
+            }
+        } else {
+            print("notify cannot find characteristic named " + characteristicKey)
+        }
+    }
+
+    func observeThyncCharacteristic(on: Bool) {
+    }
+    
+    func mainDevice() -> IATBTPeripheral? {
+        return self.iGateDiscovery.peripherals?.first
     }
 
     //MARK: - Private
+    
+    private func strengthEvaluator() -> NearbySignalStrengthValidator? {
+        return self.iGateDiscovery.peripherals?.first?.signalStrengthEvaluator as? NearbySignalStrengthValidator
+    }
     
     private func commonStartup() {
         self.notifyNewState()
     }
     
-    func bluetoothEvent(event: BTDiscoveryEvent) {
+    func bluetoothEvent(_ event: BTDiscoveryEvent) {
         var error = false
         switch event {
         case .central_manager_state_unauthorized:
@@ -129,6 +180,7 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
             self.state = .powered_off
         case .central_manager_state_powered_on:
             if self.state == .searching {
+                self.strengthEvaluator()?.searchingLimit()
                 self.iGateDiscovery.startScanning()
             }
         case .central_manager_state_unsupported:
@@ -139,9 +191,13 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
             self.state = .connecting
         case .device_connected:
             self.state = .connected
-            self.iGateDiscovery.stopScanning()
+            //MARK: This does not stop scanning.  It doesn't work here.
+//            self.iGateDiscovery.stopScanning()
         case .device_disconnected:
-            self.state = .initialized
+            self.state = .disconnected
+        case .attempting_to_reconnect:
+            self.state = .reconnectionSearch
+            self.strengthEvaluator()?.reconnectionLimit()
         default:
             error = true
         }

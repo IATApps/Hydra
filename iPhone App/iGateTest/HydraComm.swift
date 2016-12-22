@@ -48,64 +48,72 @@ import Foundation
     
     func didUpdate(iGate: CiGate, state: CiGateState) {
         switch (state) {
-            case .initialized:
-                print("iGate Init")
-                break;
-            case .powered_off:
-                print("iGate Powered Off")
-                displayOverlayState(state: .bt_off)
-                self.pair()
-                break;
-            case .unknown:
-                print("iGate Unknown")
-                break;
-            case .resetting:
-                print("iGate Resetting")
-                displayOverlayState(state: .resetting)
-                break;
-            case .unsupported:
-                print("iGate Unsupported")
-                displayOverlayState(state: .bt_unsupported)
-                break;
-            case .unauthorized:
-                print("iGate Unauthorized")
-                displayOverlayState(state: .bt_unauthorized)
-                break;
-            case .idle:
-                print("iGate Idle")
-                break;
-            case .searching:
-                print("iGate Searching")
-                displayOverlayState(state: .searching)
-                break;
-            case .connecting:
-                print("iGate Connecting")
-                displayOverlayState(state: .connecting)
-                break;
-            case .connected:
-                print("iGate Connected")
-                displayOverlayState(state: .connected)
-                if #available(iOS 10.0, *) {
-//                    unsubscribedFromDataTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { timer in
-//                        self.iGate?.startSearch()
-//                    })
-                } else {
-                    // Fallback on earlier versions
-                }
-                self.bondedUUID = self.iGate!.bondedDevUUID
-                break;
-            case .bonded:
-                print("iGate Bonded")
-                let uuidStr = self.iGate?.connectedDevUUID?.uuidString ?? "unknown"
-                let bondedUuidStr = (self.bondedUUID?.uuidString)! as String
-                let deviceName = self.iGate?.connectedDevName
-                print("BONDED TO %@ [UUID:  %@  |  Bonded UUID: %@]",  deviceName!, uuidStr, bondedUuidStr)
-                UserDefaults.standard.set(bondedUuidStr, forKey:"bonded")
-                break;
+        case .initialized:
+            print("iGate Init")
+            displayOverlayState(state: .initialized)
+
+        case .powered_off:
+            print("iGate Powered Off")
+            displayOverlayState(state: .bt_off)
+            self.pair()
+
+        case .unknown:
+            print("iGate Unknown")
+
+        case .resetting:
+            print("iGate Resetting")
+            displayOverlayState(state: .resetting)
+            
+        case .unsupported:
+            print("iGate Unsupported")
+            displayOverlayState(state: .bt_unsupported)
+            
+        case .unauthorized:
+            print("iGate Unauthorized")
+            displayOverlayState(state: .bt_unauthorized)
+            
+        case .idle:
+            print("iGate Idle")
+            
+        case .searching:
+            print("iGate Searching")
+            displayOverlayState(state: .searching)
+            
+        case .connecting:
+            print("iGate Connecting")
+            displayOverlayState(state: .connecting)
+            
+        case .reconnectionSearch:
+            print("iGate Searching for reconnection")
+            displayOverlayState(state: .reconnectionSearch)
+            
+        case .connected:
+            print("iGate Connected")
+            displayOverlayState(state: .connected)
+            if #available(iOS 10.0, *) {
+                //                    unsubscribedFromDataTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { timer in
+                //                        self.iGate?.startSearch()
+                //                    })
+            } else {
+                // Fallback on earlier versions
+            }
+            self.bondedUUID = self.iGate!.bondedDevUUID
+            
+        case .disconnected:
+            print("iGate Disconnected")
+            displayOverlayState(state: .disconnected)
+ 
+        case .bonded:
+            print("iGate Bonded")
+            let uuidStr = self.iGate?.connectedDevUUID?.uuidString ?? "unknown"
+            let bondedUuidStr = (self.bondedUUID?.uuidString)! as String
+            let peripheralName = self.iGate?.connectedDevName
+            print("BONDED TO %@ [UUID:  %@  |  Bonded UUID: %@]",  peripheralName!, uuidStr, bondedUuidStr)
+            UserDefaults.standard.set(bondedUuidStr, forKey:"bonded")
         }
         
         let dict = ["state" : NSNumber(value: state.rawValue)];
-        NotificationCenter.default.post( Notification(name: Notification.Name(rawValue: "stateUpdate"), object: nil, userInfo: dict) )        
+        NotificationCenter.default.post( Notification(name: Notification.Name(rawValue: "stateUpdate"), object: nil, userInfo: dict) )
     }
     
     private func displayOverlayState(state: HydraStateOverlay.iGateOverlayStates) {
@@ -124,7 +132,7 @@ import Foundation
         // Take the data and append it to the stored data.
         // Make sure we don't overflow... if the length would be too large,
         // just discard what we have and read the new data.
-        // This should never happen if the BTLE device is behaving properly,
+        // This should never happen if the BTLE peripheral is behaving properly,
         // but we check for it anyway.
         btleData.append(data)
         

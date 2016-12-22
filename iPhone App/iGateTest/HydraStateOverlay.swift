@@ -13,10 +13,13 @@ class HydraStateOverlay : NSObject {
     var overlay : HydraStatusOverlayView?
     
     enum iGateOverlayStates : String {
+        case initialized = ""
         case disconnecting = "Disconnecting"
+        case disconnected = "Disconnected"
         case resetting = "Resetting"
         case searching = "Searching"
         case connecting = "Connecting"
+        case reconnectionSearch = "Attempting to reconnect"
         case connected = "Connected"
         case bt_off = "Bluetooth Off"
         case bt_on = "Bluetooth On"

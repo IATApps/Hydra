@@ -35,7 +35,6 @@
 		C5A2E33D1DEBBEF800F3D069 /* AngleViewTrans.png in Resources */ = {isa = PBXBuildFile; fileRef = C5A2E33C1DEBBEF800F3D069 /* AngleViewTrans.png */; };
 		C5E71AB51DED470900180AAC /* IATBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C563B9041DECFBCE00AE51D6 /* IATBluetooth.framework */; };
 		C5E71ABC1DEE0B4B00180AAC /* iGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E71ABB1DEE0B4B00180AAC /* iGate.swift */; };
-		C5FE4C521DF8F2F1008FCFBC /* IATBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C563B9041DECFBCE00AE51D6 /* IATBluetooth.framework */; };
 		C5FE4C531DF8F2F1008FCFBC /* IATBluetooth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C563B9041DECFBCE00AE51D6 /* IATBluetooth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C5FE4C8E1DFB3E73008FCFBC /* IATFoundationUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5FE4C851DFB3E16008FCFBC /* IATFoundationUtilities.framework */; };
 		C5FE4C8F1DFB3E73008FCFBC /* IATFoundationUtilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C5FE4C851DFB3E16008FCFBC /* IATFoundationUtilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -229,7 +228,6 @@
 				7F1BBF151591785F000741FA /* CoreBluetooth.framework in Frameworks */,
 				C5FE4C8E1DFB3E73008FCFBC /* IATFoundationUtilities.framework in Frameworks */,
 				7F1BBEF4159177A0000741FA /* UIKit.framework in Frameworks */,
-				C5FE4C521DF8F2F1008FCFBC /* IATBluetooth.framework in Frameworks */,
 				7F1BBEF6159177A0000741FA /* Foundation.framework in Frameworks */,
 				CE8D3657171E314500BD64DD /* MessageUI.framework in Frameworks */,
 				7F1BBEF8159177A0000741FA /* CoreGraphics.framework in Frameworks */,
@@ -424,7 +422,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CHRH;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Ingenious Arts and Technologies LLC";
 				TargetAttributes = {
 					7F1BBEEE159177A0000741FA = {
@@ -617,6 +615,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -651,6 +650,7 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -678,7 +678,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iGateTest/Hydra-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0.1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -705,7 +704,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.chrobotics.llc.Hydra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iGateTest/Hydra-Bridging-Header.h";
-				SWIFT_VERSION = 3.0.1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

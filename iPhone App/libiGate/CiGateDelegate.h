@@ -22,10 +22,10 @@ enum {
 	CiGateStateUnsupported,	// Something wrong, iOS device not support BTLE or not power on.
     CiGateStateUnauthorized,// The app is not authorized to use Bluetooth Low Energy.
     CiGateStateIdle,        // Bluetooth is currently powered on and available to use.
-	CiGateStateSearching,	// The iGate is searching to a device.
-	CiGateStateConnecting,	// the iGate is connecting to a device.
-	CiGateStateConnected,	// The igate is connected with a device.
-    CiGateStateBonded,	    // The igate is bondeded (and the connection is encypted) with a device.
+	CiGateStateSearching,	// The iGate is searching to find a peripheral.
+	CiGateStateConnecting,	// the iGate is connecting to a peripheral.
+	CiGateStateConnected,	// The igate is connected with a peripheral.
+    CiGateStateBonded,	    // The igate is bondeded (and the connection is encypted) with a peripheral.
 };
 typedef NSInteger CiGateState;
 
