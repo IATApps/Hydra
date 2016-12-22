@@ -88,12 +88,9 @@ public extension BTDiscoveryEvent {
 
 @objc public class IATBTDiscovery : NSObject {
     let eventQueue = DispatchQueue.init(label: "bluetooth event queue")
-    public var peripherals : [IATBTPeripheral]? = []
+    public var peripherals : [IATBTPeripheral] = []
     public var isScanning : Bool {
         get {
-            guard let peripherals = self.peripherals else {
-                return false
-            }
             var result = false
             for peripheral in peripherals {
                 result = result || peripheral.isScanning
@@ -122,20 +119,17 @@ public extension BTDiscoveryEvent {
         super.init()
         let group = IATBTServiceGroup(discovery: self, services: services)
         let peripheral = IATBTPeripheral(name: name, discovery: self, serviceGroup: group)
-        self.peripherals?.append(peripheral)
+        self.peripherals.append(peripheral)
         startObservingNotifications()
     }
     
     deinit {
         self.doneObservingNotifications()
-        self.peripherals?.removeAll(keepingCapacity: true)
+        self.peripherals.removeAll(keepingCapacity: true)
     }
     
     public func startScanning() {
         guard self.isScanning == false else {
-            return
-        }
-        guard let peripherals = peripherals else {
             return
         }
         guard peripherals.count > 0 else {
@@ -150,7 +144,7 @@ public extension BTDiscoveryEvent {
         }
         
         eventQueue.async {
-            for peripheral in peripherals {
+            for peripheral in self.peripherals {
                 peripheral.startScan()
             }
         }
@@ -162,7 +156,7 @@ public extension BTDiscoveryEvent {
         }
         
         self.eventQueue.async {
-            self.peripherals?.forEach({ (peripheral) in
+            self.peripherals.forEach({ (peripheral) in
                 peripheral.stopScan()
             })
             self.scanTimeoutTimer?.stop()
@@ -172,7 +166,7 @@ public extension BTDiscoveryEvent {
 
     public func resumeScanning() {
         self.eventQueue.async {
-            self.peripherals?.forEach({ (peripheral) in
+            self.peripherals.forEach({ (peripheral) in
                 if peripheral.centralManager?.state == .poweredOn {
                     peripheral.startScan()
                 } else {
@@ -186,14 +180,14 @@ public extension BTDiscoveryEvent {
         NotificationCenter.default.addObserver(forName: kBTRequestDisconnect, object: nil, queue: nil, using:{ notification in
             // if a specific peripheral is requested then find it and disconnect
             if let peripheralUUID = notification.userInfo?[kBTDiscoveryDisconnectPeripheralUUIDKey] as? String {
-                if let peripheral = self.peripherals?.first(where: { peripheral in
+                if let peripheral = self.peripherals.first(where: { peripheral in
                     return peripheral.peripheralUUID?.uuidString == peripheralUUID
                 }) {
                     peripheral.disconnect()
                 }
             } else {
                 // disconnect all peripherals
-                self.peripherals?.forEach({ (peripheral) in
+                self.peripherals.forEach({ (peripheral) in
                     peripheral.disconnect()
                 })
             }
@@ -207,13 +201,13 @@ public extension BTDiscoveryEvent {
     }
     
     public func disconnect() {
-        self.peripherals?.forEach({ (peripheral) in
+        self.peripherals.forEach({ (peripheral) in
             peripheral.disconnect()
         })
     }
     
     private func disconnect(peripheral: CBPeripheral) {
-        if let oneOfOurPeripherals = self.peripherals?.first(where: { oneOfOurPeripherals in
+        if let oneOfOurPeripherals = self.peripherals.first(where: { oneOfOurPeripherals in
             return oneOfOurPeripherals.peripheralUUID?.uuidString == peripheral.identifier.uuidString
         }) {
             oneOfOurPeripherals.disconnect()
@@ -227,16 +221,38 @@ public extension BTDiscoveryEvent {
             self.delegate?.bluetoothEvent(event)
         }
         if event == .device_connected {
-            self.peripherals?.forEach({ (peripheral) in
+            self.peripherals.forEach({ (peripheral) in
                 peripheral.serviceGroupAcquiredServices()
             })
         }
     }
     
     public func isKnownPeripheral(peripheral: CBPeripheral) -> Bool {
-        return self.peripherals?.first(where: { oneOfOurPeripherals in
+        return self.peripherals.first(where: { oneOfOurPeripherals in
             return oneOfOurPeripherals.peripheralUUID?.uuidString == peripheral.identifier.uuidString
         }) != nil
     }
     
+    public func performOnCharacteristic(named name: String, _ perform: ((CBPeripheral, CBCharacteristic) -> Void)) {
+        for peripheral in peripherals {
+            if let characteristic = peripheral.serviceGroup.characteristic(named: name) {
+                if let peripheral = peripheral.peripheral {
+                    perform(peripheral, characteristic)
+                }
+            }
+        }
+    }
+
+    public func performOnPeripheral(named peripheralName: String, characteristicNamed: String, _ perform: ((CBPeripheral, CBCharacteristic) -> Void)) {
+        for peripheral in peripherals {
+            if peripheral.name != peripheralName { continue }
+            
+            if let characteristic = peripheral.serviceGroup.characteristic(named: characteristicNamed) {
+                if let peripheral = peripheral.peripheral {
+                    perform(peripheral, characteristic)
+                }
+            }
+        }
+    }
+
 }
