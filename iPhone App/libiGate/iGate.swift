@@ -89,27 +89,32 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
     let iGateDiscovery : IATBTDiscovery
     let iGateComService = IATBTService(serviceUUID: "B5161D82-AAB0-4E55-8D96-C59D816E6971", required: true, characteristicDescriptions: ["data":"2A4D", "config":"2A4F"])
     let iGateDIService = IATBTDeviceInformationService()
+    let iGatePeripheralDelegate : CiGatePeripheralDelegate
     
     init(delegate comDelegate: CiGateComDelegate, autoConnect:Bool, serviceUUIDstr:String ) {
         self.comDelegate = comDelegate
         self.bondedDevUUID = nil
         self.serviceUUIDstr = serviceUUIDstr
-        self.iGateDiscovery = IATBTDiscovery(name: "iGate", withServices: [iGateComService, iGateDIService])
+        self.iGatePeripheralDelegate = CiGatePeripheralDelegate(comDelegate: comDelegate)
+        self.iGateDiscovery = IATBTDiscovery(name: "iGate", peripheralDelegate: self.iGatePeripheralDelegate, withServices: [iGateComService, iGateDIService])
         self.iGateDiscovery.peripherals.first?.signalStrengthEvaluator = NearbySignalStrengthValidator()
         super.init()
+        self.iGatePeripheralDelegate.ciGate = self
         self.iGateDiscovery.delegate = self
-        self.commonStartup()
+        self.notifyNewState()
     }
 
     init(delegate comDelegate: CiGateComDelegate, autoConnect:Bool, bondedDevUUID:UUID, serviceUUIDstr:String ) {
         self.comDelegate = comDelegate
         self.serviceUUIDstr = serviceUUIDstr
         self.bondedDevUUID = bondedDevUUID
-        self.iGateDiscovery = IATBTDiscovery(name: "iGate", withServices: [iGateComService, iGateDIService])
+        self.iGatePeripheralDelegate = CiGatePeripheralDelegate(comDelegate: comDelegate)
+        self.iGateDiscovery = IATBTDiscovery(name: "iGate", peripheralDelegate: self.iGatePeripheralDelegate, withServices: [iGateComService, iGateDIService])
         self.iGateDiscovery.peripherals.first?.signalStrengthEvaluator = NearbySignalStrengthValidator()
         super.init()
+        self.iGatePeripheralDelegate.ciGate = self
         self.iGateDiscovery.delegate = self
-        self.commonStartup()
+        self.notifyNewState()
     }
     
     func startSearch() {
@@ -133,14 +138,13 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
     }
     
     func sendData(toDevice: Data, characteristicNamed characteristicKey:String) {
-        //TODO: This is setup for Thync right now
-        self.iGateDiscovery.performOnCharacteristic(named: characteristicKey) { (peripheral, characteristic) in
+        self.iGateDiscovery.characteristic(named: characteristicKey, matchingProperties: .writeWithoutResponse) { (peripheral, characteristic) in
             peripheral.writeValue(toDevice, for: characteristic, type: .withoutResponse)
         }
     }
     
     func notify(on: Bool, characteristicNamed characteristicKey:String) {
-        self.iGateDiscovery.performOnCharacteristic(named: characteristicKey) { (peripheral, characteristic) in
+        self.iGateDiscovery.characteristic(named: characteristicKey, matchingProperties: .notify) { (peripheral, characteristic) in
             let isNotifying = characteristic.isNotifying
             
             if isNotifying != on {
@@ -152,9 +156,6 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
         }
     }
 
-    func observeThyncCharacteristic(on: Bool) {
-    }
-    
     func mainDevice() -> IATBTPeripheral? {
         return self.iGateDiscovery.peripherals.first
     }
@@ -163,10 +164,6 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
     
     private func strengthEvaluator() -> NearbySignalStrengthValidator? {
         return self.iGateDiscovery.peripherals.first?.signalStrengthEvaluator as? NearbySignalStrengthValidator
-    }
-    
-    private func commonStartup() {
-        self.notifyNewState()
     }
     
     func bluetoothEvent(_ event: BTDiscoveryEvent) {
@@ -189,10 +186,11 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
             self.state = .connecting
         case .device_connected:
             self.state = .connected
-            self.notify(on: true, characteristicNamed: "data")
-            self.iGateDiscovery.performOnCharacteristic(named: "data", { (peripheral, characteristic) in
-                peripheral.readValue(for: characteristic)
-            })
+            DispatchQueue.main.async {
+                self.iGateDiscovery.characteristic(named: "data", matchingProperties: [.notify, .read] , { (peripheral, characteristic) in
+                    peripheral.setNotifyValue(true, for: characteristic)
+                })
+            }
         case .device_disconnected:
             self.state = .disconnected
         case .attempting_to_reconnect:
@@ -210,6 +208,12 @@ class CiGate : NSObject, BTDiscoveryEventDelegate {
     
     private func notifyNewState() {
         self.comDelegate?.didUpdate(iGate: self, state: self._state)
+    }
+}
+
+extension CiGate : CBPeripheralDelegate {
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        
     }
 }
 

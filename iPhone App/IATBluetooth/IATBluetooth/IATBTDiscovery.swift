@@ -114,11 +114,11 @@ public extension BTDiscoveryEvent {
         super.init()
     }
     
-    public init(name: String, withServices services: [IATBTService]?, scanTimeout: TimeInterval = 0) {
+    public init(name: String, peripheralDelegate: CBPeripheralDelegate? = nil, withServices services: [IATBTService]? = nil, scanTimeout: TimeInterval = 0) {
         self.scanTimeout = scanTimeout
         super.init()
         let group = IATBTServiceGroup(discovery: self, services: services)
-        let peripheral = IATBTPeripheral(name: name, discovery: self, serviceGroup: group)
+        let peripheral = IATBTPeripheral(name: name, discovery: self, serviceGroup: group, peripheralDelegate: peripheralDelegate)
         self.peripherals.append(peripheral)
         startObservingNotifications()
     }
@@ -233,9 +233,9 @@ public extension BTDiscoveryEvent {
         }) != nil
     }
     
-    public func performOnCharacteristic(named name: String, _ perform: ((CBPeripheral, CBCharacteristic) -> Void)) {
+    public func characteristic(named name: String, matchingProperties: CBCharacteristicProperties, _ perform: ((CBPeripheral, CBCharacteristic) -> Void)) {
         for peripheral in peripherals {
-            if let characteristic = peripheral.serviceGroup.characteristic(named: name) {
+            if let characteristic = peripheral.serviceGroup.characteristic(named: name, matchingProperties: matchingProperties) {
                 if let peripheral = peripheral.peripheral {
                     perform(peripheral, characteristic)
                 }
@@ -243,11 +243,11 @@ public extension BTDiscoveryEvent {
         }
     }
 
-    public func performOnPeripheral(named peripheralName: String, characteristicNamed: String, _ perform: ((CBPeripheral, CBCharacteristic) -> Void)) {
+    public func peripheral(named peripheralName: String, characteristicNamed: String, matchingProperties: CBCharacteristicProperties, _ perform: ((CBPeripheral, CBCharacteristic) -> Void)) {
         for peripheral in peripherals {
             if peripheral.name != peripheralName { continue }
             
-            if let characteristic = peripheral.serviceGroup.characteristic(named: characteristicNamed) {
+            if let characteristic = peripheral.serviceGroup.characteristic(named: characteristicNamed, matchingProperties: matchingProperties) {
                 if let peripheral = peripheral.peripheral {
                     perform(peripheral, characteristic)
                 }

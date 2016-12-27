@@ -31,6 +31,7 @@ import UIKit
         update(outputTuple: zero)
         updateModeText()
         observeNotifications()
+        updateTitle()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -73,6 +74,16 @@ import UIKit
         currentLabel?.attributedText = currentTxt
         
         currentTargetLabel?.text = CurrentFormatter().string(from: NSNumber(value: outputTuple.targetCurrent) )
+    }
+    
+    func updateTitle() {
+        let mainTitle = "V\(channel)"
+        let mainTitleAttribs = [NSFontAttributeName : UIFont(name: "Helvetica", size: 50)!]
+        let outTitle = "out"
+        let outTitleAttribs = [NSFontAttributeName : UIFont(name: "Helvetica", size: 18)!]
+        let newTitle = NSMutableAttributedString(string: mainTitle, attributes: mainTitleAttribs)
+        newTitle.append(NSMutableAttributedString(string: outTitle, attributes: outTitleAttribs))
+        title?.attributedText = newTitle
     }
     
     func updateModeText() {

@@ -9,6 +9,70 @@
 import Foundation
 import CoreBluetooth
 
+extension CBCharacteristicProperties {
+    func toString() -> String {
+        var result : String = ""
+        if self.contains(.authenticatedSignedWrites) {
+            result.append("authenticatedSignedWrites")
+        }
+        if self.contains(.broadcast) {
+            if result.lengthOfBytes(using: .utf8) > 0 {
+                result.append(" ")
+            }
+            result.append("broadcast")
+        }
+        if self.contains(.extendedProperties) {
+            if result.lengthOfBytes(using: .utf8) > 0 {
+                result.append(" ")
+            }
+            result.append("extendedProperties")
+        }
+        if self.contains(.indicate) {
+            if result.lengthOfBytes(using: .utf8) > 0 {
+                result.append(" ")
+            }
+            result.append("indicate")
+        }
+        if self.contains(.indicateEncryptionRequired) {
+            if result.lengthOfBytes(using: .utf8) > 0 {
+                result.append(" ")
+            }
+            result.append("indicateEncryptionRequired")
+        }
+        if self.contains(.notify) {
+            if result.lengthOfBytes(using: .utf8) > 0 {
+                result.append(" ")
+            }
+            result.append("notify")
+        }
+        if self.contains(.notifyEncryptionRequired) {
+            if result.lengthOfBytes(using: .utf8) > 0 {
+                result.append(" ")
+            }
+            result.append("notifyEncryptionRequired")
+        }
+        if self.contains(.read) {
+            if result.lengthOfBytes(using: .utf8) > 0 {
+                result.append(" ")
+            }
+            result.append("read")
+        }
+        if self.contains(.write) {
+            if result.lengthOfBytes(using: .utf8) > 0 {
+                result.append(" ")
+            }
+            result.append("write")
+        }
+        if self.contains(.writeWithoutResponse) {
+            if result.lengthOfBytes(using: .utf8) > 0 {
+                result.append(" ")
+            }
+            result.append("writeWithoutResponse")
+        }
+        return result
+    }
+}
+
 @objc protocol IATBTServicePeripheralProtocol {
     func peripheral(_ peripheral: CBPeripheral, uuidToServiceMap:[String:CBService], didDiscoverServicesWithError: Error?)
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?)
@@ -21,8 +85,12 @@ import CoreBluetooth
     open weak var serviceGroup: IATBTServiceGroup?
 
     fileprivate let required : Bool
-    fileprivate var nameToCharacteristicUUID: [String:String]!  // Key : UUID string map
-    fileprivate var characteristicUUIDtoCBCharacteristicMap: [String:CBCharacteristic]!  // Key UUID String : CBCharacteristic
+    
+    // Key : UUID string map
+    fileprivate var nameToCharacteristicUUID: [String:String]!
+    
+    // [ Key UUID String : ["read": characteristic, "write": characteristic] ]
+    fileprivate var characteristicUUIDtoCBCharacteristicMap: [String: [String : CBCharacteristic]]!
     
     override convenience init() {
         self.init(serviceUUID: CBUUID(nsuuid: UUID()).uuidString, required:false, characteristicDescriptions: [:])
@@ -131,12 +199,20 @@ import CoreBluetooth
         if self.isMatch(forService: service) && alreadyAcquired == false {
             if let characteristics = service.characteristics {
                 characteristics.forEach({ (characteristic) in
-                    let uuidStr = characteristic.uuid.uuidString
+                    print(" characteristic \(Unmanaged.passUnretained(characteristic).toOpaque()) \(characteristic.uuid.uuidString) properties \(characteristic.properties)")
+                    let uuidString = characteristic.uuid.uuidString
                     if characteristicUUIDs.contains(characteristic.uuid.uuidString) == false {
-                        print("Characterisic " + uuidStr + " was discovered, but was not setup to be named/recognized")
-                        characteristicUUIDs.insert(uuidStr)
+                        print("Characterisic " + uuidString + " was discovered, but was not setup to be named/recognized")
+                        characteristicUUIDs.insert(uuidString)
                     }
-                    self.characteristicUUIDtoCBCharacteristicMap[uuidStr] = characteristic
+                    let characteristicPropertiesString = characteristic.properties.toString()
+                    var characteristicDict = self.characteristicUUIDtoCBCharacteristicMap[uuidString]
+                    
+                    if characteristicDict == nil {
+                        self.characteristicUUIDtoCBCharacteristicMap[uuidString] = [characteristicPropertiesString : characteristic]
+                    } else {
+                        characteristicDict?[characteristicPropertiesString] = characteristic
+                    }
                 })
             }
             self.serviceGroup?.serviceWasAcquired(self)
@@ -149,9 +225,16 @@ import CoreBluetooth
         })
     }
     
-    open func characteristic(named name: String) -> CBCharacteristic? {
+    open func characteristic(named name: String, matchingProperties: CBCharacteristicProperties) -> CBCharacteristic? {
         if let uuidString = self.nameToCharacteristicUUID[name] {
-            return self.characteristicUUIDtoCBCharacteristicMap[uuidString]
+            let matchingPropertiesKey = matchingProperties.toString()
+            if let characteristicDict = self.characteristicUUIDtoCBCharacteristicMap[uuidString] {
+                if let characteristicKey = characteristicDict.keys.first(where: { (key) -> Bool in
+                    key.contains(matchingPropertiesKey)
+                }) {
+                    return characteristicDict[characteristicKey]
+                }
+            }
         }
         return nil
     }

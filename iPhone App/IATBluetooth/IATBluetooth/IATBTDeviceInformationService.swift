@@ -48,34 +48,34 @@ let kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_PNP_ID            = "PnP ID"
     //MARK - Convenience methods for obtaining specific characteristics
     
     open func systemIdCharacteristic() -> CBCharacteristic? {
-        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_SYSTEMID)
+        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_SYSTEMID, matchingProperties: .read)
     }
 
     open func modelNumberCharacteristic() -> CBCharacteristic? {
-        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_MODEL_NUMBER)
+        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_MODEL_NUMBER, matchingProperties: .read)
     }
 
     open func serialNumberCharacteristic() -> CBCharacteristic? {
-        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_SERIAL_NUMBER)
+        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_SERIAL_NUMBER, matchingProperties: .read)
     }
 
     open func hardwareVersionCharacteristic() -> CBCharacteristic? {
-        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_HARDWARE_VERSION)
+        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_HARDWARE_VERSION, matchingProperties: .read)
     }
 
     open func softwareVersionCharacteristic() -> CBCharacteristic? {
-        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_SOFTWARE_VERSION)
+        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_SOFTWARE_VERSION, matchingProperties: .read)
     }
 
     open func manufacturerNameCharacteristic() -> CBCharacteristic? {
-        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_MANUFACTURER_NAME)
+        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_MANUFACTURER_NAME, matchingProperties: .read)
     }
 
     open func regulatoryCertDataListCharacteristic() -> CBCharacteristic? {
-        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_REGULATORY_CERT_DATA_LIST)
+        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_REGULATORY_CERT_DATA_LIST, matchingProperties: .read)
     }
 
     open func pnpIdCharacteristic() -> CBCharacteristic? {
-        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_PNP_ID)
+        return self.characteristic(named: kIATBT_DEVICE_INFORMATION_CHARACTERISTIC_NAME_PNP_ID, matchingProperties: .read)
     }
 }

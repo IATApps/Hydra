@@ -188,17 +188,21 @@ import IATFoundationUtilities
         }
     }
     
-    public func characteristic(named name: String) -> CBCharacteristic? {
+    //TODO: pass in matching properties and do not assume its a read property we are looking for
+    public func characteristic(named name: String, matchingProperties: CBCharacteristicProperties) -> CBCharacteristic? {
         if let services = self.services {
             for service in services {
-                if let characteristic = service.characteristic(named: name) {
+                if let characteristic = service.characteristic(named: name, matchingProperties: matchingProperties) {
                     return characteristic
                 }
             }
         }
         return nil
     }
-    
+}
+
+// CBPeripheral friend methods called by IATBTServiceManager
+extension IATBTServiceGroup {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard let ourDefinedServices = self.services else {
             return
@@ -206,9 +210,9 @@ import IATFoundationUtilities
         guard let peripheralServices = peripheral.services else {
             return
         }
-
+        
         var uuidToServiceMap = [String:CBService]()
-            
+        
         peripheralServices.forEach({ (service) in
             print("discovered service ", service.uuid.uuidString)
             uuidToServiceMap[service.uuid.uuidString] = service
@@ -223,7 +227,7 @@ import IATFoundationUtilities
         guard let ourDefinedServices = self.services else {
             return
         }
-//        print("discovered characteristics for service ", discoveredService.uuid.uuidString)
+        //        print("discovered characteristics for service ", discoveredService.uuid.uuidString)
         if let matchingService = ourDefinedServices.first(where: { (service) -> Bool in
             return service.isMatch(forService: discoveredService)
         }) {

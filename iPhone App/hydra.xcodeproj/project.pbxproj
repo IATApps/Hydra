@@ -33,6 +33,7 @@
 		C5A2E3391DEBA64E00F3D069 /* HydraStatusOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5A2E3381DEBA64E00F3D069 /* HydraStatusOverlayView.xib */; };
 		C5A2E33B1DEBA6BB00F3D069 /* HydraStatusOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2E33A1DEBA6BB00F3D069 /* HydraStatusOverlayView.swift */; };
 		C5A2E33D1DEBBEF800F3D069 /* AngleViewTrans.png in Resources */ = {isa = PBXBuildFile; fileRef = C5A2E33C1DEBBEF800F3D069 /* AngleViewTrans.png */; };
+		C5D4BB951E10F50D005E0FC5 /* iGatePeripheralDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D4BB941E10F50D005E0FC5 /* iGatePeripheralDelegate.swift */; };
 		C5E71AB51DED470900180AAC /* IATBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C563B9041DECFBCE00AE51D6 /* IATBluetooth.framework */; };
 		C5E71ABC1DEE0B4B00180AAC /* iGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E71ABB1DEE0B4B00180AAC /* iGate.swift */; };
 		C5FE4C531DF8F2F1008FCFBC /* IATBluetooth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C563B9041DECFBCE00AE51D6 /* IATBluetooth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -172,6 +173,7 @@
 		C5A2E3381DEBA64E00F3D069 /* HydraStatusOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HydraStatusOverlayView.xib; sourceTree = "<group>"; };
 		C5A2E33A1DEBA6BB00F3D069 /* HydraStatusOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HydraStatusOverlayView.swift; sourceTree = "<group>"; };
 		C5A2E33C1DEBBEF800F3D069 /* AngleViewTrans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AngleViewTrans.png; sourceTree = "<group>"; };
+		C5D4BB941E10F50D005E0FC5 /* iGatePeripheralDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iGatePeripheralDelegate.swift; sourceTree = "<group>"; };
 		C5E71AB91DEE0AFB00180AAC /* iGate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iGate.h; sourceTree = "<group>"; };
 		C5E71ABA1DEE0B1100180AAC /* CiGateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CiGateDelegate.h; sourceTree = "<group>"; };
 		C5E71ABB1DEE0B4B00180AAC /* iGate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iGate.swift; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				C5E71AB91DEE0AFB00180AAC /* iGate.h */,
 				C5E71ABA1DEE0B1100180AAC /* CiGateDelegate.h */,
 				C5E71ABB1DEE0B4B00180AAC /* iGate.swift */,
+				C5D4BB941E10F50D005E0FC5 /* iGatePeripheralDelegate.swift */,
 			);
 			path = libiGate;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 				C552FFA01DE3DF50002F552E /* VoltageInputDisplayView.swift in Sources */,
 				C5A2E32F1DE631E900F3D069 /* HydraState.swift in Sources */,
 				C5A2E3371DEB9D7D00F3D069 /* HydraStateOverlay.swift in Sources */,
+				C5D4BB951E10F50D005E0FC5 /* iGatePeripheralDelegate.swift in Sources */,
 				C5E71ABC1DEE0B4B00180AAC /* iGate.swift in Sources */,
 				C5A2E32D1DE4321600F3D069 /* HydraComm.swift in Sources */,
 				C552FFA21DE3DFCF002F552E /* VoltageFormatter.swift in Sources */,

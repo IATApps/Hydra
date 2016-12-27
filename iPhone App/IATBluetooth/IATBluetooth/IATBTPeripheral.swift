@@ -36,7 +36,6 @@ import IATFoundationUtilities
     open var serviceManager : IATBTServiceManager?
     open let serviceGroup : IATBTServiceGroup
     open var advertisementData: [String:Any]?
-    var disconnectActions : (() -> Void)?
     var scanTimer : IATTimer?
     var lastSeenTimer : IATTimer?
     var reconnectTimeoutTimer : IATTimer?
@@ -54,8 +53,9 @@ import IATFoundationUtilities
     var showPowerAlert = true
     var reconnectOnDisconnect = true
     internal var connectTime : Date?
+    var peripheralDelegate : CBPeripheralDelegate?
     
-    public init(name: String?, discovery: IATBTDiscovery, serviceGroup: IATBTServiceGroup, eventQueue: DispatchQueue = DispatchQueue(label: "iat.bt.peripheral", qos: .background, attributes: DispatchQueue.Attributes(), autoreleaseFrequency: .inherit, target: nil)) {
+    public init(name: String?, discovery: IATBTDiscovery, serviceGroup: IATBTServiceGroup, peripheralDelegate: CBPeripheralDelegate? = nil, eventQueue: DispatchQueue = DispatchQueue(label: "iat.bt.peripheral", qos: .background, attributes: DispatchQueue.Attributes(), autoreleaseFrequency: .inherit, target: nil)) {
         self.name = name
         self.discovery = discovery
         self.serviceGroup = serviceGroup
@@ -66,6 +66,7 @@ import IATFoundationUtilities
         self.advertisementData = nil
         self.peripheral = nil
         self.peripheralUUID = nil
+        self.peripheralDelegate = peripheralDelegate
         super.init()
     }
     
@@ -73,8 +74,8 @@ import IATFoundationUtilities
         self.centralManager = nil
         self.peripheral = nil
         self.advertisementData = nil
-        //TODO: Call disconnect actions?
-        self.disconnectActions = nil
+        self.eventQueue = nil
+        self.peripheralDelegate = nil
     }
     
     fileprivate func retrieveConnectedPeripherals() -> [CBPeripheral]? {
@@ -214,7 +215,7 @@ extension IATBTPeripheral : CBCentralManagerDelegate {
         // check peripheral to see if it conforms to all the services that we are expecting?
         if peripheral == self.peripheral {
             self.connectTime = Date()
-            self.serviceManager = IATBTServiceManager(withPeripheral: peripheral, serviceGroup: self.serviceGroup)
+            self.serviceManager = IATBTServiceManager(withPeripheral: peripheral, serviceGroup: self.serviceGroup, peripheralDelegate: self.peripheralDelegate)
             DispatchQueue.main.async {
                 print("starting to connect to peripheral " + peripheral.identifier.uuidString)
                 self.serviceGroup.startAquiringServices(forPeripheral: peripheral)
